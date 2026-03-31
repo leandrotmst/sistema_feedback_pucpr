@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Respostas — formulário</title>
+</head>
+<body>
+    <h1>Resposta semanal</h1>
+
+    <form id="form-resposta">
+        <div>
+            <label for="equipe">Equipe</label><br>
+            <input type="text" id="equipe" name="equipe" required maxlength="255" placeholder="Nome da equipe">
+        </div>
+
+        <fieldset>
+            <legend>Como você avalia o emocional / estresse na semana? (0 a 5)</legend>
+            <label><input type="radio" name="nivel" value="0" required> 0</label>
+            <label><input type="radio" name="nivel" value="1"> 1</label>
+            <label><input type="radio" name="nivel" value="2"> 2</label>
+            <label><input type="radio" name="nivel" value="3"> 3</label>
+            <label><input type="radio" name="nivel" value="4"> 4</label>
+            <label><input type="radio" name="nivel" value="5"> 5</label>
+        </fieldset>
+
+        <div>
+            <button type="submit" id="enviar">Enviar</button>
+        </div>
+    </form>
+
+    <h2>Respostas registradas</h2>
+    <div id="lista"></div>
+
+    <script src="../js/respostas.js"></script>
+</body>
+</html>
