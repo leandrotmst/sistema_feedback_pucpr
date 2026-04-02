@@ -50,7 +50,9 @@ class Gestor
                 $tabela[] = $linha;
             }
 
-            session_start();
+            if (session_status() !== PHP_SESSION_ACTIVE) {
+                session_start();
+            }
             $_SESSION['email'] = $tabela;
 
             $retorno = [
