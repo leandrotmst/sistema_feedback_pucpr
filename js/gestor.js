@@ -29,8 +29,8 @@ class Gestor {
     }
 
     async novo() {
-        const email   = document.getElementById("email").value;
-        const senha     = document.getElementById("senha").value;
+        const email = document.getElementById("email").value;
+        const senha = document.getElementById("senha").value;
 
         const fd = new FormData();
         fd.append("email", email);
@@ -48,26 +48,6 @@ class Gestor {
             window.location.href = "../home/";
         }else{
             alert("ERRO: " + resposta.mensagem);
-        }
-    }
-
-    async carregarGestorParaEdicao(){
-        // Pega o id do cliete pela URL
-        const url = new URLSearchParams(window.location.search);
-        const id = url.get("id");
-        
-        const retorno = await fetch("../php/gestor_get.php?id="+id);
-        const resposta = await retorno.json();
-
-        if(resposta.status === "ok"){
-            alert("SUCESSO:" + resposta.mensagem);
-            var registro = resposta.data[0];
-            document.getElementById("email").value = registro.email;
-            document.getElementById("senha").value = registro.senha;
-            document.getElementById("id").value = id;
-        }else{
-            alert("ERRO:" + resposta.mensagem);
-            window.location.href = "../home/";
         }
     }
     

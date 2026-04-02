@@ -17,7 +17,7 @@ class Gestor
 
     public function __construct()
     {
-        require_once __DIR__ . 'conexao.php';
+        require_once __DIR__ . '/conexao.php';
         global $conexao;
         $this->conexao = $conexao;
     }
@@ -120,11 +120,11 @@ class Gestor
     {
         $retorno = self::retornoVazio();
 
-        $email     = $_POST['email'];
-        $senha     = $_POST['senha'];
+        $email = $_POST['email'];
+        $senha = $_POST['senha'];
 
         $stmt = $this->conexao->prepare(
-            'INSERT INTO gestor(email, senha) VALUES(?,?,?)'
+            'INSERT INTO gestor(email, senha) VALUES(?,?)'
         );
         $stmt->bind_param('ss', $email, $senha);
         $stmt->execute();
@@ -157,8 +157,8 @@ class Gestor
         $retorno = self::retornoVazio();
 
         if (isset($_GET['id'])) {
-            $email   = $_POST['email'];
-            $senha   = $_POST['senha'];
+            $email = $_POST['email'];
+            $senha = $_POST['senha'];
 
             $stmt = $this->conexao->prepare(
                 'UPDATE gestor SET email = ?, senha = ? WHERE id = ?'
