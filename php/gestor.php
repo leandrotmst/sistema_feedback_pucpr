@@ -53,7 +53,8 @@ class Gestor
             if (session_status() !== PHP_SESSION_ACTIVE) {
                 session_start();
             }
-            $_SESSION['email'] = $tabela;
+            // $_SESSION['email'] = $tabela;
+            $_SESSION['gestor_logado'] = $tabela[0]['email'];
 
             $retorno = [
                 'status'   => 'ok',
