@@ -17,7 +17,7 @@ class Gestor
 
     public function __construct()
     {
-        require_once __DIR__ . '/conexao.php';
+        require_once __DIR__ . 'conexao.php';
         global $conexao;
         $this->conexao = $conexao;
     }
@@ -39,10 +39,8 @@ class Gestor
     {
         $retorno = self::retornoVazio();
 
-        $stmt = $this->conexao->prepare(
-            'SELECT * FROM gestor WHERE usuario = ? AND senha = ?'
-        );
-        $stmt->bind_param('ss', $_POST['usuario'], $_POST['senha']);
+        $stmt = $this->conexao->prepare("SELECT * FROM gestor WHERE email = ? AND senha = ?");
+        $stmt->bind_param('ss', $_POST['email'], $_POST['senha']);
         $stmt->execute();
         $resultado = $stmt->get_result();
 
@@ -52,10 +50,8 @@ class Gestor
                 $tabela[] = $linha;
             }
 
-            if (session_status() !== PHP_SESSION_ACTIVE) {
-                session_start();
-            }
-            $_SESSION['usuario'] = $tabela;
+            session_start();
+            $_SESSION['email'] = $tabela;
 
             $retorno = [
                 'status'   => 'ok',
@@ -124,14 +120,13 @@ class Gestor
     {
         $retorno = self::retornoVazio();
 
-        $nome      = $_POST['nome'];
         $email     = $_POST['email'];
         $senha     = $_POST['senha'];
 
         $stmt = $this->conexao->prepare(
-            'INSERT INTO gestor(nome, email, senha) VALUES(?,?,?)'
+            'INSERT INTO gestor(email, senha) VALUES(?,?,?)'
         );
-        $stmt->bind_param('sssssi', $nome, $email, $senha);
+        $stmt->bind_param('ss', $email, $senha);
         $stmt->execute();
 
         if ($stmt->affected_rows > 0) {
@@ -162,15 +157,13 @@ class Gestor
         $retorno = self::retornoVazio();
 
         if (isset($_GET['id'])) {
-            $nome    = $_POST['nome'];
             $email   = $_POST['email'];
             $senha   = $_POST['senha'];
-            $ativo   = (int) $_POST['ativo'];
 
             $stmt = $this->conexao->prepare(
-                'UPDATE gestor SET nome = ?, email = ?, senha = ? WHERE id = ?'
+                'UPDATE gestor SET email = ?, senha = ? WHERE id = ?'
             );
-            $stmt->bind_param('sssi', $nome, $email, $senha, $_GET['id']);
+            $stmt->bind_param('ssi', $email, $senha, $_GET['id']);
             $stmt->execute();
 
             if ($stmt->affected_rows > 0) {
@@ -247,7 +240,7 @@ class Gestor
         if (session_status() !== PHP_SESSION_ACTIVE) {
             session_start();
         }
-        if (isset($_SESSION['usuario'])) {
+        if (isset($_SESSION['email'])) {
             return [
                 'status'   => 'ok',
                 'mensagem' => '',

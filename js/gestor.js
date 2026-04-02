@@ -8,11 +8,11 @@ class Gestor {
     }
 
     async login() {
-        const usuario = document.getElementById("usuario").value;
+        const email = document.getElementById("email").value;
         const senha   = document.getElementById("senha").value;
         
         const fd = new FormData();
-        fd.append("usuario", usuario);
+        fd.append("email", email);
         fd.append("senha", senha);
         
         const retorno = await fetch("../php/gestor_login.php", {
@@ -29,20 +29,12 @@ class Gestor {
     }
 
     async novo() {
-        const nome      = document.getElementById("nome").value;
-        const usuario   = document.getElementById("usuario").value;
+        const email   = document.getElementById("email").value;
         const senha     = document.getElementById("senha").value;
-        const email     = document.getElementById("email").value;
-        const instagram = document.getElementById("instagram").value;
-        const ativo     = document.getElementById("ativo").value;
 
         const fd = new FormData();
-        fd.append("nome", nome);
-        fd.append("usuario", usuario);
-        fd.append("senha", senha);
         fd.append("email", email);
-        fd.append("instagram", instagram);
-        fd.append("ativo", ativo);
+        fd.append("senha", senha);
     
         const retorno = await fetch("../php/gestor_novo.php",
             {
@@ -70,11 +62,8 @@ class Gestor {
         if(resposta.status === "ok"){
             alert("SUCESSO:" + resposta.mensagem);
             var registro = resposta.data[0];
-            document.getElementById("nome").value = registro.nome;
-            document.getElementById("usuario").value = registro.usuario;
             document.getElementById("email").value = registro.email;
             document.getElementById("senha").value = registro.senha;
-            document.getElementById("ativo").value = registro.ativo;
             document.getElementById("id").value = id;
         }else{
             alert("ERRO:" + resposta.mensagem);
@@ -83,19 +72,13 @@ class Gestor {
     }
     
     async alterar(){
-        const nome    = document.getElementById("nome").value;
-        const usuario = document.getElementById("usuario").value;
         const senha   = document.getElementById("senha").value;
         const email   = document.getElementById("email").value;
-        const ativo   = document.getElementById("ativo").value;
         const id      = document.getElementById("id").value;
 
         const fd = new FormData();
-        fd.append("nome", nome);
-        fd.append("usuario", usuario);
         fd.append("senha", senha);
         fd.append("email", email);
-        fd.append("ativo", ativo);
     
         const retorno = await fetch("../php/gestor_alterar.php?id="+id,
             {
@@ -145,24 +128,16 @@ class Gestor {
         let html = `
             <table>
                 <tr>
-                    <th> Nome </th>
-                    <th> Usuario </th>
-                    <th> Email </th>
+                    <th> E-mail </th>
                     <th> Senha </th>
-                    <th> Instagram </th>
-                    <th> Ativo </th>
                     <th> # </th>
                 </tr>
         `;
         for (let i = 0; i < tabela.length; i++) {
             html += `
                 <tr>
-                    <td>${tabela[i].nome}</td>
-                    <td>${tabela[i].usuario}</td>
                     <td>${tabela[i].email}</td>
                     <td>${tabela[i].senha}</td>
-                    <td>${tabela[i].instagram}</td>
-                    <td>${tabela[i].ativo}</td>
                     <td>
                         <a href='gestor_alterar.html?id=${tabela[i].id}'>Alterar</a>
                         <a href='#' data-id='${tabela[i].id}' class='link-excluir'>Excluir</a>
