@@ -1,8 +1,36 @@
 <?php
-/**
- * Endpoint HTTP para novo — delega para Usuario::novo().
- */
-require_once __DIR__ . '/usuario.php';
+    include_once('conexao.php');
+    $retorno = [
+        'status'   => '',
+        'mensagem' => '',
+        'data'     => []
+    ];
 
-$api = new Usuario();
-Usuario::enviarJson($api->novo());
+    // Simulando as informações que vem do front
+    $email    = $_POST['email'];
+    $senha    = $_POST['senha'];
+
+    // Preparando para inserção no banco de dados
+    $stmt = $conexao->prepare("INSERT INTO usuario(email, senha) VALUES(?,?)");
+    $stmt->bind_param("ss", $email, $senha);
+    $stmt->execute();
+
+    if($stmt->affected_rows > 0){
+        $retorno = [
+            'status'   => 'ok',
+            'mensagem' => 'Registro inserido com sucesso',
+            'data'     => []
+        ];
+    }else{
+        $retorno = [
+            'status'   => 'nok',
+            'mensagem' => 'Falha ao inserir o registro',
+            'data'     => []
+        ];
+    }
+
+    $stmt->close();
+    $conexao->close();
+
+    header("Content-type:application/json; charset=utf-8");
+    echo json_encode($retorno);
