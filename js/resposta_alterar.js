@@ -13,9 +13,14 @@ async function buscar(id){
     if(resposta.status=='ok'){
         var registro = resposta.data[0];
 
-        document.getElementById('emocional').value      = registro.emocional;
+        const radios = document.getElementsByName('nivel');
+        for (let i = 0; i < radios.length; i++) {
+            if (radios[i].value == registro.emocional) {
+                radios[i].checked = true;
+                break;
+            }
+        }
         document.getElementById('texto').value      = registro.texto;
-        document.getElementById('email_do_funcionario').value      = registro.email_do_funcionario;
         document.getElementById("id_resposta").value = registro.id;
     }else{
         alert("Erro, não existe: " + resposta.mensagem);
@@ -27,19 +32,20 @@ document.getElementById('salvar').addEventListener('click', () => {
 });
 
 async function alterar(){
-    var emocional      = document.getElementById("emocional").value;
-    var texto      = document.getElementById("texto").value;
-    var email_do_funcionario      = document.getElementById("email_do_funcionario").value;
+    const nivelRadio = document.querySelector('input[name="nivel"]:checked');
+    var texto = document.getElementById("texto").value;
     var id_resposta = document.getElementById("id_resposta").value;
 
-    const fd = new FormData();
-    fd.append('emocional', emocional);
-    fd.append('texto', texto);
-    fd.append('email_do_funcionario', email_do_funcionario);
+    if (!nivelRadio) {
+        alert("Por favor, selecione um nível emocional.");
+        return;
+    }
 
-    const retorno = await 
-    fetch("../php/resposta_alterar.php?id="+id_resposta,
-    {
+    const fd = new FormData();
+    fd.append('emocional', nivelRadio.value); // Envia o valor do rádio selecionado
+    fd.append('texto', texto);
+
+    const retorno = await fetch("../php/resposta_alterar.php?id=" + id_resposta, {
         method: "POST",
         body: fd
     });

@@ -10,11 +10,10 @@
         // Simulando as informações que vem do front
         $emocional    = $_POST['emocional'];
         $texto    = $_POST['texto'];
-        $email_do_funcionario    = $_POST['email_do_funcionario'];
     
         // Preparando para inserção no banco de dados
-        $stmt = $conexao->prepare("UPDATE funcionarios SET emocional=?, texto=?, email_do_funcionario=? WHERE id=?");
-        $stmt->bind_param("issi", $emocional, $texto, $email_do_funcionario, $_GET['id']);
+        $stmt = $conexao->prepare("UPDATE funcionarios SET emocional=?, texto=? WHERE id=?");
+        $stmt->bind_param("iss", $emocional, $texto, $_GET['id']);
         $stmt->execute();
 
         if($stmt->affected_rows > 0){
