@@ -29,30 +29,24 @@ document.getElementById('salvar').addEventListener('click', () => {
 async function alterar(){
     var email      = document.getElementById("email").value;
     var senha      = document.getElementById("senha").value;
-    var confsenha  = document.getElementById("confsenha").value;
     var id_funcionario = document.getElementById("id_funcionario").value;
 
-    if(senha===confsenha){
-        const fd = new FormData();
-        fd.append('email', email);
-        fd.append('senha', senha);
+    const fd = new FormData();
+    fd.append('email', email);
+    fd.append('senha', senha);
 
-        const retorno = await 
-        fetch("../php/funcionario_alterar.php?id_funcionario="+id_funcionario,
-        {
-            method: "POST",
-            body: fd
-        });
-        const resposta = await retorno.json();
+    const retorno = await 
+    fetch("../php/funcionario_alterar.php?id="+id_funcionario,
+    {
+        method: "POST",
+        body: fd
+    });
+    const resposta = await retorno.json();
 
-        if(resposta.status=='ok'){
-            alert("Sucesso: " + resposta.mensagem);
-            window.location.href = 'funcionario.html';
-        }else{
-            alert("Erro: " + resposta.mensagem);
-        }
-    }
-    else{
-        alert('As senhas devem ser as mesmas');
+    if(resposta.status=='ok'){
+        alert("Sucesso: " + resposta.mensagem);
+        window.location.href = 'funcionario.html';
+    }else{
+        alert("Erro: " + resposta.mensagem);
     }
 }

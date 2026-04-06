@@ -1,3 +1,18 @@
+// Assim que a página carregar
+window.onload = function() {
+    fetch('../php/get_sessao_gestor.php')
+        .then(response => response.json())
+        .then(data => {
+            if (data.status === 'ok') {
+                // Coloca o ID automaticamente no input hidden
+                document.getElementById('id_gestor').value = data.gestor_id;
+            } else {
+                // Se não tiver sessão, manda de volta pro login
+                window.location.href = "../login/login_gestor.html";
+            }
+        });
+};
+
 document.getElementById('enviar').addEventListener('click', () => {
     novo();
 });
@@ -6,29 +21,23 @@ async function novo(){
     var equipe      = document.getElementById("equipe").value;
     var email     = document.getElementById("email").value;
     var senha     = document.getElementById("senha").value;
-    var confsenha = document.getElementById("confsenha").value;
 
-    if(senha===confsenha){
-        const fd = new FormData();
-        fd.append('equipe', equipe);
-        fd.append('email', email);
-        fd.append('senha', senha);
+    const fd = new FormData();
+    fd.append('equipe', equipe);
+    fd.append('email', email);
+    fd.append('senha', senha);
 
-        const retorno = await fetch("../php/funcionario_novo.php",
-        {
-            method: "POST",
-            body: fd
-        });
-        const resposta = await retorno.json();
+    const retorno = await fetch("../php/funcionario_novo.php",
+    {
+        method: "POST",
+        body: fd
+    });
+    const resposta = await retorno.json();
 
-        if(resposta.status=='ok'){
-            alert("Sucesso: " + resposta.mensagem);
-            window.location.href = 'funcionario.html';
-        }else{
-            alert("Erro: " + resposta.mensagem);
-        }
-    }
-    else{
-        alert('As senhas devem ser as mesmas');
+    if(resposta.status=='ok'){
+        alert("Sucesso: " + resposta.mensagem);
+        window.location.href = 'funcionario.html';
+    }else{
+        alert("Erro: " + resposta.mensagem);
     }
 }

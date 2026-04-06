@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.getElementById('novo').addEventListener('click', () => {
-    window.location.href = "../home/funcionario_novo.html";
+    window.location.href = "../funcionario/funcionario_novo.html";
 });
 
 async function buscar(){
