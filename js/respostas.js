@@ -16,17 +16,17 @@ async function buscar(){
     }
 }
 
-async function excluir(id_resposta){
-    const retorno = await fetch('../php/resposta_excluir.php?id='+id_resposta);
-    const resposta = await retorno.json();
+// async function excluir(id_resposta){
+//     const retorno = await fetch('../php/resposta_excluir.php?id='+id_resposta);
+//     const resposta = await retorno.json();
 
-    if(resposta.status=='ok'){
-        alert(resposta.mensagem);
-        window.location.reload();
-    }else{
-        alert(resposta.mensagem);
-    }
-}
+//     if(resposta.status=='ok'){
+//         alert(resposta.mensagem);
+//         window.location.reload();
+//     }else{
+//         alert(resposta.mensagem);
+//     }
+// }
 
 function preencherTabela(tabela){
     var html = `
@@ -49,7 +49,8 @@ function preencherTabela(tabela){
                 <td> ${tabela[i].email_do_funcionario} </td>
                 <td>
                     <a href='../formulario/resposta_alterar.html?id=${tabela[i].id}' class='btn-alterar'>Alterar</a>
-                    <a href='#' onClick='excluir(${tabela[i].id})' class='btn-excluir'>Excluir</a>
+                    <!-- // Comentado o funcionamento abaixo -->
+                    <!-- a href='#' onClick='excluir(${tabela[i].id})' class='btn-excluir'>Excluir</a -->
                 </td>
             </tr>
         `;
