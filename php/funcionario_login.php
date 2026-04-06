@@ -8,8 +8,8 @@
         'data'     => []
     ];
 
-    $stmt = $conexao->prepare("SELECT * FROM funcionario WHERE email=? AND senha=?");
-    $stmt->bind_param("ss",$_POST['email'],$_POST['senha']);    
+    $stmt = $conexao->prepare("SELECT * FROM funcionarios WHERE email=? AND senha=? AND equipe=?");
+    $stmt->bind_param("sss",$_POST['email'],$_POST['senha'],$_POST['equipe']);    
     
     // Recuperando informações do Banco de Dados
     // Vou executar a query

@@ -1,4 +1,4 @@
-async function valida_sessao(){
+async function gestor_valida_sessao(){
     const retorno = await fetch('../php/gestor_valida_sessao.php');
     const resposta = await retorno.json();
 

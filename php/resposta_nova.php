@@ -13,7 +13,7 @@
 
     // Preparando para inserção no banco de dados
     $stmt = $conexao->prepare("INSERT INTO respostas(emocional, texto, email_do_funcionario) VALUES(?,?,?)");
-    $stmt->bind_param("ss", $emocional, $texto);
+    $stmt->bind_param("sss", $emocional, $texto);
     $stmt->execute();
 
     if($stmt->affected_rows > 0){

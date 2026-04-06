@@ -24,8 +24,8 @@
         }
 
         session_start();
-        $_SESSION['gestor_id']=$tabela['id'];
-        $_SESSION['email']=$tabela['email'];
+        $_SESSION['gestor_id']=$tabela[0]['id'];
+        $_SESSION['email']=$tabela[0]['email'];
 
         $retorno = [
             'status'   => 'ok', // ok - nok

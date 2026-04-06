@@ -10,10 +10,11 @@
         // Simulando as informações que vem do front
         $email    = $_POST['email'];
         $senha    = $_POST['senha'];
+        $equipe    = $_POST['equipe'];
     
         // Preparando para inserção no banco de dados
-        $stmt = $conexao->prepare("UPDATE funcionario SET email=?, senha=? WHERE id=?");
-        $stmt->bind_param("ssi",$email, $senha, $_GET['id']);
+        $stmt = $conexao->prepare("UPDATE funcionarios SET email=?, senha=?, equipe=? WHERE id=?");
+        $stmt->bind_param("sssi",$email, $senha, $equipe, $_GET['id']);
         $stmt->execute();
 
         if($stmt->affected_rows > 0){

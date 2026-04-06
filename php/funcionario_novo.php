@@ -9,10 +9,12 @@
     // Simulando as informações que vem do front
     $email    = $_POST['email'];
     $senha    = $_POST['senha'];
+    $id_gestor = $_POST['id_gestor'];
+    $equipe = $_POST['equipe'];
 
     // Preparando para inserção no banco de dados
-    $stmt = $conexao->prepare("INSERT INTO funcionario(email, senha) VALUES(?,?)");
-    $stmt->bind_param("ss", $email, $senha);
+    $stmt = $conexao->prepare("INSERT INTO funcionarios(email, senha, equipe, gestor_id) VALUES(?,?,?,?)");
+    $stmt->bind_param("sssi", $email, $senha, $equipe, $id_gestor);
     $stmt->execute();
 
     if($stmt->affected_rows > 0){

@@ -1,4 +1,4 @@
-async function valida_sessao(){
+async function funcionario_valida_sessao(){
     const retorno = await fetch('../php/funcionario_valida_sessao.php');
     const resposta = await retorno.json();
 

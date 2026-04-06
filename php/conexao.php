@@ -4,11 +4,11 @@
  * Ajuste servidor/usuário/senha/banco conforme seu ambiente (ex.: XAMPP).
  */
 $servidor   = 'localhost';
-$funcionario    = 'root';
+$usuario    = 'root';
 $senha      = '';
 $nome_banco = 'projeto';
 
-$conexao = new mysqli($servidor, $funcionario, $senha, $nome_banco);
+$conexao = new mysqli($servidor, $usuario, $senha, $nome_banco);
 if($conexao->connect_error){
     echo $conexao->connect_error;
 }

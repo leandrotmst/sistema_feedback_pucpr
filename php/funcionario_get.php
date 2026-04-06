@@ -10,11 +10,11 @@
 
     if(isset($_GET['id'])){
         // Segunda situação - RECEBENDO O ID por GET
-        $stmt = $conexao->prepare("SELECT * FROM funcionario WHERE id=?");
+        $stmt = $conexao->prepare("SELECT * FROM funcionarios WHERE id=?");
         $stmt->bind_param("i",$_GET['id']);
     }else{
         // Primeira situação - SEM RECEBER O ID por GET
-        $stmt = $conexao->prepare("SELECT * FROM funcionario");
+        $stmt = $conexao->prepare("SELECT * FROM funcionarios");
     }    
     
     // Recuperando informações do Banco de Dados

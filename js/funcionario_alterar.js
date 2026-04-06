@@ -13,9 +13,9 @@ async function buscar(id){
     if(resposta.status=='ok'){
         var registro = resposta.data[0];
 
+        document.getElementById('equipe').value      = registro.equipe;
         document.getElementById('email').value      = registro.email;
         document.getElementById('senha').value      = registro.senha;
-        document.getElementById('confsenha').value  = registro.senha;
         document.getElementById("id_funcionario").value = registro.id_funcionario;
     }else{
         alert("Erro, não existe: " + resposta.mensagem);
@@ -27,11 +27,13 @@ document.getElementById('salvar').addEventListener('click', () => {
 });
 
 async function alterar(){
+    var equipe      = document.getElementById("equipe").value;
     var email      = document.getElementById("email").value;
     var senha      = document.getElementById("senha").value;
     var id_funcionario = document.getElementById("id_funcionario").value;
 
     const fd = new FormData();
+    fd.append('equipe', equipe);
     fd.append('email', email);
     fd.append('senha', senha);
 
@@ -45,7 +47,7 @@ async function alterar(){
 
     if(resposta.status=='ok'){
         alert("Sucesso: " + resposta.mensagem);
-        window.location.href = 'funcionario.html';
+        window.location.href = '../gestor/index.html';
     }else{
         alert("Erro: " + resposta.mensagem);
     }

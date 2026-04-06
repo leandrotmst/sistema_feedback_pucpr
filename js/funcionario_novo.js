@@ -21,11 +21,13 @@ async function novo(){
     var equipe      = document.getElementById("equipe").value;
     var email     = document.getElementById("email").value;
     var senha     = document.getElementById("senha").value;
+    var id_gestor     = document.getElementById("id_gestor").value;
 
     const fd = new FormData();
     fd.append('equipe', equipe);
     fd.append('email', email);
     fd.append('senha', senha);
+    fd.append('id_gestor', id_gestor);
 
     const retorno = await fetch("../php/funcionario_novo.php",
     {
@@ -36,7 +38,7 @@ async function novo(){
 
     if(resposta.status=='ok'){
         alert("Sucesso: " + resposta.mensagem);
-        window.location.href = 'funcionario.html';
+        window.location.href = '../gestor/index.html';
     }else{
         alert("Erro: " + resposta.mensagem);
     }

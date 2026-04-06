@@ -1,5 +1,5 @@
 document.addEventListener('DOMContentLoaded', () => {
-    valida_gestor();
+    gestor_valida_sessao();
     buscar();
 });
 
@@ -35,7 +35,7 @@ function preencherTabela(tabela){
                 <tr>
                     <th>E-mail</th>
                     <th>Senha</th>
-                    <th>ID Gestor</th>
+                    <th>Equipe</th>
                 </tr>
             </thead>
             <tbody>
@@ -46,8 +46,9 @@ function preencherTabela(tabela){
             <tr>
                 <td> ${tabela[i].email} </td>
                 <td> ${tabela[i].senha} </td>
+                <td> ${tabela[i].equipe} </td>
                 <td>
-                    <a href='funcionario_alterar.html?id=${tabela[i].id}' class='btn-alterar'>Alterar</a>
+                    <a href='../funcionario/funcionario_alterar.html?id=${tabela[i].id}' class='btn-alterar'>Alterar</a>
                     <a href='#' onClick='excluir(${tabela[i].id})' class='btn-excluir'>Excluir</a>
                 </td>
             </tr>
