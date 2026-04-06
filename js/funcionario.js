@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.getElementById('novo').addEventListener('click', () => {
-    window.location.href = "funcionario_novo.html";
+    window.location.href = "../home/funcionario_novo.html";
 });
 
 async function buscar(){
@@ -47,7 +47,7 @@ function preencherTabela(tabela){
                 <td> ${tabela[i].email} </td>
                 <td> ${tabela[i].senha} </td>
                 <td>
-                    <a href='usuario_alterar.html?id_usuario=${tabela[i].id}' class='btn-alterar'>Alterar</a>
+                    <a href='funcionario_alterar.html?id=${tabela[i].id}' class='btn-alterar'>Alterar</a>
                     <a href='#' onClick='excluir(${tabela[i].id})' class='btn-excluir'>Excluir</a>
                 </td>
             </tr>
