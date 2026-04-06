@@ -8,8 +8,14 @@
         'data'     => []
     ];
 
-    $stmt = $conexao->prepare("SELECT * FROM usuario WHERE email=? AND senha=?");
-    $stmt->bind_param("ss",$_POST['email'],$_POST['senha']);    
+    if(isset($_GET['id'])){
+        // Segunda situação - RECEBENDO O ID por GET
+        $stmt = $conexao->prepare("SELECT * FROM funcionario WHERE id=?");
+        $stmt->bind_param("i",$_GET['id']);
+    }else{
+        // Primeira situação - SEM RECEBER O ID por GET
+        $stmt = $conexao->prepare("SELECT * FROM funcionario");
+    }    
     
     // Recuperando informações do Banco de Dados
     // Vou executar a query
@@ -22,10 +28,6 @@
         while($linha = $resultado->fetch_assoc()){
             $tabela[] = $linha;
         }
-
-        session_start();
-        $_SESSION['email']=$tabela;
-
         $retorno = [
             'status'   => 'ok', // ok - nok
             'mensagem' => 'Sucesso consulta efetuada', // mensagem que envio para o front

@@ -7,18 +7,8 @@ CREATE DATABASE IF NOT EXISTS projeto
 
 USE projeto;
 
--- Usuários do sistema (login com e-mail, senha e vínculo à equipe)
-CREATE TABLE IF NOT EXISTS usuarios (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    email VARCHAR(255) NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    equipe VARCHAR(255) NOT NULL,
-    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    UNIQUE KEY uk_usuarios_email (email)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
-
--- Gestores (acesso administrativo)
+-- 1. Tabela de Gestores (acesso administrativo)
+-- Criada primeiro para que a FK de funcionários possa referenciá-la
 CREATE TABLE IF NOT EXISTS gestor (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL,
@@ -28,13 +18,27 @@ CREATE TABLE IF NOT EXISTS gestor (
     UNIQUE KEY uk_gestor_email (email)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
 
--- Respostas do formulário (nível emocional, texto livre, e-mail de quem respondeu)
+-- 2. Tabela de Funcionários (com vínculo ao gestor)
+CREATE TABLE IF NOT EXISTS funcionarios (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    equipe VARCHAR(255) NOT NULL,
+    gestor_id INT UNSIGNED NOT NULL, -- Coluna para relacionar com a tabela gestor
+    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_funcionarios_email (email),
+    -- Chave Estrangeira: Garante que o gestor exista e permite listar por id_gestor
+    CONSTRAINT fk_funcionarios_gestor FOREIGN KEY (gestor_id) REFERENCES gestor(id) ON DELETE CASCADE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+
+-- 3. Respostas do formulário
 CREATE TABLE IF NOT EXISTS respostas (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     emocional TINYINT UNSIGNED NULL COMMENT 'Escala 0-5 (emocional / estresse na semana)',
     texto TEXT NULL,
-    email_do_usuario VARCHAR(255) NOT NULL,
+    email_do_funcionario VARCHAR(255) NOT NULL,
     criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    KEY idx_respostas_email (email_do_usuario)
+    KEY idx_respostas_email (email_do_funcionario)
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;

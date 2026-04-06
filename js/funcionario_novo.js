@@ -14,7 +14,7 @@ async function novo(){
         fd.append('email', email);
         fd.append('senha', senha);
 
-        const retorno = await fetch("../php/usuario_novo.php",
+        const retorno = await fetch("../php/funcionario_novo.php",
         {
             method: "POST",
             body: fd
@@ -23,7 +23,7 @@ async function novo(){
 
         if(resposta.status=='ok'){
             alert("Sucesso: " + resposta.mensagem);
-            window.location.href = 'usuario.html';
+            window.location.href = 'funcionario.html';
         }else{
             alert("Erro: " + resposta.mensagem);
         }

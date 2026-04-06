@@ -1,40 +1,39 @@
 <?php
     include_once('conexao.php');
+    // Configurando o padrão de retorno em todas
+    // as situações
     $retorno = [
         'status'   => '',
         'mensagem' => '',
-        'data'     => [],
+        'data'     => []
     ];
-
-    if(isset($_GET['id'])){
-        // Simulando as informações que vem do front
-        $email    = $_POST['email'];
-        $senha    = $_POST['senha'];
     
-        // Preparando para inserção no banco de dados
-        $stmt = $conexao->prepare("UPDATE usuario SET email=?, senha=? WHERE id=?");
-        $stmt->bind_param("ssi",$email, $senha, $_GET['id']);
+    // Recuperando informações do Banco de Dados
+    if(isset($_GET['id'])){
+        // Segunda situação - RECEBENDO O ID por GET
+        $stmt = $conexao->prepare("DELETE FROM funcionario WHERE id=?");
+        $stmt->bind_param("i",$_GET['id']);
         $stmt->execute();
-
+      
         if($stmt->affected_rows > 0){
             $retorno = [
                 'status'   => 'ok',
-                'mensagem' => 'Registro alterado com sucesso!',
+                'mensagem' => 'Registro excluído',
                 'data'     => []
             ];
         }else{
-            $retorno = [
+          $retorno = [
                 'status'   => 'nok',
-                'mensagem' => 'Não foi possível alterar o registro',
+                'mensagem' => 'Registro não excluído',
                 'data'     => []
             ];
         }
-        
+      
         $stmt->close();
     }else{
         $retorno = [
             'status'   => 'nok',
-            'mensagem' => "Não posso alterar um registro sem um ID informado",
+            'mensagem' => 'É necessário informar um ID para exclusão',
             'data'     => []
         ];
     }

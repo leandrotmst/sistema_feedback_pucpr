@@ -9,10 +9,10 @@
     // Simulando as informações que vem do front
     $emocional    = $_POST['emocional'];
     $texto    = $_POST['texto'];
-    $emailUsuario = $_POST['email_do_usuario'];
+    $emailFuncionario = $_POST['email_do_funcionario'];
 
     // Preparando para inserção no banco de dados
-    $stmt = $conexao->prepare("INSERT INTO respostas(emocional, texto, email_do_usuario) VALUES(?,?,?)");
+    $stmt = $conexao->prepare("INSERT INTO respostas(emocional, texto, email_do_funcionario) VALUES(?,?,?)");
     $stmt->bind_param("ss", $emocional, $texto);
     $stmt->execute();
 

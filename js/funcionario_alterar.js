@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
     const url = new URLSearchParams(window.location.search);
-    const id = url.get('id_usuario');
+    const id = url.get('id_funcionario');
 
     buscar(id);
 });
 
 async function buscar(id){
     const retorno = await 
-    fetch("../php/usuario_get.php?id_usuario="+id);
+    fetch("../php/funcionario_get.php?id_funcionario="+id);
     const resposta = await retorno.json();
 
     if(resposta.status=='ok'){
@@ -16,7 +16,7 @@ async function buscar(id){
         document.getElementById('email').value      = registro.email;
         document.getElementById('senha').value      = registro.senha;
         document.getElementById('confsenha').value  = registro.senha;
-        document.getElementById("id_usuario").value = registro.id_usuario;
+        document.getElementById("id_funcionario").value = registro.id_funcionario;
     }else{
         alert("Erro, não existe: " + resposta.mensagem);
     }
@@ -30,7 +30,7 @@ async function alterar(){
     var email      = document.getElementById("email").value;
     var senha      = document.getElementById("senha").value;
     var confsenha  = document.getElementById("confsenha").value;
-    var id_usuario = document.getElementById("id_usuario").value;
+    var id_funcionario = document.getElementById("id_funcionario").value;
 
     if(senha===confsenha){
         const fd = new FormData();
@@ -38,7 +38,7 @@ async function alterar(){
         fd.append('senha', senha);
 
         const retorno = await 
-        fetch("../php/usuario_alterar.php?id_usuario="+id_usuario,
+        fetch("../php/funcionario_alterar.php?id_funcionario="+id_funcionario,
         {
             method: "POST",
             body: fd
@@ -47,7 +47,7 @@ async function alterar(){
 
         if(resposta.status=='ok'){
             alert("Sucesso: " + resposta.mensagem);
-            window.location.href = 'usuario.html';
+            window.location.href = 'funcionario.html';
         }else{
             alert("Erro: " + resposta.mensagem);
         }

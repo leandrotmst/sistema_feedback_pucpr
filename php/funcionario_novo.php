@@ -11,7 +11,7 @@
     $senha    = $_POST['senha'];
 
     // Preparando para inserção no banco de dados
-    $stmt = $conexao->prepare("INSERT INTO usuario(email, senha) VALUES(?,?)");
+    $stmt = $conexao->prepare("INSERT INTO funcionario(email, senha) VALUES(?,?)");
     $stmt->bind_param("ss", $email, $senha);
     $stmt->execute();
 

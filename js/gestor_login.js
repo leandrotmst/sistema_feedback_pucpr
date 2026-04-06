@@ -1,32 +1,23 @@
-document.getElementById('enviar').addEventListener('click', () => {
-    novo();
+document.getElementById('entrar').addEventListener('click', ()=>{
+    login();
 });
 
-async function novo(){
-    var email     = document.getElementById("email").value;
-    var senha     = document.getElementById("senha").value;
-    var confsenha = document.getElementById("confsenha").value;
+async function login(){
+    var email = document.getElementById('email').value;
+    var senha = document.getElementById('senha').value;
+    const fd = new FormData();
+    fd.append("email", email);
+    fd.append("senha", senha);
 
-    if(senha===confsenha){
-        const fd = new FormData();
-        fd.append('email', email);
-        fd.append('senha', senha);
-
-        const retorno = await fetch("../php/usuario_novo.php",
-        {
+    const retorno = await fetch('../php/gestor_login.php',{
             method: "POST",
             body: fd
-        });
-        const resposta = await retorno.json();
-
-        if(resposta.status=='ok'){
-            alert("Sucesso: " + resposta.mensagem);
-            window.location.href = 'gestor/index.html';
-        }else{
-            alert("Erro: " + resposta.mensagem);
         }
-    }
-    else{
-        alert('As senhas devem ser as mesmas');
+    );
+    const resposta = await retorno.json();
+    if(resposta.status=='ok'){
+        window.location.href = "../gestor/index.html";
+    }else{
+        alert('Credenciais inválidas');
     }
 }
