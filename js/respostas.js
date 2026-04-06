@@ -1,41 +1,63 @@
-if (document.getElementById("lista")) {
-    resposta.buscarLista();
-}
+document.addEventListener('DOMContentLoaded', () => {
+    funcionario_valida_sessao();
+    buscar();
+});
 
-async function buscarLista() {
-    const retorno = await fetch("../php/resposta_get.php");
+document.getElementById('novo').addEventListener('click', () => {
+    window.location.href = "../formulario/resposta_nova.html";
+});
+
+async function buscar(){
+    const retorno = await fetch ("../php/resposta_get.php");
     const resposta = await retorno.json();
 
-    if (resposta.status === "ok") {
-        this.preencherTabela(resposta.data);
+    if(resposta.status=='ok'){
+        preencherTabela(resposta.data);
     }
 }
 
-function preencherTabela(tabela) {
-    let html = `
-        <table border="1" cellpadding="6" cellspacing="0">
-            <tr>
-                <th>Equipe</th>
-                <th>Emocional / estresse (0-5)</th>
-                <th>Data</th>
-            </tr>
+async function excluir(id_resposta){
+    const retorno = await fetch('../php/resposta_excluir.php?id='+id_resposta);
+    const resposta = await retorno.json();
+
+    if(resposta.status=='ok'){
+        alert(resposta.mensagem);
+        window.location.reload();
+    }else{
+        alert(resposta.mensagem);
+    }
+}
+
+function preencherTabela(tabela){
+    var html = `
+        <table class="table-custom">
+            <thead>
+                <tr>
+                    <th>Texto</th>
+                    <th>Emocional</th>
+                    <th>E-mail do funcionário</th>
+                </tr>
+            </thead>
+            <tbody>
     `;
-    if (tabela.length === 0) {
-        html += `<tr><td colspan="3">Nenhuma resposta ainda.</td></tr>`;
-    } else {
-        for (let i = 0; i < tabela.length; i++) {
-            const r = tabela[i];
-            const data = r.criado_em ? r.criado_em : "—";
-            html += `
+    
+    for(var i=0; i < tabela.length; i++){
+        html += `
             <tr>
-                <td>${r.equipe}</td>
-                <td>${r.nivel} — ${this.rotuloNivel(r.nivel)}</td>
-                <td>${data}</td>
+                <td> ${tabela[i].texto} </td>
+                <td> ${tabela[i].emocional} </td>
+                <td> ${tabela[i].email_do_funcionario} </td>
+                <td>
+                    <a href='../formulario/resposta_alterar.html?id=${tabela[i].id}' class='btn-alterar'>Alterar</a>
+                    <a href='#' onClick='excluir(${tabela[i].id})' class='btn-excluir'>Excluir</a>
+                </td>
             </tr>
         `;
-        }
     }
-    html += "</table>";
-    document.getElementById("lista").innerHTML = html;
-}
 
+    html += `
+            </tbody>
+        </table>
+    `;
+    document.getElementById('lista').innerHTML = html;
+}

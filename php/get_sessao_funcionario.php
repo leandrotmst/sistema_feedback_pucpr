@@ -1,0 +1,12 @@
+<?php
+session_start();
+header('Content-Type: application/json');
+
+if (isset($_SESSION['email_funcionario'])) {
+    echo json_encode([
+        'status' => 'ok',
+        'email' => $_SESSION['email_funcionario']
+    ]);
+} else {
+    echo json_encode(['status' => 'error']);
+}

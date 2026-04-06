@@ -7,6 +7,7 @@
         'mensagem' => '', // mensagem que envio para o front
         'data'     => []
     ];
+    
 
     $stmt = $conexao->prepare("SELECT * FROM funcionarios WHERE email=? AND senha=?");
     $stmt->bind_param("ss",$_POST['email'],$_POST['senha']);    
@@ -24,6 +25,7 @@
         }
 
         session_start();
+        $_SESSION['email_funcionario'] = $tabela[0]['email'];
         $_SESSION['email']=$tabela;
 
         $retorno = [
