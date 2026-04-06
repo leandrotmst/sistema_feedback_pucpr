@@ -14,7 +14,7 @@
     
         // Preparando para inserção no banco de dados
         $stmt = $conexao->prepare("UPDATE funcionarios SET email=?, senha=?, equipe=? WHERE id=?");
-        $stmt->bind_param("sssi",$email, $senha, $equipe, $_GET['id']);
+        $stmt->bind_param("sssi", $email, $senha, $equipe, $_GET['id']);
         $stmt->execute();
 
         if($stmt->affected_rows > 0){

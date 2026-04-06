@@ -1,13 +1,13 @@
 document.addEventListener("DOMContentLoaded", () => {
     const url = new URLSearchParams(window.location.search);
-    const id = url.get('id_funcionario');
+    const id = url.get('id');
 
     buscar(id);
 });
 
 async function buscar(id){
     const retorno = await 
-    fetch("../php/funcionario_get.php?id_funcionario="+id);
+    fetch("../php/funcionario_get.php?id="+id);
     const resposta = await retorno.json();
 
     if(resposta.status=='ok'){
@@ -16,7 +16,7 @@ async function buscar(id){
         document.getElementById('equipe').value      = registro.equipe;
         document.getElementById('email').value      = registro.email;
         document.getElementById('senha').value      = registro.senha;
-        document.getElementById("id_funcionario").value = registro.id_funcionario;
+        document.getElementById("id_funcionario").value = registro.id;
     }else{
         alert("Erro, não existe: " + resposta.mensagem);
     }
