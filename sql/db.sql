@@ -1,45 +1,73 @@
--- Banco completo do projeto (XAMPP / MySQL).
--- Uso: mysql -u root -p < sql/db.sql
---   ou cole no phpMyAdmin (aba SQL).
-CREATE DATABASE IF NOT EXISTS projeto
-    CHARACTER SET utf8mb4
-    COLLATE utf8mb4_unicode_ci;
+-- AlignUp - Modelo Relacional v7
+-- Uso: cole no phpMyAdmin (aba SQL)
 
-USE projeto;
+CREATE DATABASE IF NOT EXISTS AlignUp;
+USE AlignUp;
 
--- 1. Tabela de Gestores (acesso administrativo)
--- Criada primeiro para que a FK de funcionários possa referenciá-la
+-- Equipes / Times
+CREATE TABLE IF NOT EXISTS equipe (
+    id    INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    nome  VARCHAR(100) NOT NULL,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_equipe_nome (nome)
+) ENGINE=InnoDB COLLATE=utf8mb4_unicode_ci;
+
+-- Gestores (acesso administrativo)
+-- O gestor cria e gerencia os perfis dos funcionários
 CREATE TABLE IF NOT EXISTS gestor (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    id    INT UNSIGNED NOT NULL AUTO_INCREMENT,
     email VARCHAR(255) NOT NULL,
     senha VARCHAR(255) NOT NULL,
-    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     UNIQUE KEY uk_gestor_email (email)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+) ENGINE=InnoDB COLLATE=utf8mb4_unicode_ci;
 
--- 2. Tabela de Funcionários (com vínculo ao gestor)
-CREATE TABLE IF NOT EXISTS funcionarios (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    email VARCHAR(255) NOT NULL,
-    senha VARCHAR(255) NOT NULL,
-    equipe VARCHAR(255) NOT NULL,
-    gestor_id INT UNSIGNED NOT NULL, -- Coluna para relacionar com a tabela gestor
-    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+-- Usuários / Funcionários
+-- Criados pelo gestor, vinculados a uma equipe
+CREATE TABLE IF NOT EXISTS funcionario (
+    id        INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    email     VARCHAR(255) NOT NULL,
+    senha     VARCHAR(255) NOT NULL,
+    id_equipe INT UNSIGNED NOT NULL,
+    id_gestor INT UNSIGNED NOT NULL,
     PRIMARY KEY (id),
-    UNIQUE KEY uk_funcionarios_email (email),
-    -- Chave Estrangeira: Garante que o gestor exista e permite listar por id_gestor
-    CONSTRAINT fk_funcionarios_gestor FOREIGN KEY (gestor_id) REFERENCES gestor(id) ON DELETE CASCADE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    UNIQUE KEY uk_funcionario_email (email),
+    KEY idx_funcionario_equipe (id_equipe),
+    KEY idx_funcionario_gestor (id_gestor),
+    CONSTRAINT fk_funcionario_equipe
+        FOREIGN KEY (id_equipe) REFERENCES equipe (id)
+        ON UPDATE CASCADE,
+    CONSTRAINT fk_funcionario_gestor
+        FOREIGN KEY (id_gestor) REFERENCES gestor (id)
+        ON UPDATE CASCADE
+) ENGINE=InnoDB COLLATE=utf8mb4_unicode_ci;
 
--- 3. Respostas do formulário
+-- Perguntas do formulário (cadastradas no banco, não hardcoded)
+CREATE TABLE IF NOT EXISTS pergunta (
+    id        INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    descricao VARCHAR(500) NOT NULL,
+    PRIMARY KEY (id)
+) ENGINE=InnoDB COLLATE=utf8mb4_unicode_ci;
+
+-- Respostas do formulário
+-- Uma linha por resposta de cada pergunta
+
 CREATE TABLE IF NOT EXISTS respostas (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    emocional TINYINT UNSIGNED NULL COMMENT 'Escala 0-5 (emocional / estresse na semana)',
-    texto TEXT NULL,
-    email_do_funcionario VARCHAR(255) NOT NULL,
-    equipe VARCHAR(255) NOT NULL,
-    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    id          INT UNSIGNED     NOT NULL AUTO_INCREMENT,
+    id_funcionario  INT UNSIGNED     NOT NULL,
+    id_pergunta INT UNSIGNED     NOT NULL,
+    valor       TINYINT UNSIGNED NULL     COMMENT 'Escala 1-5 (perguntas de escala)',
+    texto       TEXT             NULL     COMMENT 'Texto livre (perguntas abertas)',
+    criado_em   TIMESTAMP        NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
-    KEY idx_respostas_email (email_do_funcionario)
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_unicode_ci;
+    KEY idx_respostas_funcionario  (id_funcionario),
+    KEY idx_respostas_pergunta (id_pergunta),
+    CONSTRAINT fk_respostas_funcionario
+        FOREIGN KEY (id_funcionario)  REFERENCES funcionario (id)
+        ON UPDATE CASCADE,
+    CONSTRAINT fk_respostas_pergunta
+        FOREIGN KEY (id_pergunta) REFERENCES pergunta (id)
+        ON UPDATE CASCADE,
+    CONSTRAINT chk_valor
+        CHECK (valor IS NULL OR valor BETWEEN 1 AND 5)
+) ENGINE=InnoDB COLLATE=utf8mb4_unicode_ci;

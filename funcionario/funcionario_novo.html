@@ -8,9 +8,15 @@
 <body>
     <div>
         <div>
-            <label for="nome">Equipe</label>
-            <input type="text" id="equipe">
-            <input type="hidden" id="id_gestor" name="id_gestor">
+            <label for="equipes">Equipes</label>
+            <input list="equipes" name="equipes">
+            <datalist id="equipes">
+                <option value="Edge">
+                <option value="Firefox">
+                <option value="Chrome">
+                <option value="Opera">
+                <option value="Safari">
+            </datalist>
         </div>
     </div>
     <div>
@@ -27,7 +33,7 @@
     </div>
     <div>
         <div>
-            <button id="enviar">Enviar</button>
+            <button type="submit" id="enviar">Enviar</button>
         </div>
     </div>
     <script src="../js/funcionario_novo.js"></script>
