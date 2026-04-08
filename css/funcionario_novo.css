@@ -1,0 +1,112 @@
+:root {
+    --primary: #6366f1;
+    --secondary: #a855f7;
+    --bg: #020617;
+    --card: rgba(255, 255, 255, 0.05);
+    --border: rgba(255, 255, 255, 0.08);
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 15px;
+    color: var(--text);
+}
+
+/* Cada bloco vira uma linha do formulário */
+body > div {
+    width: 100%;
+    max-width: 420px;
+}
+
+/* Caixa interna */
+body > div > div {
+    background: var(--card);
+    backdrop-filter: blur(20px);
+    border: 1px solid var(--border);
+    padding: 18px;
+    border-radius: 14px;
+}
+
+/* LABEL */
+label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+    color: var(--muted);
+}
+
+/* INPUT */
+input {
+    width: 100%;
+    padding: 12px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+    outline: none;
+    transition: 0.2s;
+}
+
+/* FOCO */
+input:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(99,102,241,0.3);
+}
+
+/* BOTÕES CONTAINER */
+body > div:last-child > div {
+    display: flex;
+    gap: 10px;
+}
+
+/* BOTÕES */
+button {
+    flex: 1;
+    padding: 12px;
+    border-radius: 10px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    transition: 0.25s;
+}
+
+/* VOLTAR */
+button:first-child {
+    background: transparent;
+    border: 1px solid var(--border);
+    color: var(--muted);
+}
+
+button:first-child:hover {
+    background: rgba(255,255,255,0.05);
+    color: var(--text);
+}
+
+/* CADASTRAR */
+button:last-child {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: white;
+}
+
+button:last-child:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 10px 25px rgba(99,102,241,0.4);
+}
+
+button:active {
+    transform: scale(0.97);
+}

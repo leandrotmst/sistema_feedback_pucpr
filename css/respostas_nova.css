@@ -1,0 +1,145 @@
+:root {
+    --primary: #6366f1;
+    --secondary: #a855f7;
+    --bg: #020617;
+    --card: rgba(255,255,255,0.05);
+    --border: rgba(255,255,255,0.1);
+    --text: #e2e8f0;
+    --muted: #94a3b8;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    font-family: 'Plus Jakarta Sans', sans-serif;
+    min-height: 100vh;
+    background: var(--bg);
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 30px;
+    color: var(--text);
+}
+
+/* ===== TÍTULO ===== */
+h1 {
+    font-size: 2rem;
+    font-weight: 800;
+    letter-spacing: -1px;
+}
+
+/* ===== CARD PRINCIPAL ===== */
+fieldset {
+    width: 100%;
+    max-width: 420px;
+    border: 1px solid var(--border);
+    border-radius: 18px;
+    padding: 22px;
+    background: var(--card);
+    backdrop-filter: blur(20px);
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+    box-shadow: 0 20px 40px rgba(0,0,0,0.4);
+}
+
+/* ===== LEGEND ===== */
+legend {
+    width: 100%;
+    font-size: 0.9rem;
+    color: var(--muted);
+    margin-bottom: 10px;
+}
+
+/* ===== RADIO CUSTOM ===== */
+input[type="radio"] {
+    display: none;
+}
+
+/* LABEL vira botão */
+fieldset label {
+    padding: 10px 14px;
+    border-radius: 10px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.03);
+    cursor: pointer;
+    font-weight: 600;
+    transition: all 0.25s ease;
+    user-select: none;
+}
+
+/* hover */
+fieldset label:hover {
+    border-color: var(--primary);
+    transform: translateY(-1px);
+}
+
+/* selecionado (correto para sua estrutura) */
+fieldset label:has(input:checked) {
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    border-color: transparent;
+    color: white;
+    box-shadow: 0 5px 15px rgba(99,102,241,0.4);
+}
+
+/* ===== BLOCO TEXTO ===== */
+body > div {
+    width: 100%;
+    max-width: 420px;
+}
+
+/* label */
+body > div > label {
+    display: block;
+    font-size: 0.85rem;
+    margin-bottom: 6px;
+    color: var(--muted);
+}
+
+/* input */
+input[type="text"] {
+    width: 100%;
+    padding: 13px;
+    border-radius: 12px;
+    border: 1px solid var(--border);
+    background: rgba(255,255,255,0.04);
+    color: var(--text);
+    outline: none;
+    transition: 0.25s;
+}
+
+/* focus mais refinado */
+input[type="text"]:focus {
+    border-color: var(--primary);
+    box-shadow: 0 0 0 2px rgba(99,102,241,0.25);
+}
+
+/* ===== BOTÃO ===== */
+button {
+    width: 100%;
+    max-width: 420px;
+    padding: 15px;
+    border-radius: 14px;
+    border: none;
+    font-weight: 700;
+    cursor: pointer;
+    background: linear-gradient(90deg, var(--primary), var(--secondary));
+    color: white;
+    transition: all 0.3s ease;
+}
+
+/* hover premium */
+button:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 12px 30px rgba(99,102,241,0.5);
+}
+
+/* click */
+button:active {
+    transform: scale(0.97);
+}

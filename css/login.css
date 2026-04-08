@@ -1,0 +1,64 @@
+*{
+    margin:0;
+    padding:0;
+    box-sizing:border-box;
+}
+
+body{
+    font-family:'Plus Jakarta Sans',sans-serif;
+    height:100vh;
+    display:flex;
+    flex-direction:column;
+    justify-content:center;
+    align-items:center;
+    gap:15px;
+    background:#0f172a;
+    color:white;
+}
+
+/* campos */
+input{
+    width:250px;
+    padding:10px;
+    border-radius:8px;
+    border:1px solid #334155;
+    background:#020617;
+    color:white;
+}
+
+/* labels */
+label{
+    font-size:0.9rem;
+}
+
+/* grupo de botões */
+body > div:last-child{
+    display:flex;
+    gap:10px;
+}
+
+/* botões */
+button{
+    padding:10px 15px;
+    border:none;
+    border-radius:8px;
+    cursor:pointer;
+    font-weight:600;
+    transition:0.3s;
+}
+
+/* voltar */
+button:first-child{
+    background:#334155;
+    color:white;
+}
+
+/* entrar */
+#entrar{
+    background:#6366f1;
+    color:white;
+}
+
+button:hover{
+    transform:translateY(-2px);
+}
