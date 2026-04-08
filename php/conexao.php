@@ -6,7 +6,7 @@
 $servidor   = 'localhost';
 $usuario    = 'root';
 $senha      = '';
-$nome_banco = 'AlignUp';
+$nome_banco = 'projeto';
 
 $conexao = new mysqli($servidor, $usuario, $senha, $nome_banco);
 if($conexao->connect_error){

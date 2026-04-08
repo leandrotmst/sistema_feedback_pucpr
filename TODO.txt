@@ -1,3 +1,1 @@
-- Fazer o código pegar a equipe do funcionario dinamicamente no resposta_nova.html, resposta_nova.js, resposta_nova.php. Fazer igual como ta no funcionario_novo...
-
-- Nao deixar nenhum formulario ser preenchido vazio (login, resposta, funcionario)
+- Fazer botao de logout para gestor e funcionario

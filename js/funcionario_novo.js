@@ -1,12 +1,10 @@
 // Assim que a página carregar
 window.onload = function() {
+    // Verifica sessão, mas não precisa mais do id_gestor
     fetch('../php/get_sessao_gestor.php')
         .then(response => response.json())
         .then(data => {
-            if (data.status === 'ok') {
-                // Coloca o ID automaticamente no input hidden
-                document.getElementById('id_gestor').value = data.gestor_id;
-            } else {
+            if (data.status !== 'ok') {
                 // Se não tiver sessão, manda de volta pro login
                 window.location.href = "../login/login_gestor.html";
             }
@@ -21,13 +19,11 @@ async function novo(){
     var equipe      = document.getElementById("equipe").value;
     var email     = document.getElementById("email").value;
     var senha     = document.getElementById("senha").value;
-    var id_gestor     = document.getElementById("id_gestor").value;
 
     const fd = new FormData();
     fd.append('equipe', equipe);
     fd.append('email', email);
     fd.append('senha', senha);
-    fd.append('id_gestor', id_gestor);
 
     const retorno = await fetch("../php/funcionario_novo.php",
     {

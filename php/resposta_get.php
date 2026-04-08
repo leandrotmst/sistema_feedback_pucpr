@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once('conexao.php');
     // Configurando o padrão de retorno em todas
     // as situações
@@ -8,13 +9,27 @@
         'data'     => []
     ];
 
+    if (!isset($_SESSION['email_funcionario'])) {
+        $retorno = [
+            'status'   => 'nok',
+            'mensagem' => 'Sessão inválida',
+            'data'     => []
+        ];
+        header("Content-type:application/json;charset:utf-8");
+        echo json_encode($retorno);
+        exit;
+    }
+
+    $emailSessao = $_SESSION['email_funcionario'];
+
     if(isset($_GET['id'])){
         // Segunda situação - RECEBENDO O ID por GET
-        $stmt = $conexao->prepare("SELECT * FROM respostas WHERE id=?");
-        $stmt->bind_param("i",$_GET['id']);
+        $stmt = $conexao->prepare("SELECT * FROM respostas WHERE id=? AND email_do_funcionario=?");
+        $stmt->bind_param("is",$_GET['id'], $emailSessao);
     }else{
         // Primeira situação - SEM RECEBER O ID por GET
-        $stmt = $conexao->prepare("SELECT * FROM respostas");
+        $stmt = $conexao->prepare("SELECT * FROM respostas WHERE email_do_funcionario=?");
+        $stmt->bind_param("s", $emailSessao);
     }    
     
     // Recuperando informações do Banco de Dados

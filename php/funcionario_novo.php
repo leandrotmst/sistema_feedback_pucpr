@@ -1,4 +1,5 @@
 <?php
+    session_start();
     include_once('conexao.php');
     $retorno = [
         'status'   => '',
@@ -6,10 +7,21 @@
         'data'     => []
     ];
 
+    if (!isset($_SESSION['gestor_id'])) {
+        $retorno = [
+            'status'   => 'nok',
+            'mensagem' => 'Sessão inválida',
+            'data'     => []
+        ];
+        header("Content-type:application/json; charset=utf-8");
+        echo json_encode($retorno);
+        exit;
+    }
+
     // Simulando as informações que vem do front
     $email    = $_POST['email'];
     $senha    = $_POST['senha'];
-    $id_gestor = $_POST['id_gestor'];
+    $id_gestor = $_SESSION['gestor_id'];
     $equipe = $_POST['equipe'];
 
     // Preparando para inserção no banco de dados

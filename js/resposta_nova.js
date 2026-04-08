@@ -7,12 +7,13 @@ window.onload = function() {
         .then(data => {
             if (data.status === 'ok') {
                 emailLogado = data.email;
+                equipeLogado = data.equipe;
             } else {
+                alert("Sessão expirada ou inválida. Faça login novamente.");
                 // Se não houver sessão ativa, impede a resposta e volta ao login
                 window.location.href = "../login/login_funcionario.html";
             }
-        })
-        .catch(error => console.error('Erro ao buscar sessão:', error));
+        });
 };
 
 document.getElementById('enviar').addEventListener('click', () => {
@@ -33,25 +34,21 @@ async function nova() {
     const fd = new FormData();
     fd.append("nivel", nivelRadio.value); // Corresponde ao $_POST['nivel'] no PHP
     fd.append("texto", texto);
-    fd.append("email_do_funcionario", emailLogado); // Envia o e-mail capturado dinamicamente
 
-    try {
-        const retorno = await fetch("../php/resposta_nova.php", {
-            method: "POST",
-            body: fd,
-        });
-        
-        const resposta = await retorno.json();
+    const retorno = await fetch("../php/resposta_nova.php", {
+        method: "POST",
+        body: fd,
+    });
+    
+    const resposta = await retorno.json();
 
-        if (resposta.status === "ok") {
-            alert("Resposta enviada com sucesso!");
-            window.location.href = "respostas.html";
-        } else {
-            alert("ERRO: " + resposta.mensagem);
-        }
-    } catch (e) {
-        alert("Erro técnico ao enviar resposta. Verifique a conexão.");
+    if (resposta.status === "ok") {
+        alert("Resposta enviada com sucesso!");
+        window.location.href = "respostas.html";
+    } else {
+        alert("ERRO: " + resposta.mensagem);
     }
+
 }
 
 // Função auxiliar para exibição (usada na listagem se necessário)

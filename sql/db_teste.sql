@@ -38,7 +38,7 @@ CREATE TABLE IF NOT EXISTS respostas (
     emocional TINYINT UNSIGNED NULL COMMENT 'Escala 0-5 (emocional / estresse na semana)',
     texto TEXT NULL,
     email_do_funcionario VARCHAR(255) NOT NULL,
-    equipe VARCHAR(255) NOT NULL,
+    equipe_do_funcionario VARCHAR(255) NOT NULL,
     criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     KEY idx_respostas_email (email_do_funcionario)
