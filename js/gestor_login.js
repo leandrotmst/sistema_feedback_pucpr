@@ -2,6 +2,17 @@ document.getElementById('entrar').addEventListener('click', ()=>{
     login();
 });
 
+document.getElementById('salvar').addEventListener('click', ()=>{
+    var prova = document.getElementById('provaAutoria').value;
+    if(!prova.includes('@')){
+        alert('erro');
+    }
+    else{
+        localStorage.setItem('prova', JSON.stringify(prova));
+        alert('Prova de autoria salva localmente');
+    }
+});
+
 async function login(){
     var email = document.getElementById('email').value;
     var senha = document.getElementById('senha').value;
