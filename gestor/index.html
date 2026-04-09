@@ -4,30 +4,31 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Usuários | Gestor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container-principal">
+<body class="bg-gray-100 min-h-screen flex items-center justify-center">
+    <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
         <div class="header-gerenciamento">
-            <h1 class="titulo-gerenciamento">Gestor Dashboard</h1> 
+            <h1 class="titulo-gerenciamento text-2xl font-bold text-center mb-6 text-gray-800">Gestor Dashboard</h1> 
         </div>
 
-        <div class="tabela-container">
+        <div class="tabela-container space-y-4">
             <div>
-                <a href="funcionarios.html">
-                    <button>Funcionários</button>
+                <a href="funcionarios.html" class="block">
+                    <button class="w-full bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-200">Funcionários</button>
                 </a>
             </div>
             <div>
-                <a href="respostas.html">
-                    <button>Relatório de Respostas</button>
+                <a href="respostas.html" class="block">
+                    <button class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition duration-200">Relatório de Respostas</button>
                 </a>
             </div>
             <div>
-                <button onclick="logout()">Sair</button>
+                <button onclick="logout()" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition duration-200">Sair</button>
             </div>
         </div>
     </div>
     
     <script src="../js/gestor_valida_sessao.js"></script>
 </body>
-</html
+</html>
