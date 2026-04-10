@@ -1,4 +1,5 @@
 var emailLogado = "";
+var equipeLogado = "";
 
 // 1. Ao carregar a página, identifica quem é o funcionário logado
 window.onload = function() {
@@ -8,6 +9,7 @@ window.onload = function() {
             if (data.status === 'ok') {
                 emailLogado = data.email;
                 equipeLogado = data.equipe;
+                document.getElementById('equipe').value = equipeLogado;
             } else {
                 alert("Sessão expirada ou inválida. Faça login novamente.");
                 // Se não houver sessão ativa, impede a resposta e volta ao login
@@ -34,6 +36,7 @@ async function nova() {
     const fd = new FormData();
     fd.append("nivel", nivelRadio.value); // Corresponde ao $_POST['nivel'] no PHP
     fd.append("texto", texto);
+    fd.append("equipe", equipeLogado);
 
     const retorno = await fetch("../php/resposta_nova.php", {
         method: "POST",

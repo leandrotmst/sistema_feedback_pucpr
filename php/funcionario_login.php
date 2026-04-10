@@ -26,6 +26,7 @@
 
         session_start();
         $_SESSION['email_funcionario'] = $tabela[0]['email'];
+        $_SESSION['equipe_funcionario'] = $tabela[0]['equipe'];
         $_SESSION['email']=$tabela;
 
         $retorno = [

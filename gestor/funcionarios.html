@@ -4,17 +4,26 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Gerenciamento de Funcionários | Gestor</title>
+    <script src="https://cdn.tailwindcss.com"></script>
 </head>
-<body>
-    <div class="container-principal">
-        <div class="header-gerenciamento">
-            <h1 class="titulo-gerenciamento">Gerenciar Funcionários</h1> 
-            <button id="novo" type="button" class="btn-novo-funcionario">+ Novo Funcionário</button>
-            <button type="button" onclick="window.location.href='index.html'">Voltar</button>
+<body class="bg-gray-100 min-h-screen">
+    <div class="container mx-auto p-8">
+        <div class="bg-white p-8 rounded-lg shadow-md max-w-6xl mx-auto">
+            <div class="header-gerenciamento flex justify-between items-center mb-6">
+                <h1 class="titulo-gerenciamento text-2xl font-bold text-gray-800">Gerenciar Funcionários</h1> 
+                <div class="flex gap-2">
+                    <button id="novo" type="button" class="bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-200">+ Novo Funcionário</button>
+                    <button type="button" onclick="window.location.href='index.html'" class="bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded transition duration-200">Voltar</button>
+                </div>
+            </div>
+
+            <div class="tabela-container">
+                <div id="lista" class="space-y-4"></div>
+            </div>
         </div>
 
-        <div class="tabela-container">
-            <div id="lista"></div>
+        <div class="mt-6 flex justify-center">
+            <button onclick="logout()" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-6 rounded transition duration-200">Sair</button>
         </div>
     </div>
     
