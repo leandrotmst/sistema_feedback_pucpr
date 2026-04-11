@@ -19,6 +19,7 @@ function preencherTabela(tabela){
                 <tr>
                     <th>Texto</th>
                     <th>Emocional</th>
+                    <th>Equipe</th>
                 </tr>
             </thead>
             <tbody>
@@ -29,6 +30,7 @@ function preencherTabela(tabela){
             <tr>
                 <td> ${tabela[i].texto} </td>
                 <td> ${tabela[i].emocional} </td>
+                <td> ${tabela[i].equipe} </td>
             </tr>
         `;
     }

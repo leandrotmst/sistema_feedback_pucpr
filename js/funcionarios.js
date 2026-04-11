@@ -36,6 +36,7 @@ function preencherTabela(tabela){
                     <th>E-mail</th>
                     <th>Senha</th>
                     <th>Equipe</th>
+                    <th>Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -47,9 +48,9 @@ function preencherTabela(tabela){
                 <td> ${tabela[i].email} </td>
                 <td> ${tabela[i].senha} </td>
                 <td> ${tabela[i].equipe} </td>
-                <td>
-                    <a href='../funcionario/funcionario_alterar.html?id=${tabela[i].id}' class='btn-alterar'>Alterar</a>
-                    <a href='#' onClick='excluir(${tabela[i].id})' class='btn-excluir'>Excluir</a>
+                <td class="flex gap-2">
+                    <button onclick="window.location.href='../funcionario/funcionario_alterar.html?id=${tabela[i].id}'" class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded transition duration-200">Alterar</button>
+                    <button onclick="excluir(${tabela[i].id})" class="bg-red-500 hover:bg-red-600 text-white font-semibold py-1 px-3 rounded transition duration-200">Excluir</button>
                 </td>
             </tr>
         `;
