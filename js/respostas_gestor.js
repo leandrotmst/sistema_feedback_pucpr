@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 async function buscar(){
-    const retorno = await fetch ("../php/resposta_get.php");
+    const retorno = await fetch ("../php/gestor_resposta_get.php");
     const resposta = await retorno.json();
 
     if(resposta.status=='ok'){

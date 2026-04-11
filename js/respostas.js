@@ -16,18 +16,6 @@ async function buscar(){
     }
 }
 
-// async function excluir(id_resposta){
-//     const retorno = await fetch('../php/resposta_excluir.php?id='+id_resposta);
-//     const resposta = await retorno.json();
-
-//     if(resposta.status=='ok'){
-//         alert(resposta.mensagem);
-//         window.location.reload();
-//     }else{
-//         alert(resposta.mensagem);
-//     }
-// }
-
 function preencherTabela(tabela){
     var html = `
         <table class="table-custom">
