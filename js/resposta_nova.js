@@ -27,8 +27,8 @@ async function nova() {
     const texto = document.getElementById("texto").value;
 
     // Validação: verifica se o rádio foi marcado
-    if (!nivelRadio) {
-        alert("Escolha um nível de 0 a 5 (emocional / estresse na semana).");
+    if (!nivelRadio | !texto.trim()) {
+        alert("Preencha todos os campos.");
         return;
     }
 

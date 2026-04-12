@@ -20,6 +20,12 @@ async function novo(){
     var email     = document.getElementById("email").value;
     var senha     = document.getElementById("senha").value;
 
+    // Validações
+    if (!equipe.trim() | !email.trim() | !senha.trim()) {
+        alert("Por favor, preencha todos os campos.");
+        return;
+    }
+
     const fd = new FormData();
     fd.append('equipe', equipe);
     fd.append('email', email);
