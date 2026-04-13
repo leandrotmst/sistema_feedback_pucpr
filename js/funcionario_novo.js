@@ -16,9 +16,9 @@ document.getElementById('enviar').addEventListener('click', () => {
 });
 
 async function novo(){
-    var equipe      = document.getElementById("equipe").value;
-    var email     = document.getElementById("email").value;
-    var senha     = document.getElementById("senha").value;
+    var equipe = document.getElementById("equipe").value;
+    var email  = document.getElementById("email").value;
+    var senha  = document.getElementById("senha").value;
 
     // Validações
     if (!equipe.trim() | !email.trim() | !senha.trim()) {

@@ -19,10 +19,31 @@
     }
 
     // Simulando as informações que vem do front
-    $email    = $_POST['email'];
-    $senha    = $_POST['senha'];
+    $email     = $_POST['email'];
+    $senha     = $_POST['senha'];
     $id_gestor = $_SESSION['gestor_id'];
-    $equipe = $_POST['equipe'];
+    $equipe    = $_POST['equipe'];
+
+    // Verificando se o e-mail já existe no banco de dados
+    $stmt_check = $conexao->prepare("SELECT id FROM funcionarios WHERE email = ?");
+    $stmt_check->bind_param("s", $email);
+    $stmt_check->execute();
+    $result = $stmt_check->get_result();
+
+    if($result->num_rows > 0){
+        $retorno = [
+            'status'   => 'nok',
+            'mensagem' => 'Este e-mail já está cadastrado no sistema',
+            'data'     => []
+        ];
+        $stmt_check->close();
+        $conexao->close();
+        header("Content-type:application/json; charset=utf-8");
+        echo json_encode($retorno);
+        exit;
+    }
+
+    $stmt_check->close();
 
     // Preparando para inserção no banco de dados
     $stmt = $conexao->prepare("INSERT INTO funcionarios(email, senha, equipe, gestor_id) VALUES(?,?,?,?)");
