@@ -25,7 +25,7 @@
     if(isset($_GET['id'])){
         // Segunda situação - RECEBENDO O ID por GET
         $stmt = $conexao->prepare(
-            "SELECT r.texto, r.emocional, f.equipe
+            "SELECT r.texto, r.emocional, f.equipe, r.email_do_funcionario
              FROM respostas r
              JOIN funcionarios f ON f.email = r.email_do_funcionario
              WHERE r.id = ? AND f.gestor_id = ?"
@@ -34,7 +34,7 @@
     }else{
         // Primeira situação - SEM RECEBER O ID por GET
         $stmt = $conexao->prepare(
-            "SELECT r.texto, r.emocional, f.equipe
+            "SELECT r.texto, r.emocional, f.equipe, r.email_do_funcionario
              FROM respostas r
              JOIN funcionarios f ON f.email = r.email_do_funcionario
              WHERE f.gestor_id = ?"

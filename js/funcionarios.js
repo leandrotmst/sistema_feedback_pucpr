@@ -34,7 +34,6 @@ function preencherTabela(tabela){
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">E-mail</th>
-                    <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Senha</th>
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Equipe</th>
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Ações</th>
                 </tr>
@@ -46,7 +45,6 @@ function preencherTabela(tabela){
         html += `
             <tr class="border-b border-gray-200 hover:bg-gray-50">
                 <td class="px-6 py-4 text-gray-900">${tabela[i].email}</td>
-                <td class="px-6 py-4 text-gray-900">${tabela[i].senha}</td>
                 <td class="px-6 py-4 text-gray-900">${tabela[i].equipe}</td>
                 <td class="px-6 py-4 flex gap-2">
                     <button onclick="window.location.href='../funcionario/funcionario_alterar.html?id=${tabela[i].id}'" class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded transition duration-200">Alterar</button>

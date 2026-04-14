@@ -20,6 +20,7 @@ function preencherTabela(tabela){
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Texto</th>
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Emocional</th>
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Equipe</th>
+                    <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Email do Funcionário</th>
                 </tr>
             </thead>
             <tbody>
@@ -31,6 +32,7 @@ function preencherTabela(tabela){
                 <td class="px-6 py-4 text-gray-900">${tabela[i].texto}</td>
                 <td class="px-6 py-4 text-gray-900">${tabela[i].emocional}</td>
                 <td class="px-6 py-4 text-gray-900">${tabela[i].equipe}</td>
+                <td class="px-6 py-4 text-gray-900">${tabela[i].email_do_funcionario}</td>
             </tr>
         `;
     }

@@ -21,26 +21,33 @@
     $emocional    = $_POST['nivel'];
     $texto    = $_POST['texto'];
     $emailFuncionario = $_SESSION['email_funcionario'];
+    $equipeFuncionario = $_SESSION['equipe_funcionario'];
+    $funcionarioId = $_SESSION['id_funcionario'];
 
-    // Buscando a equipe do funcionário no banco de dados
-    $stmtEquipe = $conexao->prepare("SELECT equipe FROM funcionarios WHERE email = ?");
-    $stmtEquipe->bind_param("s", $emailFuncionario);
-    $stmtEquipe->execute();
-    $resultadoEquipe = $stmtEquipe->get_result();
-    $equipeFuncionario = null;
-    
-    if ($resultadoEquipe->num_rows > 0) {
-        $linhaEquipe = $resultadoEquipe->fetch_assoc();
-        $equipeFuncionario = $linhaEquipe['equipe'];
+    // Validação: verificar se id_funcionario foi armazenado na sessão
+    if (!isset($funcionarioId) || is_null($funcionarioId)) {
+        $retorno = [
+            'status'   => 'nok',
+            'mensagem' => 'ID do funcionário não foi armazenado. Faça login novamente.',
+            'data'     => []
+        ];
+        header("Content-type:application/json; charset=utf-8");
+        echo json_encode($retorno);
+        exit;
     }
-    $stmtEquipe->close();
 
     // Preparando para inserção no banco de dados
-    $stmt = $conexao->prepare("INSERT INTO respostas(emocional, texto, email_do_funcionario, equipe_do_funcionario) VALUES(?,?,?,?)");
-    $stmt->bind_param("isss", $emocional, $texto, $emailFuncionario, $equipeFuncionario);
+    $stmt = $conexao->prepare("INSERT INTO respostas(emocional, texto, email_do_funcionario, equipe_do_funcionario, funcionarios_id) VALUES(?,?,?,?,?)");
+    $stmt->bind_param("isssi", $emocional, $texto, $emailFuncionario, $equipeFuncionario, $funcionarioId);
     $stmt->execute();
 
-    if($stmt->affected_rows > 0){
+    if($stmt->error) {
+        $retorno = [
+            'status'   => 'nok',
+            'mensagem' => 'Erro ao executar: ' . $stmt->error,
+            'data'     => []
+        ];
+    } else if($stmt->affected_rows > 0){
         $retorno = [
             'status'   => 'ok',
             'mensagem' => 'Registro inserido com sucesso',
