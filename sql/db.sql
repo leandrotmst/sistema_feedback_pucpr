@@ -37,3 +37,15 @@ CREATE TABLE IF NOT EXISTS respostas (
     KEY idx_respostas_email (email_do_funcionario),
 	CONSTRAINT fk_funcionarios_id FOREIGN KEY (funcionarios_id) REFERENCES funcionarios(id) ON DELETE CASCADE
 );
+
+
+CREATE TABLE IF NOT EXISTS analista_dados (
+    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
+    email VARCHAR(255) NOT NULL,
+    senha VARCHAR(255) NOT NULL,
+    gestor_id INT UNSIGNED NOT NULL,
+    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    PRIMARY KEY (id),
+    UNIQUE KEY uk_analista_dados_email (email),
+    CONSTRAINT fk_analista_dados_gestor FOREIGN KEY (gestor_id) REFERENCES gestor(id) ON DELETE CASCADE
+);
