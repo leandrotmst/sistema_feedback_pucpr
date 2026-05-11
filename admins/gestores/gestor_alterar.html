@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Alterar Gestor | Admin</title>
+    <link rel="stylesheet">
+</head>
+<body>
+    <div class="container-principal">
+        <h1 class="titulo-gerenciamento">Alterar Gestor</h1>
+        <form class="">
+            <div class="form-group">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" id="email" name="email" class="form-input" required>
+            </div>
+            <div class="form-group">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" id="senha" name="senha" class="form-input" required>
+            </div>
+            <div class="">
+                <button type="button" onclick="window.location.href='index.html'" class="btn-novo-usuario" style="">Voltar</button>
+                <button type="button" id="enviar" class="btn-novo-usuario" style="">Salvar Alterações</button>
+            </div>
+        </form>
+    </div>
+    <script src="../js/admin_valida_sessao.js"></script>
+    <script src="../js/gestor_alterar.js"></script>
+</body>
+</html>

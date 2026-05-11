@@ -45,12 +45,12 @@ function preencherTabela(tabela){
     for(var i=0; i < tabela.length; i++){
         html += `
             <tr>
-                <td> ${tabela[i].id_gestor} </td>
+                <td> ${tabela[i].id} </td>
                 <td> ${tabela[i].email} </td>
                 <td> ${tabela[i].senha} </td>
                 <td>
-                    <a href='gestor_alterar.html?id_gestor=${tabela[i].id_gestor}' class='btn-alterar'>Alterar</a>
-                    <a href='#' onClick='excluir(${tabela[i].id_gestor})' class='btn-excluir'>Excluir</a>
+                    <a href='gestor_alterar.html?id=${tabela[i].id}' class='btn-alterar'>Alterar</a>
+                    <a href='#' onClick='excluir(${tabela[i].id})' class='btn-excluir'>Excluir</a>
                 </td>
             </tr>
         `;
