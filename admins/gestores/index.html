@@ -3,17 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento de Gestores | Admin</title>
-    <link rel="stylesheet" href="../css/usuario.css">
+    <title>Admin | Gerenciamento de Gestores</title>
+    <link rel="stylesheet" href="../../css/style.css">
 </head>
-<body>
-    <div class="container-principal">
-        <div class="header-gerenciamento">
-            <h1 class="titulo-gerenciamento">Gerenciar Gestores</h1> 
-            <button id="novo" type="button" class="btn-novo-usuario">+ Novo Gestor</button>
+<body class="flex items-center justify-center p-4">
+    <div class="card" style="max-width: 800px; width: 100%;">
+        <div class="header-gerenciamento" style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <h1 class="text-2xl font-bold text-primary">Gerenciamento de Gestores</h1>
+            <div>
+                <a href="../home/admin.html" class="btn btn-secondary" style="margin-right: 10px;">Voltar</a>
+                <button id="novo" type="button" class="btn btn-primary">+ Novo Gestor</button>
+            </div>
         </div>
 
-        <div class="tabela-container">
+        <div style="overflow-x: auto;">
             <div id="lista"></div>
         </div>
     </div>

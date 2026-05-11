@@ -4,7 +4,7 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.getElementById('novo').addEventListener('click', () => {
-    window.location.href = "../gestor/gestor_novo.html";
+    window.location.href = "gestor_novo.html";
 });
 
 async function buscar(){
@@ -17,6 +17,8 @@ async function buscar(){
 }
 
 async function excluir(id_gestor){
+    if (!confirm("Deseja realmente excluir este gestor?")) return;
+    
     const retorno = await fetch('../php/gestores/gestor_excluir.php?id='+id_gestor);
     const resposta = await retorno.json();
 
@@ -30,13 +32,12 @@ async function excluir(id_gestor){
 
 function preencherTabela(tabela){
     var html = `
-        <table class="table-custom">
+        <table style="width: 100%; border-collapse: collapse; text-align: left;">
             <thead>
-                <tr>
-                    <th>ID Gestor</th>
-                    <th>E-mail</th>
-                    <th>Senha</th>
-                    <th>Ações</th>
+                <tr style="border-bottom: 2px solid #eee;">
+                    <th style="padding: 10px;">ID Gestor</th>
+                    <th style="padding: 10px;">E-mail</th>
+                    <th style="padding: 10px;">Ações</th>
                 </tr>
             </thead>
             <tbody>
@@ -44,13 +45,12 @@ function preencherTabela(tabela){
     
     for(var i=0; i < tabela.length; i++){
         html += `
-            <tr>
-                <td> ${tabela[i].id} </td>
-                <td> ${tabela[i].email} </td>
-                <td> ${tabela[i].senha} </td>
-                <td>
-                    <a href='gestor_alterar.html?id=${tabela[i].id}' class='btn-alterar'>Alterar</a>
-                    <a href='#' onClick='excluir(${tabela[i].id})' class='btn-excluir'>Excluir</a>
+            <tr style="border-bottom: 1px solid #eee;">
+                <td style="padding: 10px;"> ${tabela[i].id} </td>
+                <td style="padding: 10px;"> ${tabela[i].email} </td>
+                <td style="padding: 10px; display: flex; gap: 5px;">
+                    <a href='gestor_alterar.html?id=${tabela[i].id}' class='btn btn-secondary'>Alterar</a>
+                    <a href='#' onClick='excluir(${tabela[i].id})' class='btn btn-danger'>Excluir</a>
                 </td>
             </tr>
         `;
