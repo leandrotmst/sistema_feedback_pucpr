@@ -1,0 +1,68 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Painel de IA | Analista de Dados</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card card-lg" style="min-height: 500px;">
+            <div class="header-gerenciamento">
+                <div>
+                    <h1 class="text-2xl font-bold text-primary" style="display: flex; align-items: center; gap: 0.5rem;">
+                        ✨ Inteligência Artificial
+                    </h1> 
+                    <p class="text-muted" style="margin-top: 0.25rem; font-size: 0.9rem;">Análise semanal das respostas da equipe (últimos 7 dias)</p>
+                </div>
+                <div class="flex gap-2">
+                    <button type="button" onclick="window.location.href='index.html'" class="btn btn-secondary btn-auto">Voltar</button>
+                    <button id="btnGerarAnalise" class="btn btn-primary btn-auto" style="background: linear-gradient(135deg, var(--primary-color), #4a154b); border: none;">Gerar Análise</button>
+                </div>
+            </div>
+
+            <!-- Container de Carregamento -->
+            <div id="loading" style="display: none; text-align: center; padding: 4rem 0;">
+                <div style="font-size: 3rem; animation: pulse 1.5s infinite;">⏳</div>
+                <h3 class="mt-4 text-primary font-semibold">A Inteligência Artificial está analisando os dados...</h3>
+                <p class="text-muted">Isso pode levar alguns segundos dependendo da quantidade de respostas.</p>
+            </div>
+
+            <!-- Container de Resultados -->
+            <div id="resultadoIA" style="display: none; display: flex; flex-direction: column; gap: 1.5rem;">
+                
+                <div class="card" style="background: rgba(138, 21, 56, 0.05); border-left: 4px solid var(--primary-color);">
+                    <h3 class="font-bold text-primary mb-2">📋 Resumo do Clima Semanal</h3>
+                    <p id="resumo" style="white-space: pre-line;"></p>
+                </div>
+
+                <div class="card" style="background: rgba(229, 62, 62, 0.05); border-left: 4px solid var(--danger-color);">
+                    <h3 class="font-bold" style="color: var(--danger-color); margin-bottom: 0.5rem;">⚠️ Alertas de Atenção</h3>
+                    <p id="alertas" style="white-space: pre-line;"></p>
+                </div>
+
+                <div class="card" style="background: rgba(56, 161, 105, 0.05); border-left: 4px solid var(--success-color);">
+                    <h3 class="font-bold" style="color: var(--success-color); margin-bottom: 0.5rem;">💡 Soluções Propostas pela IA</h3>
+                    <p id="solucoes" style="white-space: pre-line;"></p>
+                </div>
+
+            </div>
+
+            <div id="msgErro" style="display: none; margin-top: 2rem; color: var(--danger-color); text-align: center; font-weight: bold;"></div>
+
+        </div>
+    </div>
+    
+    <style>
+        @keyframes pulse {
+            0% { transform: scale(1); opacity: 1; }
+            50% { transform: scale(1.1); opacity: 0.7; }
+            100% { transform: scale(1); opacity: 1; }
+        }
+    </style>
+
+    <script src="../js/analise_ia.js"></script>
+    <script src="../js/analista_dados_valida_sessao.js"></script>
+</body>
+</html>

@@ -1,6 +1,5 @@
 <?php
-    session_start();
-    include_once('conexao.php');
+    include_once('../../php/conexao.php');
     // Configurando o padrão de retorno em todas
     // as situações
     $retorno = [
@@ -9,38 +8,8 @@
         'data'     => []
     ];
 
-    if (!isset($_SESSION['gestor_id'])) {
-        $retorno = [
-            'status'   => 'nok',
-            'mensagem' => 'Sessão inválida',
-            'data'     => []
-        ];
-        header("Content-type:application/json;charset:utf-8");
-        echo json_encode($retorno);
-        exit;
-    }
-
-    $gestorId = $_SESSION['gestor_id'];
-
-    if(isset($_GET['id'])){
-        // Segunda situação - RECEBENDO O ID por GET
-        $stmt = $conexao->prepare(
-            "SELECT r.texto, r.emocional, r.dados_dinamicos, f.equipe, r.email_do_funcionario
-             FROM respostas r
-             JOIN funcionarios f ON f.email = r.email_do_funcionario
-             WHERE r.id = ? AND f.gestor_id = ?"
-        );
-        $stmt->bind_param("ii", $_GET['id'], $gestorId);
-    }else{
-        // Primeira situação - SEM RECEBER O ID por GET
-        $stmt = $conexao->prepare(
-            "SELECT r.texto, r.emocional, r.dados_dinamicos, f.equipe, r.email_do_funcionario
-             FROM respostas r
-             JOIN funcionarios f ON f.email = r.email_do_funcionario
-             WHERE f.gestor_id = ?"
-        );
-        $stmt->bind_param("i", $gestorId);
-    }    
+    $stmt = $conexao->prepare("SELECT * FROM admins WHERE usuario=? AND senha=?");
+    $stmt->bind_param("ss",$_POST['usuario'],$_POST['senha']);    
     
     // Recuperando informações do Banco de Dados
     // Vou executar a query
@@ -53,6 +22,10 @@
         while($linha = $resultado->fetch_assoc()){
             $tabela[] = $linha;
         }
+
+        session_start();
+        $_SESSION['admin']=$tabela;   
+
         $retorno = [
             'status'   => 'ok', // ok - nok
             'mensagem' => 'Sucesso consulta efetuada', // mensagem que envio para o front

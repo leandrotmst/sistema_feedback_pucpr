@@ -26,9 +26,25 @@ function preencherTabela(tabela){
     `;
     
     for(var i=0; i < tabela.length; i++){
+        let extraHtml = "";
+        if (tabela[i].dados_dinamicos) {
+            try {
+                const dados = JSON.parse(tabela[i].dados_dinamicos);
+                extraHtml = '<ul class="mt-2 text-sm text-gray-600 space-y-1">';
+                for (const [pergunta, resp] of Object.entries(dados)) {
+                    extraHtml += `<li><strong>${pergunta}:</strong> ${resp}</li>`;
+                }
+                extraHtml += '</ul>';
+            } catch(e) {}
+        }
+
         html += `
             <tr class="border-b border-gray-200 hover:bg-gray-50">
-                <td class="px-6 py-4 text-gray-900">${tabela[i].texto}</td>
+                <td class="px-6 py-4 text-gray-900">
+                    <div class="font-medium mb-1">Resumo Semanal:</div>
+                    <div>${tabela[i].texto}</div>
+                    ${extraHtml}
+                </td>
                 <td class="px-6 py-4 text-gray-900">${tabela[i].emocional}</td>
                 <td class="px-6 py-4 text-gray-900">${tabela[i].equipe}</td>
             </tr>

@@ -18,8 +18,9 @@
         exit;
     }
 
-    $emocional    = $_POST['nivel'];
-    $texto    = $_POST['texto'];
+    $emocional    = $_POST['nivel'] ?? null;
+    $texto    = $_POST['texto'] ?? null;
+    $dadosDinamicos = $_POST['dados_dinamicos'] ?? null; // JSON vindo do Front-end
     $emailFuncionario = $_SESSION['email_funcionario'];
     $equipeFuncionario = $_SESSION['equipe_funcionario'];
     $funcionarioId = $_SESSION['id_funcionario'];
@@ -36,9 +37,9 @@
         exit;
     }
 
-    // Preparando para inserção no banco de dados
-    $stmt = $conexao->prepare("INSERT INTO respostas(emocional, texto, email_do_funcionario, equipe_do_funcionario, funcionarios_id) VALUES(?,?,?,?,?)");
-    $stmt->bind_param("isssi", $emocional, $texto, $emailFuncionario, $equipeFuncionario, $funcionarioId);
+    // Preparando para inserção no banco de dados (agora incluindo dados_dinamicos)
+    $stmt = $conexao->prepare("INSERT INTO respostas(emocional, texto, dados_dinamicos, email_do_funcionario, equipe_do_funcionario, funcionarios_id) VALUES(?,?,?,?,?,?)");
+    $stmt->bind_param("issssi", $emocional, $texto, $dadosDinamicos, $emailFuncionario, $equipeFuncionario, $funcionarioId);
     $stmt->execute();
 
     if($stmt->error) {
