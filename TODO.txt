@@ -1,1 +1,0 @@
-- Fazer botao de logout para gestor e funcionario

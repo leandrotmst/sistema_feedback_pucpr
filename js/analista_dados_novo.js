@@ -38,7 +38,7 @@ async function novo(){
 
     if(resposta.status=='ok'){
         alert("Sucesso: " + resposta.mensagem);
-        window.location.href = '../analista_dados/index.html';
+        window.location.href = '../gestor/index.html';
     }else{
         alert("Erro: " + resposta.mensagem);
     }

@@ -3,28 +3,28 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Usuário NOVO</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Novo Funcionário</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-        <h1 class="text-2xl font-bold text-center mb-6 text-gray-800">Cadastrar Funcionário</h1>
+<body class="flex items-center justify-center">
+    <div class="card card-md">
+        <h1 class="text-2xl font-bold text-center mb-6 text-primary">Cadastrar Funcionário</h1>
         <div class="space-y-4">
-            <div>
-                <label for="equipe" class="block text-sm font-medium text-gray-700">Equipes</label>
-                <input type="text" id="equipe" name="equipe" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+            <div class="form-group">
+                <label for="equipe" class="form-label">Equipes</label>
+                <input type="text" id="equipe" name="equipe" class="form-input" required>
             </div>
-            <div>
-                <label for="email" class="block text-sm font-medium text-gray-700">E-mail</label>
-                <input type="email" id="email" name="email" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+            <div class="form-group">
+                <label for="email" class="form-label">E-mail</label>
+                <input type="email" id="email" name="email" class="form-input" required>
             </div>
-            <div>
-                <label for="senha" class="block text-sm font-medium text-gray-700">Senha</label>
-                <input type="password" id="senha" name="senha" class="mt-1 block w-full px-3 py-2 border border-gray-300 rounded-md shadow-sm focus:outline-none focus:ring-blue-500 focus:border-blue-500" required>
+            <div class="form-group">
+                <label for="senha" class="form-label">Senha</label>
+                <input type="password" id="senha" name="senha" class="form-input" required>
             </div>
-            <div class="flex space-x-4">
-                <button type="button" onclick="window.location.href='../gestor/funcionarios.html'" class="flex-1 bg-gray-500 hover:bg-gray-600 text-white font-semibold py-2 px-4 rounded transition duration-200">Voltar</button>
-                <button type="submit" id="enviar" class="flex-1 bg-blue-500 hover:bg-blue-600 text-white font-semibold py-2 px-4 rounded transition duration-200">Cadastrar Funcionário</button>
+            <div class="flex space-x-4 mt-6">
+                <button type="button" onclick="window.location.href='../gestor/funcionarios.html'" class="btn btn-secondary flex-1">Voltar</button>
+                <button type="submit" id="enviar" class="btn btn-primary flex-1">Cadastrar Funcionário</button>
             </div>
         </div>
     </div>

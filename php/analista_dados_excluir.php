@@ -45,7 +45,7 @@
         $stmtCheck->close();
 
         // Segunda situação - RECEBENDO O ID por GET
-        $stmt = $conexao->prepare("DELETE FROM funcionarios WHERE id=?");
+        $stmt = $conexao->prepare("DELETE FROM analista_dados WHERE id=?");
         $stmt->bind_param("i",$id);
         $stmt->execute();
       

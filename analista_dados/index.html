@@ -3,24 +3,17 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento de Respostas | Analista de dados</title>
-    <script src="https://cdn.tailwindcss.com"></script>
+    <title>Gerenciamento de Respostas | Analista de Dados</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="bg-gray-100 min-h-screen flex items-center justify-center">
-    <div class="bg-white p-8 rounded-lg shadow-md max-w-md w-full">
-        <div class="header-gerenciamento">
-            <h1 class="titulo-gerenciamento text-2xl font-bold text-center mb-6 text-gray-800">Gestor Dashboard</h1> 
-        </div>
-
-        <div class="tabela-container space-y-4">
-            <div>
-                <a href="respostas.html" class="block">
-                    <button class="w-full bg-green-500 hover:bg-green-600 text-white font-semibold py-2 px-4 rounded transition duration-200">Respostas</button>
-                </a>
-            </div>
-            <div>
-                <button onclick="logout()" class="w-full bg-red-500 hover:bg-red-600 text-white font-semibold py-2 px-4 rounded transition duration-200">Sair</button>
-            </div>
+<body class="flex items-center justify-center">
+    <div class="card card-sm">
+        <h1 class="text-2xl font-bold text-center mb-6 text-primary">Analista Dashboard</h1>
+        <div class="space-y-4">
+            <a href="respostas.html" class="block">
+                <button class="btn btn-success">Respostas</button>
+            </a>
+            <button onclick="logout()" class="btn btn-danger mt-6">Sair</button>
         </div>
     </div>
     
