@@ -42,15 +42,60 @@
         $stmtCheck->close();
 
         // Simulando as informações que vem do front
-        $email    = $_POST['email'];
-        $senha    = $_POST['senha'];
+        $email        = $_POST['email'] ?? '';
+        $senha_atual  = $_POST['senha_atual'] ?? '';
+        $senha_nova   = $_POST['senha_nova'] ?? '';
+
+        if (!strpos($email, '@')) {
+            $retorno = [
+                'status'   => 'nok',
+                'mensagem' => 'E-mail inválido. Deve conter @',
+                'data'     => []
+            ];
+            header("Content-type:application/json;charset:utf-8");
+            echo json_encode($retorno);
+            exit;
+        }
+
+        $senha_query = "";
+        $bind_types = "si";
+        $bind_vars = [&$email, &$id];
+
+        // Se quiser mudar a senha
+        if (!empty($senha_nova)) {
+            // Verifica a senha atual
+            $stmtSenha = $conexao->prepare("SELECT senha FROM analista_dados WHERE id=?");
+            $stmtSenha->bind_param("i", $id);
+            $stmtSenha->execute();
+            $resSenha = $stmtSenha->get_result();
+            if ($row = $resSenha->fetch_assoc()) {
+                if ($row['senha'] !== $senha_atual) {
+                    $retorno = [
+                        'status'   => 'nok',
+                        'mensagem' => 'A senha atual informada está incorreta.',
+                        'data'     => []
+                    ];
+                    $stmtSenha->close();
+                    header("Content-type:application/json;charset:utf-8");
+                    echo json_encode($retorno);
+                    exit;
+                }
+            }
+            $stmtSenha->close();
+
+            $senha_query = ", senha=?";
+            $bind_types = "ssi";
+            $bind_vars = [&$email, &$senha_nova, &$id];
+        }
     
-        // Preparando para atualização no banco de dados
-        $stmt = $conexao->prepare("UPDATE funcionarios SET email=?, senha=? WHERE id=?");
-        $stmt->bind_param("ssi", $email, $senha, $id);
+        // Preparando para atualização no banco de dados (corrigido para analista_dados)
+        $stmt = $conexao->prepare("UPDATE analista_dados SET email=? $senha_query WHERE id=?");
+        
+        // Chamada dinâmica de bind_param
+        $stmt->bind_param($bind_types, ...$bind_vars);
         $stmt->execute();
 
-        if($stmt->affected_rows > 0){
+        if($stmt->affected_rows > 0 || $stmt->errno === 0){
             $retorno = [
                 'status'   => 'ok',
                 'mensagem' => 'Registro alterado com sucesso!',

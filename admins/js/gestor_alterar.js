@@ -22,7 +22,6 @@ async function buscarDadosGestor() {
 
         if (resposta.status == 'ok' && resposta.data.length > 0) {
             document.getElementById('email').value = resposta.data[0].email;
-            document.getElementById('senha').value = resposta.data[0].senha;
         } else {
             alert("Gestor não encontrado");
             window.location.href = 'index.html';
@@ -35,16 +34,39 @@ async function buscarDadosGestor() {
 document.getElementById('enviar').addEventListener('click', async () => {
     const id = getParametroId();
     const email = document.getElementById('email').value;
-    const senha = document.getElementById('senha').value;
+    const senha_atual = document.getElementById('senha_atual').value;
+    const senha_nova = document.getElementById('senha_nova').value;
+    const senha_nova_confirmacao = document.getElementById('senha_nova_confirmacao').value;
 
-    if (!email || !senha) {
-        alert("Preencha todos os campos");
+    if (!email) {
+        alert("Preencha o e-mail");
         return;
+    }
+
+    if (!email.includes('@')) {
+        alert("Por favor, informe um e-mail válido contendo '@'.");
+        return;
+    }
+
+    if (senha_nova || senha_atual || senha_nova_confirmacao) {
+        if (!senha_atual) {
+            alert("Para alterar a senha, você deve informar a senha atual.");
+            return;
+        }
+        if (!senha_nova) {
+            alert("Para alterar a senha, você deve informar a nova senha.");
+            return;
+        }
+        if (senha_nova !== senha_nova_confirmacao) {
+            alert("A nova senha e a confirmação não coincidem.");
+            return;
+        }
     }
 
     const fd = new FormData();
     fd.append('email', email);
-    fd.append('senha', senha);
+    fd.append('senha_atual', senha_atual);
+    fd.append('senha_nova', senha_nova);
 
     try {
         const retorno = await fetch('../php/gestores/gestor_alterar.php?id=' + id, {

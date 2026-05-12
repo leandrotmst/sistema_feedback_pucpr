@@ -14,9 +14,19 @@
                 <label for="email" class="form-label">E-mail</label>
                 <input type="email" id="email" name="email" class="form-input" required>
             </div>
+            <hr style="border: 1px solid #eee; margin: 15px 0;">
+            <p style="font-size: 0.9em; color: #666; margin-bottom: 10px;">Para alterar a senha, preencha os campos abaixo. Caso contrário, deixe em branco.</p>
             <div class="form-group">
-                <label for="senha" class="form-label">Senha</label>
-                <input type="password" id="senha" name="senha" class="form-input" required>
+                <label for="senha_atual" class="form-label">Senha Atual</label>
+                <input type="password" id="senha_atual" class="form-input" placeholder="Digite a senha atual">
+            </div>
+            <div class="form-group">
+                <label for="senha_nova" class="form-label">Nova Senha</label>
+                <input type="password" id="senha_nova" class="form-input" placeholder="Digite a nova senha">
+            </div>
+            <div class="form-group">
+                <label for="senha_nova_confirmacao" class="form-label">Confirmar Nova Senha</label>
+                <input type="password" id="senha_nova_confirmacao" class="form-input" placeholder="Confirme a nova senha">
             </div>
             <div class="flex space-x-4 mt-6">
                 <button type="button" onclick="window.location.href='index.html'" class="btn btn-secondary flex-1">Voltar</button>
