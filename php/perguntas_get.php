@@ -25,7 +25,7 @@ $gestor_id = $_SESSION['gestor_id_funcionario'] ?? 0;
 $sql = "SELECT id, texto_pergunta, tipo_campo, opcoes FROM perguntas 
         WHERE ativa = 1 
         AND (gestor_id IS NULL OR gestor_id = ?)
-        AND (equipe_alvo = 'Todas' OR equipe_alvo = ?)";
+        AND (LOWER(TRIM(equipe_alvo)) = 'todas' OR LOWER(TRIM(equipe_alvo)) = LOWER(TRIM(?)))";
 $stmt = $conexao->prepare($sql);
 $stmt->bind_param("is", $gestor_id, $equipe);
 $stmt->execute();

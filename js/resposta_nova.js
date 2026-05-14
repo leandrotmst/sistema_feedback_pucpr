@@ -56,7 +56,6 @@ function renderizarPerguntas(perguntas) {
             select.dataset.textoPergunta = pergunta.texto_pergunta;
             select.required = true;
             
-            // Opção em branco por padrão
             const placeholder = document.createElement('option');
             placeholder.value = '';
             placeholder.textContent = '-- Selecione uma opção --';
@@ -71,6 +70,53 @@ function renderizarPerguntas(perguntas) {
                 opt.textContent = optText.trim();
                 select.appendChild(opt);
             });
+            div.appendChild(select);
+
+        } else if (pergunta.tipo_campo === 'escala_1_5') {
+            const select = document.createElement('select');
+            select.className = 'form-input pergunta-dinamica-input';
+            select.dataset.perguntaId = pergunta.id;
+            select.dataset.textoPergunta = pergunta.texto_pergunta;
+            select.required = true;
+            
+            const placeholder = document.createElement('option');
+            placeholder.value = '';
+            placeholder.textContent = '-- Escolha de 1 a 5 --';
+            placeholder.disabled = true;
+            placeholder.selected = true;
+            select.appendChild(placeholder);
+
+            for (let i = 1; i <= 5; i++) {
+                const opt = document.createElement('option');
+                opt.value = i;
+                opt.textContent = i;
+                select.appendChild(opt);
+            }
+            div.appendChild(select);
+
+        } else if (pergunta.tipo_campo === 'sim_nao') {
+            const select = document.createElement('select');
+            select.className = 'form-input pergunta-dinamica-input';
+            select.dataset.perguntaId = pergunta.id;
+            select.dataset.textoPergunta = pergunta.texto_pergunta;
+            select.required = true;
+            
+            const placeholder = document.createElement('option');
+            placeholder.value = '';
+            placeholder.textContent = '-- Selecione Sim ou Não --';
+            placeholder.disabled = true;
+            placeholder.selected = true;
+            select.appendChild(placeholder);
+
+            const optSim = document.createElement('option');
+            optSim.value = 'Sim';
+            optSim.textContent = 'Sim';
+            select.appendChild(optSim);
+
+            const optNao = document.createElement('option');
+            optNao.value = 'Não';
+            optNao.textContent = 'Não';
+            select.appendChild(optNao);
 
             div.appendChild(select);
 
@@ -82,7 +128,6 @@ function renderizarPerguntas(perguntas) {
             input.dataset.perguntaId = pergunta.id;
             input.dataset.textoPergunta = pergunta.texto_pergunta;
             input.required = true;
-            
             div.appendChild(input);
         }
 

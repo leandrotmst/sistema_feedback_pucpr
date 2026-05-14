@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gerenciar Soluções | Analista de Dados</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body>
+    <div class="container">
+        <div class="card card-lg">
+            <div class="header-gerenciamento">
+                <h1 class="text-2xl font-bold text-primary">Soluções Propostas</h1> 
+                <div class="flex gap-2">
+                    <button type="button" onclick="window.location.href='index.html'" class="btn btn-secondary btn-auto">Voltar</button>
+                    <button id="novo" type="button" class="btn btn-primary btn-auto">+ Nova Solução</button>
+                </div>
+            </div>
+
+            <div class="table-container">
+                <div id="lista">
+                    <!-- Conteúdo gerado pelo JS -->
+                </div>
+            </div>
+        </div>
+
+        <div class="mt-6 flex justify-center">
+            <button onclick="logout()" class="btn btn-danger btn-auto">Sair</button>
+        </div>
+    </div>
+    
+    <script src="../js/solucao.js"></script>
+    <script src="../js/analista_dados_valida_sessao.js"></script>
+</body>
+</html>

@@ -1,0 +1,39 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Gestor | Soluções</title>
+    <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="flex items-center justify-center p-4">
+    <div class="card" style="max-width: 900px; width: 100%;">
+        <div class="header-gerenciamento" style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
+            <h1 class="text-2xl font-bold text-primary">Soluções Propostas</h1>
+            <div>
+                <a href="index.html" class="btn btn-secondary">Voltar</a>
+            </div>
+        </div>
+
+        <div style="overflow-x: auto;">
+            <table style="width: 100%; border-collapse: collapse; text-align: left;">
+                <thead>
+                    <tr style="border-bottom: 2px solid #eee;">
+                        <th style="padding: 10px;">ID</th>
+                        <th style="padding: 10px;">Título</th>
+                        <th style="padding: 10px;">Equipe Alvo</th>
+                        <th style="padding: 10px;">Analista</th>
+                        <th style="padding: 10px;">Ações</th>
+                    </tr>
+                </thead>
+                <tbody id="tabelaSolucoes">
+                    <!-- Preenchido via JS -->
+                </tbody>
+            </table>
+        </div>
+    </div>
+    
+    <script src="../js/gestor_valida_sessao.js"></script>
+    <script src="../js/gestor_solucoes.js"></script>
+</body>
+</html>

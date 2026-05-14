@@ -1,6 +1,6 @@
 <?php
 session_start();
-include_once('../../conexao.php');
+include_once('../conexao.php');
 
 $retorno = ['status' => 'nok', 'mensagem' => '', 'data' => []];
 
