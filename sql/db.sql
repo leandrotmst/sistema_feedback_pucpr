@@ -37,7 +37,6 @@ CREATE TABLE IF NOT EXISTS respostas (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     emocional TINYINT UNSIGNED NULL COMMENT 'Escala 0-5 (emocional / estresse na semana)',
     texto TEXT NULL,
-    dados_dinamicos JSON NULL COMMENT 'Respostas flexíveis das perguntas dinâmicas',
     email_do_funcionario VARCHAR(255) NOT NULL,
     equipe_do_funcionario VARCHAR(255) NOT NULL,
     funcionarios_id INT UNSIGNED NOT NULL,
@@ -45,19 +44,6 @@ CREATE TABLE IF NOT EXISTS respostas (
     PRIMARY KEY (id),
     KEY idx_respostas_email (email_do_funcionario),
 	CONSTRAINT fk_funcionarios_id FOREIGN KEY (funcionarios_id) REFERENCES funcionarios(id) ON DELETE CASCADE
-);
-
-CREATE TABLE IF NOT EXISTS perguntas (
-    id INT UNSIGNED NOT NULL AUTO_INCREMENT,
-    texto_pergunta VARCHAR(500) NOT NULL,
-    tipo_campo VARCHAR(50) NOT NULL DEFAULT 'text' COMMENT 'Pode ser text, select, etc',
-    opcoes TEXT NULL COMMENT 'Opções separadas por vírgula se o tipo for select',
-    equipe_alvo VARCHAR(255) NULL COMMENT 'Ex: TI, MKT ou Todas',
-    gestor_id INT UNSIGNED NULL COMMENT 'Se NULL, é global (admin). Se preenchido, é do gestor específico.',
-    ativa BOOLEAN NOT NULL DEFAULT TRUE,
-    criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    PRIMARY KEY (id),
-    CONSTRAINT fk_perguntas_gestor FOREIGN KEY (gestor_id) REFERENCES gestor(id) ON DELETE CASCADE
 );
 
 

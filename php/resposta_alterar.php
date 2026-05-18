@@ -22,6 +22,19 @@
         $id = $_GET['id'];
         $emailSessao = $_SESSION['email_funcionario'];
 
+        // Verifica dia da semana: 0=Dom, 1=Seg, 2=Ter, 3=Qua, 4=Qui, 5=Sex, 6=Sáb
+        $diaSemana = (int)date('w');
+        if (in_array($diaSemana, [1, 2, 3])) { 
+            $retorno = [
+                'status'   => 'nok',
+                'mensagem' => 'Fora do período permitido. A edição só é liberada de quinta-feira a domingo.',
+                'data'     => []
+            ];
+            header("Content-type:application/json;charset=utf-8");
+            echo json_encode($retorno);
+            exit;
+        }
+
         // First, check if the response belongs to the logged-in user
         $stmtCheck = $conexao->prepare("SELECT id FROM respostas WHERE id=? AND email_do_funcionario=?");
         $stmtCheck->bind_param("is", $id, $emailSessao);

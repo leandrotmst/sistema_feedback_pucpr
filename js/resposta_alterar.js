@@ -1,4 +1,11 @@
 document.addEventListener("DOMContentLoaded", () => {
+    const day = new Date().getDay();
+    if (day >= 1 && day <= 3) {
+        alert("Fora do prazo! O formulário só pode ser editado de quinta-feira a domingo.");
+        window.location.href = "respostas.html";
+        return;
+    }
+
     const url = new URLSearchParams(window.location.search);
     const id = url.get('id');
 

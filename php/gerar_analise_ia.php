@@ -22,7 +22,7 @@ $gestorId = $_SESSION['gestor_id'];
 
 // Buscar as respostas dos últimos 7 dias para a equipe deste gestor
 $stmt = $conexao->prepare(
-    "SELECT r.texto, r.emocional, r.dados_dinamicos, f.equipe, r.criado_em
+    "SELECT r.texto, r.emocional, f.equipe, r.criado_em
      FROM respostas r
      JOIN funcionarios f ON f.email = r.email_do_funcionario
      WHERE f.gestor_id = ? AND r.criado_em >= DATE_SUB(NOW(), INTERVAL 7 DAY)
@@ -42,13 +42,6 @@ if($resultado->num_rows > 0){
             'data' => $linha['criado_em']
         ];
 
-        // Se houver dados dinâmicos (JSON), anexamos à resposta
-        if (!empty($linha['dados_dinamicos'])) {
-            $dadosJSON = json_decode($linha['dados_dinamicos'], true);
-            if ($dadosJSON) {
-                $respostaTratada['respostas_as_perguntas_semanais'] = $dadosJSON;
-            }
-        }
 
         $respostas_semana[] = $respostaTratada;
     }
