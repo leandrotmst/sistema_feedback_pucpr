@@ -24,8 +24,9 @@
 
     if(isset($_GET['id'])){
         // Segunda situação - RECEBENDO O ID por GET
+        $id = $_GET['id'];
         $stmt = $conexao->prepare("SELECT * FROM respostas WHERE id=? AND email_do_funcionario=?");
-        $stmt->bind_param("is",$_GET['id'], $emailSessao);
+        $stmt->bind_param("ss", $id, $emailSessao);
     }else{
         // Primeira situação - SEM RECEBER O ID por GET
         $stmt = $conexao->prepare("SELECT * FROM respostas WHERE email_do_funcionario=?");

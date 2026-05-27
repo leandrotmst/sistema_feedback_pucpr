@@ -54,8 +54,21 @@
         }
         $stmtCheck->close();
 
+        // Verificando se os dados POST foram enviados
+        if (!isset($_POST['emocional']) || !isset($_POST['texto'])) {
+            $retorno = [
+                'status'   => 'nok',
+                'mensagem' => 'Dados incompletos: emocional e texto são obrigatórios',
+                'data'     => []
+            ];
+            header("Content-type:application/json;charset:utf-8");
+            echo json_encode($retorno);
+            $conexao->close();
+            exit;
+        }
+        
         // Simulando as informações que vem do front
-        $emocional    = $_POST['emocional'];
+        $emocional    = (int)$_POST['emocional'];
         $texto    = $_POST['texto'];
         $semana    = $_POST['semana'] ?? null;
     

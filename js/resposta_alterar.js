@@ -41,7 +41,7 @@ document.getElementById('salvar').addEventListener('click', () => {
 
 async function alterar(){
     const nivelRadio = document.querySelector('input[name="nivel"]:checked');
-    var texto = document.getElementById("texto").value;
+    var texto = document.getElementById("texto").value.trim();
     var semana = document.getElementById("semana").value;
     var id_resposta = document.getElementById("id_resposta").value;
 
@@ -52,6 +52,11 @@ async function alterar(){
 
     if (!semana) {
         alert("Por favor, selecione a semana correspondente.");
+        return;
+    }
+
+    if (!texto) {
+        alert("Por favor, preencha o resumo da semana.");
         return;
     }
 
