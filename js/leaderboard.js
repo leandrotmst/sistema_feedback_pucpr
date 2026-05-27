@@ -41,7 +41,7 @@ function preencherLeaderboard(tabela){
                 <td class="px-6 py-4 text-gray-900">${rank}</td>
                 <td class="px-6 py-4 text-gray-900">${linha.email}</td>
                 <td class="px-6 py-4 text-gray-900">${linha.equipe}</td>
-                <td class="px-6 py-4 text-gray-900">${linha.pontuacao}</td>
+                <td class="px-6 py-4 text-gray-900">${linha.pontuacao} 🔥 </td>
                 <td class="px-6 py-4 text-gray-900">${linha.respostas_semana}</td>
             </tr>
         `;
