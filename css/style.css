@@ -116,19 +116,34 @@ body.flex {
 ═══════════════════════════════════════════════════════════════ */
 .logo-symbol {
   display: block;
-  width: 72px;
-  height: auto;
+  width: 160px; /* tamanho maior */
+  height: 96px; /* altura fixa */
+  
   background-image: var(--logo-symbol);
   background-size: contain;
   background-repeat: no-repeat;
   background-position: center;
-  aspect-ratio: 317/192;
-}
-.logo-symbol-sm  { width: 48px; }
-.logo-symbol-lg  { width: 100px; }
-.logo-symbol-xl  { width: 130px; }
 
-/* Versão invertida (fundo escuro) */
+  flex-shrink: 0;
+}
+
+/* tamanhos opcionais */
+.logo-symbol-sm {
+  width: 90px;
+  height: 54px;
+}
+
+.logo-symbol-lg {
+  width: 220px;
+  height: 132px;
+}
+
+.logo-symbol-xl {
+  width: 280px;
+  height: 168px;
+}
+
+/* versão branca */
 .logo-symbol-inv {
   filter: brightness(0) invert(1);
 }
@@ -489,16 +504,15 @@ body.portal-page::before { display: none; }
 
 /* Logo AU grande no portal */
 .portal-logo {
-  width: 110px;
-  aspect-ratio: 317/192;
-  background-image: var(--logo-symbol);
-  background-size: contain;
-  background-repeat: no-repeat;
-  background-position: center;
+  width: 260px;
+  height: auto;
+
+  display: block;
+  margin: 0 auto 80px;
+
   filter: brightness(0) invert(1);
-  margin: 0 auto 1.5rem;
-  animation: fadeIn .5s both;
 }
+
 
 .portal-title {
   font-family: 'Syne', sans-serif;
