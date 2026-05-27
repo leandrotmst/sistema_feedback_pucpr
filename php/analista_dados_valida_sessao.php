@@ -1,6 +1,6 @@
 <?php
     session_start();
-    if(isset($_SESSION['email'])){
+    if(isset($_SESSION['id_analista_dados'])){
         $retorno = [
             'status'   => 'ok', // ok - nok
             'mensagem' => '', // mensagem que envio para o front

@@ -8,10 +8,12 @@ async function funcionario_valida_sessao(){
 }
 
 async function logout(){
-    const retorno = await fetch('../php/gestor_logout.php');
+    const retorno = await fetch('../php/funcionario_logout.php');
     const resposta = await retorno.json();
 
     if(resposta.status == 'ok'){
         window.location.href = '../index.html';
     }
 }
+
+funcionario_valida_sessao();

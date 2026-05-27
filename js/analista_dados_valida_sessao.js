@@ -15,3 +15,5 @@ async function logout(){
         window.location.href = '../index.html';
     }
 }
+
+analista_dados_valida_sessao();

@@ -16,3 +16,5 @@ async function logout(){
         window.location.href = '../index.html';
     }
 }
+
+gestor_valida_sessao();
