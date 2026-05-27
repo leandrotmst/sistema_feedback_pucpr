@@ -69,7 +69,6 @@
     }
     $stmtCheck->close();
 
-    // Preparando para inserção no banco de dados (agora incluindo dados_dinamicos)
     $stmt = $conexao->prepare("INSERT INTO respostas(emocional, texto, email_do_funcionario, equipe_do_funcionario, funcionarios_id) VALUES(?,?,?,?,?)");
     $stmt->bind_param("isssi", $emocional, $texto, $emailFuncionario, $equipeFuncionario, $funcionarioId);
     $stmt->execute();
