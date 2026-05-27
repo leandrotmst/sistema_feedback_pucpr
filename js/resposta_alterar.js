@@ -28,7 +28,6 @@ async function buscar(id){
             }
         }
         document.getElementById('texto').value      = registro.texto;
-        document.getElementById('semana').value     = registro.semana_referente || '';
         document.getElementById("id_resposta").value = registro.id;
     }else{
         alert("Erro, não existe: " + resposta.mensagem);
@@ -42,16 +41,10 @@ document.getElementById('salvar').addEventListener('click', () => {
 async function alterar(){
     const nivelRadio = document.querySelector('input[name="nivel"]:checked');
     var texto = document.getElementById("texto").value.trim();
-    var semana = document.getElementById("semana").value;
     var id_resposta = document.getElementById("id_resposta").value;
 
     if (!nivelRadio) {
         alert("Por favor, selecione um nível emocional.");
-        return;
-    }
-
-    if (!semana) {
-        alert("Por favor, selecione a semana correspondente.");
         return;
     }
 
@@ -63,7 +56,6 @@ async function alterar(){
     const fd = new FormData();
     fd.append('emocional', nivelRadio.value); // Envia o valor do rádio selecionado
     fd.append('texto', texto);
-    fd.append('semana', semana);
 
     const retorno = await fetch("../php/resposta_alterar.php?id=" + id_resposta, {
         method: "POST",

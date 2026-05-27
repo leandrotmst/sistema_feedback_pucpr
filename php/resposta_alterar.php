@@ -70,11 +70,10 @@
         // Simulando as informações que vem do front
         $emocional    = (int)$_POST['emocional'];
         $texto    = $_POST['texto'];
-        $semana    = $_POST['semana'] ?? null;
     
         // Preparando para atualização no banco de dados
-        $stmt = $conexao->prepare("UPDATE respostas SET emocional=?, texto=?, semana_referente=? WHERE id=?");
-        $stmt->bind_param("issi", $emocional, $texto, $semana, $id);
+        $stmt = $conexao->prepare("UPDATE respostas SET emocional=?, texto=? WHERE id=?");
+        $stmt->bind_param("isi", $emocional, $texto, $id);
         $stmt->execute();
 
         if($stmt->affected_rows > 0){
