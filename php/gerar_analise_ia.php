@@ -10,7 +10,7 @@ $retorno = [
 ];
 
 // O Analista de Dados precisa estar logado
-if (!isset($_SESSION['analista_dados_id'])) {
+if (!isset($_SESSION['id_analista_dados'])) {
     $retorno['status'] = 'nok';
     $retorno['mensagem'] = 'Sessão inválida. Faça login como analista de dados.';
     header("Content-type:application/json;charset:utf-8");
@@ -18,7 +18,7 @@ if (!isset($_SESSION['analista_dados_id'])) {
     exit;
 }
 
-$analistaId = $_SESSION['analista_dados_id'];
+$analistaId = $_SESSION['id_analista_dados'];
 $stmtGestor = $conexao->prepare("SELECT gestor_id FROM analista_dados WHERE id = ?");
 $stmtGestor->bind_param("i", $analistaId);
 $stmtGestor->execute();

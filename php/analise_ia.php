@@ -53,7 +53,7 @@ Responda OBRIGATORIAMENTE APENAS em formato JSON válido, contendo as três chav
         
         // Se a IA não retornou um JSON válido, retorna um mock seguro
         if (!$result || !isset($result['resumo'])) {
-            return $this->mockResult("A IA retornou um formato inesperado. Raw: " . substr($raw, 0, 50));
+            throw new Exception("A IA retornou um formato inesperado. Raw: " . substr($raw, 0, 100));
         }
         
         return $result;
@@ -85,14 +85,27 @@ Responda OBRIGATORIAMENTE APENAS em formato JSON válido, contendo as três chav
 
         $result   = curl_exec($ch);
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $curlError = curl_error($ch);
         curl_close($ch);
 
-        if (!$result || $httpCode !== 200) {
-            return '{}';
+        // Debug: logs de erro
+        if (!$result) {
+            throw new Exception("Erro cURL: " . $curlError);
+        }
+
+        if ($httpCode !== 200) {
+            $errorInfo = "HTTP Code: $httpCode. Response: " . substr($result, 0, 200);
+            throw new Exception("Erro na API Gemini: " . $errorInfo);
         }
 
         $response = json_decode($result, true);
-        $text     = $response['candidates'][0]['content']['parts'][0]['text'] ?? '{}';
+        
+        if (!isset($response['candidates'][0]['content']['parts'][0]['text'])) {
+            $debugInfo = json_encode($response);
+            throw new Exception("Formato inesperado da resposta Gemini: " . substr($debugInfo, 0, 200));
+        }
+        
+        $text     = $response['candidates'][0]['content']['parts'][0]['text'];
 
         return $text;
     }
