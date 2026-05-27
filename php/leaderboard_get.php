@@ -11,6 +11,7 @@ $stmt = $conexao->prepare(
     "SELECT f.id, f.email, f.equipe, f.pontuacao,
         (SELECT COUNT(*) FROM respostas r WHERE r.funcionarios_id = f.id AND YEARWEEK(r.criado_em, 1) = YEARWEEK(NOW(), 1)) AS respostas_semana
     FROM funcionarios f
+    WHERE f.pontuacao > 0
     ORDER BY f.pontuacao DESC, respostas_semana DESC, f.email ASC"
 );
 

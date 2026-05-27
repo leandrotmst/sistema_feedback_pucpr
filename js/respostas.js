@@ -22,6 +22,7 @@ function preencherTabela(tabela){
             <thead class="bg-gray-50">
                 <tr>
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Texto</th>
+                    <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Nome do pet</th>
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Emocional</th>
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">E-mail do funcionário</th>
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Ações</th>
@@ -50,10 +51,11 @@ function preencherTabela(tabela){
                     <div>${tabela[i].texto}</div>
                     ${extraHtml}
                 </td>
+                <td class="px-6 py-4 text-gray-900">${tabela[i].nome_pet}</td>
                 <td class="px-6 py-4 text-gray-900">${tabela[i].emocional}</td>
                 <td class="px-6 py-4 text-gray-900">${tabela[i].email_do_funcionario}</td>
                 <td class="px-6 py-4">
-                    <button onclick="window.location.href='../formulario/resposta_alterar.html?id=${tabela[i].id}'" class='btn btn-secondary">Alterar</button>
+                    <button onclick="window.location.href='../formulario/resposta_alterar.html?id=${tabela[i].id}'" class='btn btn-secondary'>Alterar</button>
                     <!-- // Comentado o funcionamento abaixo -->
                     <!-- a href='#' onClick='excluir(${tabela[i].id})' class='btn btn-danger'>Excluir</a -->
                 </td>

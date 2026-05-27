@@ -9,7 +9,7 @@
         'data'     => []
     ];
 
-    if (!isset($_SESSION['gestor_id'])) {
+    if (!isset($_SESSION['id_analista_dados'])) {
         $retorno = [
             'status'   => 'nok',
             'mensagem' => 'Sessão inválida',
@@ -20,26 +20,26 @@
         exit;
     }
 
-    $gestorId = $_SESSION['gestor_id'];
+    $analistaId = $_SESSION['id_analista_dados'];
 
     if(isset($_GET['id'])){
-        // Segunda situação - RECEBENDO O ID por GET
         $stmt = $conexao->prepare(
             "SELECT r.texto, r.emocional, f.equipe, r.email_do_funcionario
              FROM respostas r
-             JOIN funcionarios f ON f.email = r.email_do_funcionario
-             WHERE r.id = ? AND f.gestor_id = ?"
+             JOIN funcionarios f ON f.id = r.funcionarios_id
+             JOIN analista_dados a ON a.gestor_id = f.gestor_id
+             WHERE r.id = ? AND a.id = ?"
         );
-        $stmt->bind_param("ii", $_GET['id'], $gestorId);
+        $stmt->bind_param("ii", $_GET['id'], $analistaId);
     }else{
-        // Primeira situação - SEM RECEBER O ID por GET
         $stmt = $conexao->prepare(
             "SELECT r.texto, r.emocional, f.equipe, r.email_do_funcionario
              FROM respostas r
-             JOIN funcionarios f ON f.email = r.email_do_funcionario
-             WHERE f.gestor_id = ?"
+             JOIN funcionarios f ON f.id = r.funcionarios_id
+             JOIN analista_dados a ON a.gestor_id = f.gestor_id
+             WHERE a.id = ?"
         );
-        $stmt->bind_param("i", $gestorId);
+        $stmt->bind_param("i", $analistaId);
     }    
     
     // Recuperando informações do Banco de Dados

@@ -18,13 +18,28 @@ if (!isset($_SESSION['analista_dados_id'])) {
     exit;
 }
 
-$gestorId = $_SESSION['gestor_id'];
+$analistaId = $_SESSION['analista_dados_id'];
+$stmtGestor = $conexao->prepare("SELECT gestor_id FROM analista_dados WHERE id = ?");
+$stmtGestor->bind_param("i", $analistaId);
+$stmtGestor->execute();
+$resultGestor = $stmtGestor->get_result();
+
+if (!$resultGestor || $resultGestor->num_rows === 0) {
+    $retorno['status'] = 'nok';
+    $retorno['mensagem'] = 'Analista de dados não encontrado.';
+    header("Content-type:application/json;charset:utf-8");
+    echo json_encode($retorno);
+    exit;
+}
+
+$gestorId = $resultGestor->fetch_assoc()['gestor_id'];
+$stmtGestor->close();
 
 // Buscar as respostas dos últimos 7 dias para a equipe deste gestor
 $stmt = $conexao->prepare(
     "SELECT r.texto, r.emocional, f.equipe, r.criado_em
      FROM respostas r
-     JOIN funcionarios f ON f.email = r.email_do_funcionario
+     JOIN funcionarios f ON f.id = r.funcionarios_id
      WHERE f.gestor_id = ? AND r.criado_em >= DATE_SUB(NOW(), INTERVAL 7 DAY)
      ORDER BY r.criado_em DESC"
 );

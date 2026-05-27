@@ -32,11 +32,11 @@ async function buscarDadosGestor() {
 }
 
 document.getElementById('enviar').addEventListener('click', async () => {
-    const id = getParametroId();
-    const email = document.getElementById('email').value;
-    const senha_atual = document.getElementById('senha_atual').value;
-    const senha_nova = document.getElementById('senha_nova').value;
-    const senha_nova_confirmacao = document.getElementById('senha_nova_confirmacao').value;
+    var id = getParametroId();
+    var email = document.getElementById('email').value;
+    var senha_atual = document.getElementById('senha_atual').value;
+    var senha_nova = document.getElementById('senha_nova').value;
+    var senha_nova_confirmacao = document.getElementById('senha_nova_confirmacao').value;
 
     if (!email) {
         alert("Preencha o e-mail");

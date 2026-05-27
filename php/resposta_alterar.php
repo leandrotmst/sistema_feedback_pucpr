@@ -23,17 +23,17 @@
         $emailSessao = $_SESSION['email_funcionario'];
 
         // Verifica dia da semana: 0=Dom, 1=Seg, 2=Ter, 3=Qua, 4=Qui, 5=Sex, 6=Sáb
-        $diaSemana = (int)date('w');
-        if (in_array($diaSemana, [1, 2, 3])) { 
-            $retorno = [
-                'status'   => 'nok',
-                'mensagem' => 'Fora do período permitido. A edição só é liberada de quinta-feira a domingo.',
-                'data'     => []
-            ];
-            header("Content-type:application/json;charset=utf-8");
-            echo json_encode($retorno);
-            exit;
-        }
+        // $diaSemana = (int)date('w');
+        // if (in_array($diaSemana, [1, 2, 3])) { 
+        //     $retorno = [
+        //         'status'   => 'nok',
+        //         'mensagem' => 'Fora do período permitido. A edição só é liberada de quinta-feira a domingo.',
+        //         'data'     => []
+        //     ];
+        //     header("Content-type:application/json;charset=utf-8");
+        //     echo json_encode($retorno);
+        //     exit;
+        // }
 
         // First, check if the response belongs to the logged-in user
         $stmtCheck = $conexao->prepare("SELECT id FROM respostas WHERE id=? AND email_do_funcionario=?");
@@ -57,10 +57,11 @@
         // Simulando as informações que vem do front
         $emocional    = $_POST['emocional'];
         $texto    = $_POST['texto'];
+        $semana    = $_POST['semana'] ?? null;
     
         // Preparando para atualização no banco de dados
-        $stmt = $conexao->prepare("UPDATE respostas SET emocional=?, texto=? WHERE id=?");
-        $stmt->bind_param("isi", $emocional, $texto, $id);
+        $stmt = $conexao->prepare("UPDATE respostas SET emocional=?, texto=?, semana_referente=? WHERE id=?");
+        $stmt->bind_param("issi", $emocional, $texto, $semana, $id);
         $stmt->execute();
 
         if($stmt->affected_rows > 0){

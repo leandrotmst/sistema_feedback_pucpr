@@ -3,8 +3,8 @@ document.addEventListener('DOMContentLoaded', () => {
 });
 
 document.getElementById('enviar').addEventListener('click', async () => {
-    const email = document.getElementById('email').value;
-    const senha = document.getElementById('senha').value;
+    var email = document.getElementById('email').value;
+    var senha = document.getElementById('senha').value;
 
     if (!email || !senha) {
         alert("Preencha todos os campos");

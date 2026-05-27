@@ -1,10 +1,10 @@
 document.addEventListener("DOMContentLoaded", () => {
-    const day = new Date().getDay();
-    if (day >= 1 && day <= 3) {
-        alert("Fora do prazo! O formulário só pode ser editado de quinta-feira a domingo.");
-        window.location.href = "respostas.html";
-        return;
-    }
+    // const day = new Date().getDay();
+    // if (day >= 1 && day <= 3) {
+    //     alert("Fora do prazo! O formulário só pode ser editado de quinta-feira a domingo.");
+    //     window.location.href = "respostas.html";
+    //     return;
+    // }
 
     const url = new URLSearchParams(window.location.search);
     const id = url.get('id');
@@ -28,6 +28,7 @@ async function buscar(id){
             }
         }
         document.getElementById('texto').value      = registro.texto;
+        document.getElementById('semana').value     = registro.semana_referente || '';
         document.getElementById("id_resposta").value = registro.id;
     }else{
         alert("Erro, não existe: " + resposta.mensagem);
@@ -41,6 +42,7 @@ document.getElementById('salvar').addEventListener('click', () => {
 async function alterar(){
     const nivelRadio = document.querySelector('input[name="nivel"]:checked');
     var texto = document.getElementById("texto").value;
+    var semana = document.getElementById("semana").value;
     var id_resposta = document.getElementById("id_resposta").value;
 
     if (!nivelRadio) {
@@ -48,9 +50,15 @@ async function alterar(){
         return;
     }
 
+    if (!semana) {
+        alert("Por favor, selecione a semana correspondente.");
+        return;
+    }
+
     const fd = new FormData();
     fd.append('emocional', nivelRadio.value); // Envia o valor do rádio selecionado
     fd.append('texto', texto);
+    fd.append('semana', semana);
 
     const retorno = await fetch("../php/resposta_alterar.php?id=" + id_resposta, {
         method: "POST",

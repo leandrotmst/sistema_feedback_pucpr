@@ -3,13 +3,6 @@ var equipeLogado = "";
 
 // 1. Ao carregar a página, identifica quem é o funcionário logado
 window.onload = function() {
-    // const day = new Date().getDay();
-    const day = 4; // DATA CHUMBADA PARA SIMULAR SEXTA-FEIRA
-    if (day >= 1 && day <= 3) {
-        alert("Fora do prazo! O formulário só pode ser preenchido de quinta-feira a domingo.");
-        window.location.href = "respostas.html";
-        return;
-    }
     fetch('../php/get_sessao_funcionario.php')
         .then(response => response.json())
         .then(data => {
@@ -22,18 +15,37 @@ window.onload = function() {
                 window.location.href = "../login/login_funcionario.html";
             }
         });
+    setWeekField();
 };
 
 document.getElementById('enviar').addEventListener('click', () => {
     nova();
 });
 
-async function nova() {
-    const nivelRadio = document.querySelector('input[name="nivel"]:checked');
-    const texto = document.getElementById("texto").value;
+function getCurrentWeekValue() {
+    const date = new Date();
+    date.setHours(0,0,0,0);
+    date.setDate(date.getDate() + 3 - (date.getDay() + 6) % 7);
+    const week1 = new Date(date.getFullYear(), 0, 4);
+    const weekNumber = 1 + Math.round(((date.getTime() - week1.getTime()) / 86400000 - 3 + (week1.getDay() + 6) % 7) / 7);
+    return `${date.getFullYear()}-W${weekNumber.toString().padStart(2, '0')}`;
+}
 
-    if (!nivelRadio || !texto.trim()) {
-        alert("Preencha todos os campos obrigatórios (humor e resumo).");
+function setWeekField() {
+    const semanaInput = document.getElementById('semana');
+    if (semanaInput) {
+        semanaInput.value = getCurrentWeekValue();
+    }
+}
+
+async function nova() {
+    var nivelRadio = document.querySelector('input[name="nivel"]:checked');
+    var texto = document.getElementById("texto").value;
+    var semana = document.getElementById("semana")?.value || "";
+    var nome_pet = document.getElementById("nome_pet").value;
+
+    if (!nivelRadio || !texto.trim() || !semana) {
+        alert("Preencha todos os campos obrigatórios (humor, semana e resumo).");
         return;
     }
 
@@ -41,6 +53,8 @@ async function nova() {
     const fd = new FormData();
     fd.append("nivel", nivelRadio.value);
     fd.append("texto", texto);
+    fd.append("semana", semana);
+    fd.append("nome_pet", nome_pet);
     fd.append("equipe", equipeLogado);
 
     const retorno = await fetch("../php/resposta_nova.php", {

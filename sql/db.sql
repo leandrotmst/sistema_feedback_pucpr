@@ -39,6 +39,7 @@ CREATE TABLE IF NOT EXISTS respostas (
     id INT UNSIGNED NOT NULL AUTO_INCREMENT,
     emocional TINYINT UNSIGNED NULL COMMENT 'Escala 0-5 (emocional / estresse na semana)',
     texto TEXT NULL,
+    semana_referente VARCHAR(20) NULL,
     email_do_funcionario VARCHAR(255) NOT NULL,
     equipe_do_funcionario VARCHAR(255) NOT NULL,
     funcionarios_id INT UNSIGNED NOT NULL,

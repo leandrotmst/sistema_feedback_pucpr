@@ -31,7 +31,7 @@ async function excluir(id_gestor){
 }
 
 function preencherTabela(tabela){
-    var html = `
+    const html = `
         <table style="width: 100%; border-collapse: collapse; text-align: left;">
             <thead>
                 <tr style="border-bottom: 2px solid #eee;">

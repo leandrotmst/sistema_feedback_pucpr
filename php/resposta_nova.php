@@ -20,6 +20,8 @@
 
     $emocional    = $_POST['nivel'] ?? null;
     $texto    = $_POST['texto'] ?? null;
+    $nome_pet    = $_POST['nome_pet'];
+    $semana    = $_POST['semana'] ?? null;
 
     $emailFuncionario = $_SESSION['email_funcionario'];
     $equipeFuncionario = $_SESSION['equipe_funcionario'];
@@ -27,17 +29,17 @@
 
     // Verifica dia da semana: 0=Dom, 1=Seg, 2=Ter, 3=Qua, 4=Qui, 5=Sex, 6=Sáb
     // $diaSemana = (int)date('w');
-    $diaSemana = 4; // DATA CHUMBADA PARA SIMULAR SEXTA-FEIRA
-    if (in_array($diaSemana, [1, 2, 3])) { 
-        $retorno = [
-            'status'   => 'nok',
-            'mensagem' => 'Fora do período permitido. O preenchimento só é liberado de quinta-feira a domingo.',
-            'data'     => []
-        ];
-        header("Content-type:application/json; charset=utf-8");
-        echo json_encode($retorno);
-        exit;
-    }
+    // $diaSemana = 4; // DATA CHUMBADA PARA SIMULAR SEXTA-FEIRA
+    // if (in_array($diaSemana, [1, 2, 3])) { 
+    //     $retorno = [
+    //         'status'   => 'nok',
+    //         'mensagem' => 'Fora do período permitido. O preenchimento só é liberado de quinta-feira a domingo.',
+    //         'data'     => []
+    //     ];
+    //     header("Content-type:application/json; charset=utf-8");
+    //     echo json_encode($retorno);
+    //     exit;
+    // }
 
     // Validação: verificar se id_funcionario foi armazenado na sessão
     if (!isset($funcionarioId) || is_null($funcionarioId)) {
@@ -69,9 +71,9 @@
     }
     $stmtCheck->close();
 
-    // Preparando para inserção no banco de dados (agora incluindo dados_dinamicos)
-    $stmt = $conexao->prepare("INSERT INTO respostas(emocional, texto, email_do_funcionario, equipe_do_funcionario, funcionarios_id) VALUES(?,?,?,?,?)");
-    $stmt->bind_param("isssi", $emocional, $texto, $emailFuncionario, $equipeFuncionario, $funcionarioId);
+    // Preparando para inserção no banco de dados
+    $stmt = $conexao->prepare("INSERT INTO respostas(emocional, texto, nome_pet, semana_referente, email_do_funcionario, equipe_do_funcionario, funcionarios_id) VALUES(?,?,?,?,?,?,?)");
+    $stmt->bind_param("isssssi", $emocional, $texto, $nome_pet, $semana, $emailFuncionario, $equipeFuncionario, $funcionarioId);
     $stmt->execute();
 
     if($stmt->error) {

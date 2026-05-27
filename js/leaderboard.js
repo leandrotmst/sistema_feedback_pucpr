@@ -15,7 +15,7 @@ async function buscarLeaderboard(){
 
 function preencherLeaderboard(tabela){
     if(!tabela.length){
-        document.getElementById('leaderboard').innerHTML = '<p class="text-muted">Ninguém respondeu ainda. Seja o primeiro a conquistar a leaderboard!</p>';
+        document.getElementById('leaderboard').innerHTML = '<p class="text-muted">Nenhuma pontuação registrada ainda.</p>';
         return;
     }
 
@@ -34,14 +34,11 @@ function preencherLeaderboard(tabela){
                 <tbody>
     `;
 
-    const icons = ['','🔥','🔥🔥','🔥🔥🔥'];
-
     tabela.forEach((linha, index) => {
         const rank = index + 1;
-        const badge = icons[rank] || '🔥';
         html += `
             <tr class="border-b border-gray-200 hover:bg-gray-50">
-                <td class="px-6 py-4 text-gray-900">${badge} ${rank}</td>
+                <td class="px-6 py-4 text-gray-900">${rank}</td>
                 <td class="px-6 py-4 text-gray-900">${linha.email}</td>
                 <td class="px-6 py-4 text-gray-900">${linha.equipe}</td>
                 <td class="px-6 py-4 text-gray-900">${linha.pontuacao}</td>
