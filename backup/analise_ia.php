@@ -7,10 +7,9 @@ class AnalisadorIA {
     private $apiKey;
 
     public function __construct() {
-        // Atualizado para buscar a chave da Perplexity
-        $this->apiKey = $_ENV['PERPLEXITY_API_KEY'] ?? getenv('PERPLEXITY_API_KEY');
+        $this->apiKey = $_ENV['GEMINI_API_KEY'] ?? getenv('GEMINI_API_KEY');
         if (empty($this->apiKey) || $this->apiKey === 'sua_chave_aqui') {
-            throw new Exception("API Key da Perplexity não configurada no arquivo .env");
+            throw new Exception("API Key do Gemini não configurada no arquivo .env");
         }
     }
 
@@ -30,21 +29,21 @@ A escala emocional vai de 0 (pior) a 5 (melhor).
 Abaixo estão os dados dos últimos 7 dias em JSON:
 {$dadosJson}
 
-Responda OBRIGATORIAMENTE APENAS em formato JSON válido, contendo as três chaves exatas abaixo (em português do Brasil).
+Responda OBRIGATORIAMENTE APENAS em formato JSON válido, contendo as três chaves exatas abaixo (em português do Brasil). Não adicione nenhuma formatação Markdown fora do bloco JSON.
 {
   \"resumo\": \"Um parágrafo resumindo o clima geral da equipe nesta semana com base nos relatos e nas notas emocionais.\",
   \"alertas\": \"Lista de pontos críticos, se houver (ex: funcionários com nota 0 ou 1, ou mencionando forte estresse/burnout). Se não houver, diga que o clima está estável.\",
   \"solucoes_propostas\": \"Recomendações práticas e acionáveis para o gestor e para a empresa visando melhorar os pontos de atenção levantados nesta semana.\"
 }";
 
-        return $this->callPerplexity($prompt);
+        return $this->callGemini($prompt);
     }
 
     // -------------------------------------------------------------------------
-    // Chama Perplexity e retorna array PHP (já parseado do JSON)
+    // Chama Gemini e retorna array PHP (já parseado do JSON)
     // -------------------------------------------------------------------------
-    private function callPerplexity(string $prompt): array {
-        $raw    = $this->callPerplexityRaw($prompt);
+    private function callGemini(string $prompt): array {
+        $raw    = $this->callGeminiRaw($prompt);
         
         // Limpar possíveis formatações markdown do retorno da IA (```json ... ```)
         $raw    = preg_replace('/^```json\s*/i', '', trim($raw));
@@ -61,37 +60,31 @@ Responda OBRIGATORIAMENTE APENAS em formato JSON válido, contendo as três chav
     }
 
     // -------------------------------------------------------------------------
-    // cURL para Perplexity (Modelo Sonar)
+    // cURL para Gemini 2.0 Flash
     // -------------------------------------------------------------------------
-    private function callPerplexityRaw(string $prompt): string {
+    private function callGeminiRaw(string $prompt): string {
         $data = [
-            'model' => 'sonar', 
-            'messages' => [
-                [
-                    'role' => 'user',
-                    'content' => $prompt
-                ]
-            ],
-            'temperature' => 0.2, // Reduzi levemente para ela ser ainda mais precisa no formato
-            // Removido o 'json_object' que causava o erro 400
+            'contents' => [[
+                'parts' => [['text' => $prompt]],
+            ]],
+            'generationConfig' => [
+                'temperature' => 0.4, // Menos criativo, mais focado e analítico
+                'responseMimeType' => 'application/json'
+            ]
         ];
 
-        // URL oficial da API da Perplexity
-        $ch = curl_init('https://api.perplexity.ai/chat/completions');
+        $ch = curl_init('https://generativelanguage.googleapis.com/v1beta/models/gemini-2.0-flash:generateContent?key=' . $this->apiKey);
         curl_setopt_array($ch, [
             CURLOPT_RETURNTRANSFER => true,
             CURLOPT_POST           => true,
-            CURLOPT_HTTPHEADER     => [
-                'Content-Type: application/json',
-                'Authorization: Bearer ' . $this->apiKey 
-            ],
+            CURLOPT_HTTPHEADER     => ['Content-Type: application/json'],
             CURLOPT_POSTFIELDS     => json_encode($data),
-            CURLOPT_TIMEOUT        => 30, 
-            CURLOPT_SSL_VERIFYPEER => false 
+            CURLOPT_TIMEOUT        => 30, // 30 segundos
+            CURLOPT_SSL_VERIFYPEER => false // Para rodar liso no XAMPP local
         ]);
 
-        $result    = curl_exec($ch);
-        $httpCode  = curl_getinfo($ch, CURLINFO_HTTP_CODE);
+        $result   = curl_exec($ch);
+        $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         $curlError = curl_error($ch);
         curl_close($ch);
 
@@ -102,19 +95,21 @@ Responda OBRIGATORIAMENTE APENAS em formato JSON válido, contendo as três chav
 
         if ($httpCode !== 200) {
             $errorInfo = "HTTP Code: $httpCode. Response: " . substr($result, 0, 200);
-            throw new Exception("Erro na API Perplexity: " . $errorInfo);
+            throw new Exception("Erro na API Gemini: " . $errorInfo);
         }
 
         $response = json_decode($result, true);
         
-        if (!isset($response['choices'][0]['message']['content'])) {
+        if (!isset($response['candidates'][0]['content']['parts'][0]['text'])) {
             $debugInfo = json_encode($response);
-            throw new Exception("Formato inesperado da resposta Perplexity: " . substr($debugInfo, 0, 200));
+            throw new Exception("Formato inesperado da resposta Gemini: " . substr($debugInfo, 0, 200));
         }
         
-        return $response['choices'][0]['message']['content'];
+        $text     = $response['candidates'][0]['content']['parts'][0]['text'];
+
+        return $text;
     }
-    
+
     private function mockResult(string $motivo = ""): array {
         return [
             "resumo" => "Falha ao gerar o resumo com IA. Motivo: $motivo",
