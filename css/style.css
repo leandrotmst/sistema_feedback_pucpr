@@ -38,7 +38,7 @@
   --border:      #ddd6f5;
   --border-l:    #ede9fe;
 
-  --tx:          #131340;
+  --tx:          #1a1a53;
   --tx2:         #4a4080;
   --tx-m:        #9692b5;
   --tx-h:        #cdc9e8;
@@ -81,7 +81,7 @@ body {
   font-weight: 400;
   text-rendering: optimizeLegibility;
 
-  background: var(--bg);
+  background: var(--g-dark);
   color: var(--tx);
   min-height: 100vh;
   line-height: 1.6;
@@ -170,15 +170,6 @@ body.flex {
   width: 100%;
   animation: slideUp var(--t-s) var(--ease-s) both;
   overflow: hidden;
-}
-
-/* Acento topo */
-.card::before {
-  content: '';
-  position: absolute;
-  top: 0; left: 0; right: 0;
-  height: 3px;
-  background: var(--g-brand);
 }
 
 /* Cards filhos */
