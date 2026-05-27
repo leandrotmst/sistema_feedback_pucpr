@@ -16,6 +16,18 @@ async function buscar(){
     }
 }
 
+async function excluir(id_solucao){
+    const retorno = await fetch('../php/solucao_excluir.php?id='+id_solucao);
+    const resposta = await retorno.json();
+
+    if(resposta.status=='ok'){
+        alert(resposta.mensagem);
+        window.location.reload();
+    }else{
+        alert(resposta.mensagem);
+    }
+}
+
 function preencherTabela(tabela){
     var html = `
         <table class="w-full text-sm text-left border-collapse border border-gray-300">
@@ -35,7 +47,8 @@ function preencherTabela(tabela){
                 <td class="px-6 py-4 text-gray-900">${tabela[i].titulo}</td>
                 <td class="px-6 py-4 text-gray-900">${tabela[i].equipe}</td>
                 <td class="px-6 py-4 flex gap-2">
-                    <button onclick="window.location.href='solucao_alterar.html?id=${tabela[i].id}'" class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded transition duration-200">Alterar</button>
+                    <button onclick="window.location.href='solucao_alterar.html?id=${tabela[i].id}'" class='btn btn-secondary'">Alterar</button>
+                    <button onclick="excluir(${tabela[i].id})" class='btn btn-danger' ">Excluir</button>
                 </td>
             </tr>
         `;

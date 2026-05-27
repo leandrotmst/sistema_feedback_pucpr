@@ -53,9 +53,9 @@ function preencherTabela(tabela){
                 <td class="px-6 py-4 text-gray-900">${tabela[i].emocional}</td>
                 <td class="px-6 py-4 text-gray-900">${tabela[i].email_do_funcionario}</td>
                 <td class="px-6 py-4">
-                    <button onclick="window.location.href='../formulario/resposta_alterar.html?id=${tabela[i].id}'" class="bg-yellow-500 hover:bg-yellow-600 text-white font-semibold py-1 px-3 rounded transition duration-200">Alterar</button>
+                    <button onclick="window.location.href='../formulario/resposta_alterar.html?id=${tabela[i].id}'" class='btn btn-secondary">Alterar</button>
                     <!-- // Comentado o funcionamento abaixo -->
-                    <!-- a href='#' onClick='excluir(${tabela[i].id})' class='btn-excluir'>Excluir</a -->
+                    <!-- a href='#' onClick='excluir(${tabela[i].id})' class='btn btn-danger'>Excluir</a -->
                 </td>
             </tr>
         `;

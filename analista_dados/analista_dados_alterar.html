@@ -1,40 +1,47 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Editar Analista de Dados</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Editar Analista de Dados</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="flex items-center justify-center">
-    <div class="card card-md">
-        <h1 class="text-2xl font-bold text-center mb-6 text-primary">Editar Analista de Dados</h1>
-        <div class="space-y-4">
-            <input type="hidden" id="id_analista_dados" name="id_analista_dados">
-            <div class="form-group">
-                <label for="email" class="form-label">E-mail</label>
-                <input type="email" id="email" class="form-input">
-            </div>
-            <hr style="border: 1px solid #eee; margin: 15px 0;">
-            <p style="font-size: 0.9em; color: #666; margin-bottom: 10px;">Para alterar a senha, preencha os campos abaixo. Caso contrário, deixe em branco.</p>
-            <div class="form-group">
-                <label for="senha_atual" class="form-label">Senha Atual</label>
-                <input type="password" id="senha_atual" class="form-input" placeholder="Digite a senha atual">
-            </div>
-            <div class="form-group">
-                <label for="senha_nova" class="form-label">Nova Senha</label>
-                <input type="password" id="senha_nova" class="form-input" placeholder="Digite a nova senha">
-            </div>
-            <div class="form-group">
-                <label for="senha_nova_confirmacao" class="form-label">Confirmar Nova Senha</label>
-                <input type="password" id="senha_nova_confirmacao" class="form-input" placeholder="Confirme a nova senha">
-            </div>
-            <div class="flex space-x-4 mt-6">
-                <button type="button" onclick="window.history.back()" class="btn btn-secondary flex-1">Voltar</button>
-                <button id="salvar" class="btn btn-primary flex-1">Salvar Alterações</button>
-            </div>
-        </div>
+  <div class="card card-md">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem">
+      <div class="menu-icon menu-icon-c" style="flex-shrink:0">✏️</div>
+      <div>
+        <h1 class="text-2xl font-bold text-primary">Editar Analista</h1>
+        <p class="text-muted" style="font-size:.8rem;margin-top:.15rem">Edite o e-mail ou redefina a senha</p>
+      </div>
     </div>
-    <script src="../js/analista_dados_alterar.js"></script>
+    <div class="space-y-4">
+      <input type="hidden" id="id_analista_dados" name="id_analista_dados">
+      <div class="form-group">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" id="email" class="form-input" placeholder="analista@empresa.com">
+      </div>
+      <hr>
+      <p style="font-size: 0.9em; color: #666; margin-bottom: 10px;">Para alterar a senha, preencha os campos abaixo. Caso contrário, deixe em branco.</p>
+      <div class="form-group">
+        <label for="senha_atual" class="form-label">Senha Atual</label>
+        <div class="pw-wrap"><input type="password" id="senha_atual" class="form-input" placeholder="Digite a senha atual"><button type="button" class="btn-eye" onclick="togglePw('senha_atual',this)" tabindex="-1">👁</button></div>
+      </div>
+      <div class="form-group">
+        <label for="senha_nova" class="form-label">Nova Senha</label>
+        <div class="pw-wrap"><input type="password" id="senha_nova" class="form-input" placeholder="Digite a nova senha"><button type="button" class="btn-eye" onclick="togglePw('senha_nova',this)" tabindex="-1">👁</button></div>
+      </div>
+      <div class="form-group">
+        <label for="senha_nova_confirmacao" class="form-label">Confirmar Nova Senha</label>
+        <div class="pw-wrap"><input type="password" id="senha_nova_confirmacao" class="form-input" placeholder="Confirme a nova senha"><button type="button" class="btn-eye" onclick="togglePw('senha_nova_confirmacao',this)" tabindex="-1">👁</button></div>
+      </div>
+      <div style="display:flex;gap:.6rem;margin-top:1.5rem">
+        <button type="button" onclick="window.history.back()" class="btn btn-secondary" style="width:auto;padding:.7rem 1.1rem">← Voltar</button>
+        <button id="salvar" class="btn btn-primary flex-1">Salvar Alterações</button>
+      </div>
+    </div>
+  </div>
+  <script>function togglePw(id,btn){const el=document.getElementById(id);el.type=el.type==='password'?'text':'password';btn.textContent=el.type==='password'?'👁':'🙈';}</script>
+  <script src="../js/analista_dados_alterar.js"></script>
 </body>
 </html>

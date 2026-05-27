@@ -1,45 +1,49 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Resposta Semanal</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Resposta Semanal | AlignUp</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="flex items-center justify-center">
-    <div class="card card-md">
-        <h1 class="text-2xl font-bold text-center mb-6 text-primary">Resposta Semanal</h1>
-
-        <fieldset class="form-group mb-6">
-            <legend class="form-label mb-4">Como você avalia o emocional / estresse na semana? (0 a 5)</legend>
-            <div class="flex gap-4">
-                <label class="flex items-center"><input type="radio" name="nivel" value="0" required class="mr-2"> 0</label>
-                <label class="flex items-center"><input type="radio" name="nivel" value="1" class="mr-2"> 1</label>
-                <label class="flex items-center"><input type="radio" name="nivel" value="2" class="mr-2"> 2</label>
-                <label class="flex items-center"><input type="radio" name="nivel" value="3" class="mr-2"> 3</label>
-                <label class="flex items-center"><input type="radio" name="nivel" value="4" class="mr-2"> 4</label>
-                <label class="flex items-center"><input type="radio" name="nivel" value="5" class="mr-2"> 5</label>
-            </div>
-        </fieldset>
-
-        <div class="form-group mb-6">
-            <label for="texto" class="form-label">Resumo de como foi a semana</label>
-            <textarea id="texto" name="texto" class="form-input" required></textarea>
-            <input type="hidden" id="equipe" name="equipe">
-            <input type="hidden" id="funcionarioId" name="funcionarioId">
-        </div>
-
-        <div class="flex space-x-4">
-            <button type="button" onclick="window.location.href='../funcionario/index.html'" class="btn btn-secondary flex-1">Voltar</button>
-            <button type="submit" id="enviar" class="btn btn-primary flex-1">Enviar</button>
-        </div>
-
-        <div class="mt-4 flex justify-center">
-            <button onclick="logout()" class="btn btn-danger btn-auto">Sair</button>
-        </div>
+<body class="flex items-center justify-center p-4">
+  <div class="card card-md">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem">
+      <div class="menu-icon menu-icon-p" style="flex-shrink:0">✍️</div>
+      <div>
+        <h1 class="text-2xl font-bold text-primary">Resposta Semanal</h1>
+        <p class="text-muted" style="font-size:.8rem;margin-top:.15rem">Como foi sua semana? Conte para nós.</p>
+      </div>
     </div>
 
-    <script src="../js/resposta_nova.js"></script>
-    <script src="../js/funcionario_valida_sessao.js"></script>
+    <fieldset style="margin-bottom:1.25rem">
+      <legend>Nível emocional / estresse da semana (0 a 5)</legend>
+      <div class="flex gap-4" style="margin-top:.85rem;flex-wrap:wrap">
+        <label class="flex items-center"><input type="radio" name="nivel" value="0" required class="mr-2"> 0 — Ótimo</label>
+        <label class="flex items-center"><input type="radio" name="nivel" value="1" class="mr-2"> 1</label>
+        <label class="flex items-center"><input type="radio" name="nivel" value="2" class="mr-2"> 2</label>
+        <label class="flex items-center"><input type="radio" name="nivel" value="3" class="mr-2"> 3</label>
+        <label class="flex items-center"><input type="radio" name="nivel" value="4" class="mr-2"> 4</label>
+        <label class="flex items-center"><input type="radio" name="nivel" value="5" class="mr-2"> 5 — Crítico</label>
+      </div>
+    </fieldset>
+
+    <div class="form-group mb-6">
+      <label for="texto" class="form-label">Resumo da semana</label>
+      <textarea id="texto" name="texto" class="form-input" rows="5" placeholder="Como foi sua semana? Descreva pontos positivos, desafios ou o que quiser compartilhar..." required></textarea>
+      <input type="hidden" id="equipe" name="equipe">
+      <input type="hidden" id="funcionarioId" name="funcionarioId">
+    </div>
+
+    <div style="display:flex;gap:.6rem">
+      <button type="button" onclick="window.location.href='../funcionario/index.html'" class="btn btn-secondary" style="width:auto;padding:.7rem 1.1rem">← Voltar</button>
+      <button type="submit" id="enviar" class="btn btn-primary flex-1">Enviar Resposta</button>
+    </div>
+    <div class="mt-4 flex justify-center">
+      <button onclick="logout()" class="btn btn-danger btn-auto">Sair</button>
+    </div>
+  </div>
+  <script src="../js/resposta_nova.js"></script>
+  <script src="../js/funcionario_valida_sessao.js"></script>
 </body>
 </html>

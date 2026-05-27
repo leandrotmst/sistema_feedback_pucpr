@@ -1,27 +1,27 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Admin | Gerenciamento de Gestores</title>
-    <link rel="stylesheet" href="../../css/style.css">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Admin | Gerenciamento de Gestores</title>
+  <link rel="stylesheet" href="../../css/style.css">
 </head>
-<body class="flex items-center justify-center p-4">
-    <div class="card" style="max-width: 800px; width: 100%;">
-        <div class="header-gerenciamento" style="margin-bottom: 1.5rem; display: flex; justify-content: space-between; align-items: center;">
-            <h1 class="text-2xl font-bold text-primary">Gerenciamento de Gestores</h1>
-            <div>
-                <a href="../home/admin.html" class="btn btn-secondary" style="margin-right: 10px;">Voltar</a>
-                <button id="novo" type="button" class="btn btn-primary">+ Novo Gestor</button>
-            </div>
+<body>
+  <div class="container">
+    <div class="card card-lg">
+      <div class="header-gerenciamento">
+        <h1>Gerenciamento de Gestores</h1>
+        <div class="flex gap-2">
+          <a href="../home/admin.html" class="btn btn-secondary btn-auto">← Voltar</a>
+          <button id="novo" type="button" class="btn btn-primary btn-auto">+ Novo Gestor</button>
         </div>
-
-        <div style="overflow-x: auto;">
-            <div id="lista"></div>
-        </div>
+      </div>
+      <div class="table-container">
+        <div id="lista"></div>
+      </div>
     </div>
-    
-    <script src="../js/admin_gestores.js"></script>
-    <script src="../js/admin_valida_sessao.js"></script>
+  </div>
+  <script src="../js/admin_gestores.js"></script>
+  <script src="../js/admin_valida_sessao.js"></script>
 </body>
 </html>

@@ -1,35 +1,42 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento | Gestor Dashboard</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Gestor | AlignUp</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="flex items-center justify-center">
-    <div class="card card-sm">
-        <div class="header-gerenciamento" style="border-bottom: none; margin-bottom: 1.5rem; justify-content: center;">
-            <h1 class="text-2xl font-bold text-center text-primary">Gestor Dashboard</h1> 
-        </div>
-
-        <div class="space-y-4">
-            <a href="funcionarios.html" class="block">
-                <button class="btn btn-primary w-full">Funcionários</button>
-            </a>
-
-            <a href="analista_dados.html" class="block">
-                <button class="btn btn-secondary w-full">Analista de Dados</button>
-            </a>
-            <a href="respostas.html" class="block">
-                <button class="btn btn-success w-full">Relatório de Respostas</button>
-            </a>
-            <a href="solucoes.html" class="block">
-                <button class="btn btn-secondary w-full">Soluções Propostas</button>
-            </a>
-            <button onclick="logout()" class="btn btn-danger mt-6 w-full">Sair</button>
-        </div>
+<body class="flex items-center justify-center p-4">
+  <div class="card card-sm">
+    <div style="text-align:center;margin-bottom:2rem">
+      <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#131340,#6d28d9,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto .75rem">👔</div>
+      <h1 style="font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.04em;color:#131340">Gestor Dashboard</h1>
+      <p class="text-muted" style="font-size:.82rem;margin-top:.3rem">Gerencie sua equipe e acompanhe resultados</p>
     </div>
-    
-    <script src="../js/gestor_valida_sessao.js"></script>
+    <div class="menu-list">
+      <a href="funcionarios.html" class="menu-item">
+        <div class="menu-icon menu-icon-p">👥</div>
+        <span>Funcionários</span>
+        <span class="menu-arrow">›</span>
+      </a>
+      <a href="analista_dados.html" class="menu-item">
+        <div class="menu-icon menu-icon-c">📈</div>
+        <span>Analistas de Dados</span>
+        <span class="menu-arrow">›</span>
+      </a>
+      <a href="respostas.html" class="menu-item">
+        <div class="menu-icon menu-icon-t">📋</div>
+        <span>Relatório de Respostas</span>
+        <span class="menu-arrow">›</span>
+      </a>
+      <a href="solucoes.html" class="menu-item">
+        <div class="menu-icon menu-icon-n">💡</div>
+        <span>Soluções Propostas</span>
+        <span class="menu-arrow">›</span>
+      </a>
+    </div>
+    <button onclick="logout()" class="btn btn-danger mt-6">Sair da Conta</button>
+  </div>
+  <script src="../js/gestor_valida_sessao.js"></script>
 </body>
 </html>

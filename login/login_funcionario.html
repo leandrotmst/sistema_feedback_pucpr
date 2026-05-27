@@ -1,30 +1,71 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Login Funcionário | Sistema de Feedback</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Login Funcionário | AlignUp</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="flex items-center justify-center">
-    <div class="card card-sm">
-        <h1 class="text-2xl font-bold text-center mb-6 text-primary">Login Funcionário</h1>
-        <div class="space-y-4">
-            <div class="form-group">
-                <label for="email" class="form-label">E-mail</label>
-                <input type="email" id="email" name="email" required class="form-input">
-            </div>
-            <div class="form-group">
-                <label for="senha" class="form-label">Senha</label>
-                <input type="password" id="senha" name="senha" required class="form-input">
-            </div>
+<body class="login-page">
 
-            <div class="flex space-x-4 mt-6">
-                <button type="button" onclick="window.location.href='../index.html'" class="btn btn-secondary flex-1">Voltar</button>
-                <button id="entrar" type="submit" class="btn btn-primary flex-1">Entrar</button>
-            </div>
-        </div>
+  <div class="lp-left">
+    <div class="lp-dots"></div>
+    <div class="lp-brand">
+      <div class="lp-logo"></div>
+      <h1 class="lp-headline">Sua voz constrói<br>equipes melhores.</h1>
+      <p class="lp-sub">Registre como foi sua semana. Suas respostas são anônimas e ajudam a criar um ambiente mais saudável.</p>
+      <div class="lp-pillars">
+        <div class="lp-pillar"><div class="lp-pillar-icon">🎧</div><span class="lp-pillar-label">Ouvir</span></div>
+        <div class="lp-pillar"><div class="lp-pillar-icon">📊</div><span class="lp-pillar-label">Analisar</span></div>
+        <div class="lp-pillar"><div class="lp-pillar-icon">✅</div><span class="lp-pillar-label">Agir</span></div>
+        <div class="lp-pillar"><div class="lp-pillar-icon">🏆</div><span class="lp-pillar-label">Reconhecer</span></div>
+      </div>
+      <div class="lp-tagline"><strong>Pessoas alinhadas.</strong> Equipes mais fortes. Resultados que crescem.</div>
     </div>
-    <script src="../js/funcionario_login.js"></script>
+  </div>
+
+  <div class="lp-right">
+    <div class="lp-role-badge role-func">
+      <span class="lp-role-dot"></span> Área do Funcionário
+    </div>
+    <h2 class="lp-form-title">Bem-vindo de volta</h2>
+    <p class="lp-form-sub">Acesse para registrar seu feedback semanal</p>
+
+    <div class="lp-form-card">
+      <div class="form-group" style="margin-bottom:.9rem">
+        <label for="email" class="form-label">E-mail</label>
+        <input type="email" id="email" name="email" required class="form-input" placeholder="seu@email.com" autocomplete="email">
+      </div>
+      <div class="form-group" style="margin-bottom:1.25rem">
+        <label for="senha" class="form-label">Senha</label>
+        <div class="pw-wrap">
+          <input type="password" id="senha" name="senha" required class="form-input" placeholder="••••••••" autocomplete="current-password">
+          <button type="button" class="btn-eye" onclick="togglePw('senha',this)" tabindex="-1">👁</button>
+        </div>
+      </div>
+      <div style="display:flex;gap:.6rem">
+        <button type="button" onclick="window.location.href='../index.html'" class="btn btn-secondary" style="width:auto;padding:.7rem 1.1rem">← Voltar</button>
+        <button id="entrar" type="submit" class="btn btn-primary flex-1">Entrar</button>
+      </div>
+    </div>
+
+    <div class="lp-role-nav">
+      <p class="lp-role-nav-label">Acessar como outro perfil</p>
+      <div class="lp-role-links">
+        <a href="login_gestor.html" class="lp-role-link">👔 Gestor</a>
+        <a href="login_analista_dados.html" class="lp-role-link">📈 Analista</a>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    function togglePw(id, btn) {
+      const el = document.getElementById(id);
+      el.type = el.type === 'password' ? 'text' : 'password';
+      btn.textContent = el.type === 'password' ? '👁' : '🙈';
+    }
+  </script>
+  <script src="../js/funcionario_login.js"></script>
 </body>
 </html>

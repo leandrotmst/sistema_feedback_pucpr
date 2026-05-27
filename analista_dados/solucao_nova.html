@@ -1,33 +1,39 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nova Solução</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Nova Solução | Analista</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body class="flex items-center justify-center">
-    <div class="card card-md">
-        <h1 class="text-2xl font-bold text-center mb-6 text-primary">Propor Solução</h1>
-        <div class="space-y-4">
-            <div class="form-group">
-                <label for="titulo" class="form-label">Título da Solução</label>
-                <input type="text" id="titulo" name="titulo" class="form-input" required>
-            </div>
-            <div class="form-group">
-                <label for="equipe" class="form-label">Equipe Alvo</label>
-                <input type="text" id="equipe" name="equipe" class="form-input" placeholder="Ex: Vendas, TI ou Todas" required>
-            </div>
-            <div class="form-group">
-                <label for="descricao" class="form-label">Descrição</label>
-                <textarea id="descricao" name="descricao" class="form-input" rows="4" required></textarea>
-            </div>
-            <div class="flex space-x-4 mt-6">
-                <button type="button" onclick="window.location.href='solucao.html'" class="btn btn-secondary flex-1">Voltar</button>
-                <button type="button" id="enviar" class="btn btn-primary flex-1">Salvar Solução</button>
-            </div>
-        </div>
+  <div class="card card-md">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.75rem">
+      <div class="menu-icon menu-icon-t" style="flex-shrink:0">💡</div>
+      <div>
+        <h1 class="text-2xl font-bold text-primary">Propor Solução</h1>
+        <p class="text-muted" style="font-size:.8rem;margin-top:.15rem">Descreva a solução proposta para a equipe</p>
+      </div>
     </div>
-    <script src="../js/solucao_nova.js"></script>
+    <div class="space-y-4">
+      <div class="form-group">
+        <label for="titulo" class="form-label">Título da Solução</label>
+        <input type="text" id="titulo" name="titulo" class="form-input" placeholder="Ex: Workshop de gestão de tempo" required>
+      </div>
+      <div class="form-group">
+        <label for="equipe" class="form-label">Equipe Alvo</label>
+        <input type="text" id="equipe" name="equipe" class="form-input" placeholder="Ex: Vendas, TI ou Todas" required>
+      </div>
+      <div class="form-group">
+        <label for="descricao" class="form-label">Descrição</label>
+        <textarea id="descricao" name="descricao" class="form-input" rows="4" placeholder="Descreva detalhadamente a solução proposta..." required></textarea>
+      </div>
+      <div style="display:flex;gap:.6rem;margin-top:1.5rem">
+        <button type="button" onclick="window.location.href='solucao.html'" class="btn btn-secondary" style="width:auto;padding:.7rem 1.1rem">← Voltar</button>
+        <button type="button" id="enviar" class="btn btn-primary flex-1">Salvar Solução</button>
+      </div>
+    </div>
+  </div>
+  <script src="../js/solucao_nova.js"></script>
 </body>
 </html>

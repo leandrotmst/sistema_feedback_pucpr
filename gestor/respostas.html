@@ -1,28 +1,22 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento de Resposta | Gestor</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Relatório de Respostas | Gestor</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="card card-lg">
-            <div class="header-gerenciamento">
-                <h1 class="text-2xl font-bold text-primary">Respostas registradas</h1> 
-                <button type="button" onclick="window.location.href='index.html'" class="btn btn-secondary btn-auto">Voltar</button>
-            </div>
-            
-            <div class="table-container">
-                <div id="lista">
-                    <!-- Conteúdo gerado pelo JS -->
-                </div>
-            </div>
-        </div>
+  <div class="container">
+    <div class="card card-lg">
+      <div class="header-gerenciamento">
+        <h1>Respostas Registradas</h1>
+        <button type="button" onclick="window.location.href='index.html'" class="btn btn-secondary btn-auto">← Voltar</button>
+      </div>
+      <div class="table-container"><div id="lista"></div></div>
     </div>
-        
-    <script src="../js/respostas_gestor.js"></script>
-    <script src="../js/gestor_valida_sessao.js"></script>
+  </div>
+  <script src="../js/respostas_gestor.js"></script>
+  <script src="../js/gestor_valida_sessao.js"></script>
 </body>
 </html>

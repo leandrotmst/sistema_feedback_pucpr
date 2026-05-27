@@ -1,33 +1,26 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Respostas Registradas</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Minhas Respostas | AlignUp</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <div class="container">
-        <div class="card card-lg">
-            <div class="header-gerenciamento">
-                <h1 class="text-2xl font-bold text-primary">Respostas registradas</h1> 
-                <button id="novo" type="button" class="btn btn-primary btn-auto">+ Nova Resposta</button>
-            </div>
-            
-            <div class="table-container">
-                <div id="lista">
-                    <!-- Conteúdo gerado pelo JS -->
-                </div>
-            </div>
-        </div>
-
-        <div class="mt-6 flex justify-center space-x-4">
-            <button type="button" onclick="window.location.href='../funcionario/index.html'" class="btn btn-secondary btn-auto">Voltar</button>
-            <button onclick="logout()" class="btn btn-danger btn-auto">Sair</button>
-        </div>
+  <div class="container">
+    <div class="card card-lg">
+      <div class="header-gerenciamento">
+        <h1>Minhas Respostas</h1>
+        <button id="novo" type="button" class="btn btn-primary btn-auto">+ Nova Resposta</button>
+      </div>
+      <div class="table-container"><div id="lista"></div></div>
     </div>
-        
-    <script src="../js/respostas.js"></script>
-    <script src="../js/funcionario_valida_sessao.js"></script>
+    <div class="mt-6 flex justify-center" style="gap:.75rem">
+      <button type="button" onclick="window.location.href='../funcionario/index.html'" class="btn btn-secondary btn-auto">← Voltar</button>
+      <button onclick="logout()" class="btn btn-danger btn-auto">Sair</button>
+    </div>
+  </div>
+  <script src="../js/respostas.js"></script>
+  <script src="../js/funcionario_valida_sessao.js"></script>
 </body>
 </html>

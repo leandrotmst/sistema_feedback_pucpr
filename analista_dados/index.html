@@ -1,30 +1,37 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Gerenciamento de Respostas | Analista de Dados</title>
-    <link rel="stylesheet" href="../css/style.css">
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Dashboard Analista | AlignUp</title>
+  <link rel="stylesheet" href="../css/style.css">
 </head>
-<body class="flex items-center justify-center">
-    <div class="card card-sm">
-        <h1 class="text-2xl font-bold text-center mb-6 text-primary">Analista Dashboard</h1>
-        <div class="space-y-4">
-            <a href="analise_ia.html" class="block">
-                <button class="btn btn-primary" style="background: linear-gradient(135deg, var(--primary-color), #4a154b); border: none;">
-                    ✨ Painel de Inteligência (IA)
-                </button>
-            </a>
-            <a href="respostas.html" class="block">
-                <button class="btn btn-success">Respostas (Brutas)</button>
-            </a>
-            <a href="solucao.html" class="block">
-                <button class="btn btn-secondary">Soluções</button>
-            </a>
-            <button onclick="logout()" class="btn btn-danger mt-6">Sair</button>
-        </div>
+<body class="flex items-center justify-center p-4">
+  <div class="card card-sm">
+    <div style="text-align:center;margin-bottom:2rem">
+      <div style="width:56px;height:56px;border-radius:16px;background:linear-gradient(135deg,#131340,#6d28d9,#06b6d4);display:flex;align-items:center;justify-content:center;font-size:1.5rem;margin:0 auto .75rem">📈</div>
+      <h1 style="font-family:'Syne',sans-serif;font-size:1.35rem;font-weight:800;letter-spacing:-.04em;color:#131340">Analista Dashboard</h1>
+      <p class="text-muted" style="font-size:.82rem;margin-top:.3rem">Selecione uma área para continuar</p>
     </div>
-    
-    <script src="../js/analista_dados_valida_sessao.js"></script>
+    <div class="menu-list">
+      <a href="analise_ia.html" class="menu-item">
+        <div class="menu-icon menu-icon-p">🧠</div>
+        <span>Inteligência Artificial</span>
+        <span class="menu-arrow">›</span>
+      </a>
+      <a href="respostas.html" class="menu-item">
+        <div class="menu-icon menu-icon-c">📋</div>
+        <span>Relatório de Respostas</span>
+        <span class="menu-arrow">›</span>
+      </a>
+      <a href="solucao.html" class="menu-item">
+        <div class="menu-icon menu-icon-t">💡</div>
+        <span>Soluções Propostas</span>
+        <span class="menu-arrow">›</span>
+      </a>
+    </div>
+    <button onclick="logout()" class="btn btn-danger mt-6">Sair da Conta</button>
+  </div>
+  <script src="../js/analista_dados_valida_sessao.js"></script>
 </body>
 </html>

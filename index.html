@@ -1,32 +1,32 @@
+
 <!DOCTYPE html>
 <html lang="pt-BR">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Sistema de Feedback PUCPR</title>
-    <link rel="stylesheet" href="css/style.css">
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>AlignUp | Portal de Acesso</title>
+  <link rel="stylesheet" href="css/style.css">
 </head>
-<body class="flex items-center justify-center">
-    <div class="card card-sm">
-        <h1 class="text-2xl font-bold text-center mb-6 text-primary">Sistema de Feedback</h1>
-        <p class="text-center text-muted mb-6">Selecione seu perfil de acesso</p>
-        <div class="space-y-4">
-            <a href="login/login_gestor.html" class="block">
-                <button class="btn btn-primary">
-                    Acesso Gestor
-                </button>
-            </a>
-            <a href="login/login_funcionario.html" class="block">
-                <button class="btn btn-secondary">
-                    Acesso Funcionário
-                </button>
-            </a>
-            <a href="login/login_analista_dados.html" class="block">
-                <button class="btn btn-outline">
-                    Acesso Analista de Dados
-                </button>
-            </a>
-        </div>
+<body class="portal-page">
+  <div class="portal-wrap">
+    <div class="portal-logo"></div>
+    <h1 class="portal-title">Portal AlignUp</h1>
+    <p class="portal-sub">Selecione seu perfil de acesso para continuar</p>
+    <div class="portal-grid">
+      <a href="login/login_funcionario.html" class="portal-card">
+        <div class="portal-card-icon">👤</div>
+        <span class="portal-card-label">Funcionário</span>
+      </a>
+      <a href="login/login_gestor.html" class="portal-card">
+        <div class="portal-card-icon">👔</div>
+        <span class="portal-card-label">Gestor</span>
+      </a>
+      <a href="login/login_analista_dados.html" class="portal-card">
+        <div class="portal-card-icon">📈</div>
+        <span class="portal-card-label">Analista</span>
+      </a>
     </div>
+    <p class="portal-tagline">Pessoas alinhadas · Equipes mais fortes · Resultados que crescem</p>
+  </div>
 </body>
 </html>
