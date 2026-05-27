@@ -42,7 +42,6 @@ async function nova() {
     var nivelRadio = document.querySelector('input[name="nivel"]:checked');
     var texto = document.getElementById("texto").value;
     var semana = document.getElementById("semana")?.value || "";
-    var instagram = document.getElementById("instagram").value;
 
     if (!nivelRadio || !texto.trim() || !semana) {
         alert("Preencha todos os campos obrigatórios (humor, semana e resumo).");
@@ -55,7 +54,6 @@ async function nova() {
     fd.append("texto", texto);
     fd.append("semana", semana);
     fd.append("equipe", equipeLogado);
-    fd.append("instagram", instagram);
 
     const retorno = await fetch("../php/resposta_nova.php", {
         method: "POST",
