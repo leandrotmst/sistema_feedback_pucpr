@@ -27,17 +27,17 @@
 
     // Verifica dia da semana: 0=Dom, 1=Seg, 2=Ter, 3=Qua, 4=Qui, 5=Sex, 6=Sáb
     // $diaSemana = (int)date('w');
-    $diaSemana = 4; // DATA CHUMBADA PARA SIMULAR SEXTA-FEIRA
-    if (in_array($diaSemana, [1, 2, 3])) { 
-        $retorno = [
-            'status'   => 'nok',
-            'mensagem' => 'Fora do período permitido. O preenchimento só é liberado de quinta-feira a domingo.',
-            'data'     => []
-        ];
-        header("Content-type:application/json; charset=utf-8");
-        echo json_encode($retorno);
-        exit;
-    }
+    // $diaSemana = 4; // DATA CHUMBADA PARA SIMULAR SEXTA-FEIRA
+    // if (in_array($diaSemana, [1, 2, 3])) { 
+    //     $retorno = [
+    //         'status'   => 'nok',
+    //         'mensagem' => 'Fora do período permitido. O preenchimento só é liberado de quinta-feira a domingo.',
+    //         'data'     => []
+    //     ];
+    //     header("Content-type:application/json; charset=utf-8");
+    //     echo json_encode($retorno);
+    //     exit;
+    // }
 
     // Validação: verificar se id_funcionario foi armazenado na sessão
     if (!isset($funcionarioId) || is_null($funcionarioId)) {
