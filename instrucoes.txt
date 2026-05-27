@@ -1,0 +1,13 @@
+Instrucoes para enviar resposta fora do dia permitido
+
+arquivo resposta_nova.js, linha 7:
+const day = 4;
+
+arquivo resposta_alterar.js, linha 3:
+const day = 4;
+
+arquivo resposta_nova.php, linha 29:
+$diaSemana = 4;
+
+arquivo resposta_alterar.php, linha 26:
+$diaSemana = 4;
