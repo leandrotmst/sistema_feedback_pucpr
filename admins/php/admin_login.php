@@ -25,6 +25,10 @@
 
         session_start();
         $_SESSION['admin']=$tabela;   
+        // armazenar id do admin para validação de sessão
+        if(isset($tabela[0]['id'])){
+            $_SESSION['admin_id'] = $tabela[0]['id'];
+        }
 
         $retorno = [
             'status'   => 'ok', // ok - nok

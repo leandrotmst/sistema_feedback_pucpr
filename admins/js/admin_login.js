@@ -1,4 +1,5 @@
-document.getElementById("login").addEventListener("click", () => {
+document.getElementById("login").addEventListener("click", (e) => {
+    e.preventDefault();
     login_admin();
 });
 
