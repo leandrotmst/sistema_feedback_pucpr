@@ -35,6 +35,7 @@ function preencherTabela(tabela){
                 <tr>
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">E-mail</th>
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Equipe</th>
+                    <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Pontuação</th>
                     <th class="px-6 py-3 border-b border-gray-300 font-semibold text-gray-900">Ações</th>
                 </tr>
             </thead>
@@ -46,9 +47,10 @@ function preencherTabela(tabela){
             <tr class="border-b border-gray-200 hover:bg-gray-50">
                 <td class="px-6 py-4 text-gray-900">${tabela[i].email}</td>
                 <td class="px-6 py-4 text-gray-900">${tabela[i].equipe}</td>
+                <td class="px-6 py-4 text-gray-900">${tabela[i].pontuacao ?? 0}</td>
                 <td class="px-6 py-4 flex gap-2">
-                    <button onclick="window.location.href='../funcionario/funcionario_alterar.html?id=${tabela[i].id}'" class='btn btn-secondary'">Alterar</button>
-                    <button onclick="excluir(${tabela[i].id})" class='btn btn-danger' ">Excluir</button>
+                    <button onclick="window.location.href='../funcionario/funcionario_alterar.html?id=${tabela[i].id}'" class="btn btn-secondary">Alterar</button>
+                    <button onclick="excluir(${tabela[i].id})" class="btn btn-danger">Excluir</button>
                 </td>
             </tr>
         `;

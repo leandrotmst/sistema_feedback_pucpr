@@ -28,7 +28,7 @@
         $stmt->bind_param("ii",$_GET['id'], $gestorId);
     }else{
         // Primeira situação - SEM RECEBER O ID por GET
-        $stmt = $conexao->prepare("SELECT * FROM funcionarios WHERE gestor_id=?");
+        $stmt = $conexao->prepare("SELECT * FROM funcionarios WHERE gestor_id=? ORDER BY pontuacao DESC, criado_em DESC");
         $stmt->bind_param("i", $gestorId);
     }    
     

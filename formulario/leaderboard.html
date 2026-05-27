@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="pt-BR">
+<head>
+  <meta charset="UTF-8"><meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Leaderboard | AlignUp</title>
+  <link rel="stylesheet" href="../css/style.css">
+</head>
+<body class="flex items-center justify-center p-4">
+  <div class="card card-md" style="max-width:900px; width:100%;">
+    <div style="display:flex;align-items:center;gap:.75rem;margin-bottom:1.25rem">
+      <div class="menu-icon menu-icon-f" style="flex-shrink:0">🔥</div>
+      <div>
+        <h1 class="text-2xl font-bold text-primary">Leaderboard</h1>
+        <p class="text-muted" style="font-size:.88rem;margin-top:.3rem">Veja quem está respondendo semanalmente e subindo no ranking.</p>
+      </div>
+    </div>
+
+    <div style="margin-bottom:1rem;color:#334155;font-size:1rem;line-height:1.6;">
+      Responda o formulário semanalmente para ganhar pontos. As três primeiras posições recebem mais destaque na turma.
+    </div>
+
+    <div id="leaderboard"></div>
+
+    <div style="display:flex;justify-between;gap:.75rem;margin-top:1.5rem;flex-wrap:wrap;">
+      <button onclick="window.history.back()" class="btn btn-secondary btn-auto">← Voltar</button>
+      <button onclick="window.location.href='../index.html'" class="btn btn-primary btn-auto">Ir para o portal</button>
+    </div>
+  </div>
+  <script src="../js/leaderboard.js"></script>
+</body>
+</html>

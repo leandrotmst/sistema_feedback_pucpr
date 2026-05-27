@@ -26,7 +26,8 @@
     $funcionarioId = $_SESSION['id_funcionario'];
 
     // Verifica dia da semana: 0=Dom, 1=Seg, 2=Ter, 3=Qua, 4=Qui, 5=Sex, 6=Sáb
-    $diaSemana = (int)date('w');
+    // $diaSemana = (int)date('w');
+    $diaSemana = 4; // DATA CHUMBADA PARA SIMULAR SEXTA-FEIRA
     if (in_array($diaSemana, [1, 2, 3])) { 
         $retorno = [
             'status'   => 'nok',
@@ -80,9 +81,14 @@
             'data'     => []
         ];
     } else if($stmt->affected_rows > 0){
+        $stmtUpdate = $conexao->prepare("UPDATE funcionarios SET pontuacao = pontuacao + 1 WHERE id = ?");
+        $stmtUpdate->bind_param("i", $funcionarioId);
+        $stmtUpdate->execute();
+        $stmtUpdate->close();
+
         $retorno = [
             'status'   => 'ok',
-            'mensagem' => 'Registro inserido com sucesso',
+            'mensagem' => 'Registro inserido com sucesso. Você ganhou 1 ponto!',
             'data'     => []
         ];
     }else{

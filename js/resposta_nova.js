@@ -3,7 +3,8 @@ var equipeLogado = "";
 
 // 1. Ao carregar a página, identifica quem é o funcionário logado
 window.onload = function() {
-    const day = new Date().getDay();
+    // const day = new Date().getDay();
+    const day = 4; // DATA CHUMBADA PARA SIMULAR SEXTA-FEIRA
     if (day >= 1 && day <= 3) {
         alert("Fora do prazo! O formulário só pode ser preenchido de quinta-feira a domingo.");
         window.location.href = "respostas.html";

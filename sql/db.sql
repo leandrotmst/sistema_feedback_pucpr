@@ -26,9 +26,11 @@ CREATE TABLE IF NOT EXISTS funcionarios (
     senha VARCHAR(255) NOT NULL,
     equipe VARCHAR(255) NOT NULL,
     gestor_id INT UNSIGNED NOT NULL,
+    pontuacao INT UNSIGNED NOT NULL DEFAULT 0,
     criado_em TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     PRIMARY KEY (id),
     UNIQUE KEY uk_funcionarios_email (email),
+    KEY idx_funcionarios_pontuacao (pontuacao),
     CONSTRAINT fk_funcionarios_gestor FOREIGN KEY (gestor_id) REFERENCES gestor(id) ON DELETE CASCADE
 );
 
