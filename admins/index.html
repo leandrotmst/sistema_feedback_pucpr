@@ -3,22 +3,36 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Login Administrador | AlignUp</title>
+    <link rel="stylesheet" href="../css/style.css">
 </head>
 <body>
-    <div>
-        <div>
-            <label for="usuario">Usuário</label>
-            <input type="text" name="usuario" id="usuario">
+    <div class="lp-right">
+        <div class="lp-role-badge role-gestor">
+            <span class="lp-role-dot"></span> Área do Administrador
         </div>
-        <div>
-            <label for="senha">Senha</label>
-            <input type="password" name="senha" id="senha">
+        <h2 class="lp-form-title">Acesso de Administrador</h2>
+        <p class="lp-form-sub">Gerencie gestores</p>
+
+        <div class="lp-form-card">
+            <div class="form-group" style="margin-bottom:.9rem">
+                <label for="usuario" class="form-label">E-mail</label>
+                <input type="email" id="usuario" name="email" required class="form-input" placeholder="admin@email.com" autocomplete="email">
+            </div>
+            <div class="form-group" style="margin-bottom:1.25rem">
+                <label for="senha" class="form-label">Senha</label>
+            <div class="pw-wrap">
+                <input type="password" id="senha" name="senha" required class="form-input" placeholder="••••••••" autocomplete="current-password">
+                <button type="button" class="btn-eye" onclick="togglePw('senha',this)" tabindex="-1">👁</button>
+            </div>
         </div>
-        <div>
-            <button id="login" type="submit">Login</button>
+            <div style="display:flex;gap:.6rem">
+                <button id="login" type="submit" class="btn btn-primary flex-1">Entrar</button>
+            </div>
         </div>
     </div>
+    <script src="js/admin_login.js"></script>
 </body>
-<script src="js/admin_login.js"></script>
+
+
 </html>
