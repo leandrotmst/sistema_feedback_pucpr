@@ -33,13 +33,13 @@ ${MENSAGEM_ALTERADO_SUCESSO}     Registro alterado com sucesso!
 ${MENSAGEM_EMAIL_CADASTRADO}     Este e-mail já está cadastrado no sistema
 
 *** Keywords ***
-*** Keywords ***
 Preparar o banco de dados
-    ${resultado}=    Run Process    ${MYSQL}    --socket=${SOCKET}    -u    root    -e    source ${MASSA}    stderr=STDOUT
+    @{args}=    Create List    --socket=${SOCKET}    -u    root    -e    source ${MASSA}
+    ${resultado}=    Run Process    ${MYSQL}    @{args}    stderr=STDOUT
     Log    ${resultado.stdout}
-    Should Be Equal As Integers    ${resultado.rc}    0    msg=Erro ao importar banco: ${resultado.stdout}
+    Should Be Equal As Integers    ${resultado.rc}    0    msg=Erro ao importar o banco: ${resultado.stdout}
     Connect To Database    pymysql    db_name=projeto    db_user=root    db_password=${EMPTY}    db_host=localhost    unix_socket=${SOCKET}
-
+    
 Encerrar o teste
     Run Keyword And Ignore Error    Close Browser
     Disconnect From Database

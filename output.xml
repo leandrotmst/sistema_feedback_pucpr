@@ -1,10 +1,10 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<robot generator="Robot 7.5 (Python 3.14.5 on darwin)" generated="2026-10-25T23:13:52.446012" rpa="false" schemaversion="5">
+<robot generator="Robot 7.5 (Python 3.14.5 on darwin)" generated="2026-10-25T23:23:55.851538" rpa="false" schemaversion="5">
 <suite id="s1" name="Leandro Testes" source="/Applications/XAMPP/xamppfiles/htdocs/sistema_feedback_pucpr/testes/robot/leandro_testes.robot">
 <test id="s1-t1" name="CT17 - Ver lista de gestores sem estar logado" line="8">
 <kw name="Preparar o banco de dados" owner="leandro_resources" type="SETUP">
 <kw name="Run Process" owner="Process">
-<msg time="2026-10-25T23:13:52.661891" level="FAIL">Keyword 'Process.Run Process' got positional argument after named arguments.</msg>
+<msg time="2026-10-25T23:23:56.036927" level="FAIL">Keyword 'Process.Run Process' got positional argument after named arguments.</msg>
 <var>${resultado}</var>
 <arg>${MYSQL}</arg>
 <arg>--socket=${SOCKET}</arg>
@@ -14,19 +14,19 @@
 <arg>source ${MASSA}</arg>
 <arg>stderr=STDOUT</arg>
 <doc>Runs a process and waits for it to complete.</doc>
-<status status="FAIL" start="2026-10-25T23:13:52.661772" elapsed="0.000144">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
+<status status="FAIL" start="2026-10-25T23:23:56.036826" elapsed="0.000123">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </kw>
 <kw name="Log" owner="BuiltIn">
 <arg>${resultado.stdout}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.662026" elapsed="0.000013"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.037045" elapsed="0.000012"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${resultado.rc}</arg>
 <arg>0</arg>
-<arg>msg=Erro ao importar banco: ${resultado.stdout}</arg>
+<arg>msg=Erro ao importar o banco: ${resultado.stdout}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.662092" elapsed="0.000010"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.037101" elapsed="0.000009"/>
 </kw>
 <kw name="Connect To Database" owner="DatabaseLibrary">
 <arg>pymysql</arg>
@@ -38,42 +38,42 @@
 <doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
 Along with listed commonly used arguments (`db_name`, `db_host` etc.)
 you can set any other DB module specific parameters as key/value pairs.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.662169" elapsed="0.000142"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.037166" elapsed="0.000109"/>
 </kw>
-<status status="FAIL" start="2026-10-25T23:13:52.661395" elapsed="0.000972">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
+<status status="FAIL" start="2026-10-25T23:23:56.036483" elapsed="0.000839">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </kw>
 <kw name="Encerrar o teste" owner="leandro_resources" type="TEARDOWN">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.662746" elapsed="0.000055"/>
+<status status="PASS" start="2026-10-25T23:23:56.037679" elapsed="0.000042"/>
 </kw>
 <arg>Close Browser</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.662599" elapsed="0.000228"/>
+<status status="PASS" start="2026-10-25T23:23:56.037546" elapsed="0.000196"/>
 </kw>
 <kw name="Disconnect From Database" owner="DatabaseLibrary">
-<msg time="2026-10-25T23:13:52.662908" level="INFO">No open database connection to close</msg>
+<msg time="2026-10-25T23:23:56.037809" level="INFO">No open database connection to close</msg>
 <doc>Disconnects from the database.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.662867" elapsed="0.000062"/>
+<status status="PASS" start="2026-10-25T23:23:56.037776" elapsed="0.000051"/>
 </kw>
 <kw name="Delete All Sessions" owner="RequestsLibrary">
-<msg time="2026-10-25T23:13:52.662995" level="INFO">Deleting All Sessions</msg>
+<msg time="2026-10-25T23:23:56.037891" level="INFO">Deleting All Sessions</msg>
 <doc>Removes all the session objects </doc>
-<status status="PASS" start="2026-10-25T23:13:52.662965" elapsed="0.000050"/>
+<status status="PASS" start="2026-10-25T23:23:56.037857" elapsed="0.000053"/>
 </kw>
-<status status="PASS" start="2026-10-25T23:13:52.662489" elapsed="0.000549"/>
+<status status="PASS" start="2026-10-25T23:23:56.037438" elapsed="0.000495"/>
 </kw>
 <doc>Acessar a lista de gestores sem login não deve mostrar dados de gestores.</doc>
 <tag>CT17</tag>
 <tag>leandro</tag>
-<status status="FAIL" start="2026-10-25T23:13:52.660980" elapsed="0.002088">Setup failed:
+<status status="FAIL" start="2026-10-25T23:23:56.036091" elapsed="0.001870">Setup failed:
 Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </test>
 <test id="s1-t2" name="CT19 - Cadastrar gestor com e-mail repetido" line="14">
 <kw name="Preparar o banco de dados" owner="leandro_resources" type="SETUP">
 <kw name="Run Process" owner="Process">
-<msg time="2026-10-25T23:13:52.663543" level="FAIL">Keyword 'Process.Run Process' got positional argument after named arguments.</msg>
+<msg time="2026-10-25T23:23:56.038531" level="FAIL">Keyword 'Process.Run Process' got positional argument after named arguments.</msg>
 <var>${resultado}</var>
 <arg>${MYSQL}</arg>
 <arg>--socket=${SOCKET}</arg>
@@ -83,19 +83,19 @@ Keyword 'Process.Run Process' got positional argument after named arguments.</st
 <arg>source ${MASSA}</arg>
 <arg>stderr=STDOUT</arg>
 <doc>Runs a process and waits for it to complete.</doc>
-<status status="FAIL" start="2026-10-25T23:13:52.663462" elapsed="0.000096">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
+<status status="FAIL" start="2026-10-25T23:23:56.038444" elapsed="0.000104">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </kw>
 <kw name="Log" owner="BuiltIn">
 <arg>${resultado.stdout}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.663638" elapsed="0.000010"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.038634" elapsed="0.000011"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${resultado.rc}</arg>
 <arg>0</arg>
-<arg>msg=Erro ao importar banco: ${resultado.stdout}</arg>
+<arg>msg=Erro ao importar o banco: ${resultado.stdout}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.663691" elapsed="0.000009"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.038691" elapsed="0.000010"/>
 </kw>
 <kw name="Connect To Database" owner="DatabaseLibrary">
 <arg>pymysql</arg>
@@ -107,42 +107,42 @@ Keyword 'Process.Run Process' got positional argument after named arguments.</st
 <doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
 Along with listed commonly used arguments (`db_name`, `db_host` etc.)
 you can set any other DB module specific parameters as key/value pairs.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.663759" elapsed="0.000009"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.038758" elapsed="0.000008"/>
 </kw>
-<status status="FAIL" start="2026-10-25T23:13:52.663355" elapsed="0.000452">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
+<status status="FAIL" start="2026-10-25T23:23:56.038328" elapsed="0.000474">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </kw>
 <kw name="Encerrar o teste" owner="leandro_resources" type="TEARDOWN">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.664097" elapsed="0.000042"/>
+<status status="PASS" start="2026-10-25T23:23:56.039109" elapsed="0.000045"/>
 </kw>
 <arg>Close Browser</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.663986" elapsed="0.000174"/>
+<status status="PASS" start="2026-10-25T23:23:56.038998" elapsed="0.000175"/>
 </kw>
 <kw name="Disconnect From Database" owner="DatabaseLibrary">
-<msg time="2026-10-25T23:13:52.664229" level="INFO">No open database connection to close</msg>
+<msg time="2026-10-25T23:23:56.039236" level="INFO">No open database connection to close</msg>
 <doc>Disconnects from the database.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.664200" elapsed="0.000046"/>
+<status status="PASS" start="2026-10-25T23:23:56.039209" elapsed="0.000042"/>
 </kw>
 <kw name="Delete All Sessions" owner="RequestsLibrary">
-<msg time="2026-10-25T23:13:52.664300" level="INFO">Deleting All Sessions</msg>
+<msg time="2026-10-25T23:23:56.039303" level="INFO">Deleting All Sessions</msg>
 <doc>Removes all the session objects </doc>
-<status status="PASS" start="2026-10-25T23:13:52.664277" elapsed="0.000040"/>
+<status status="PASS" start="2026-10-25T23:23:56.039281" elapsed="0.000037"/>
 </kw>
-<status status="PASS" start="2026-10-25T23:13:52.663893" elapsed="0.000443"/>
+<status status="PASS" start="2026-10-25T23:23:56.038900" elapsed="0.000435"/>
 </kw>
 <doc>Cadastrar gestor com e-mail já existente deve ser recusado pelo sistema.</doc>
 <tag>CT19</tag>
 <tag>leandro</tag>
-<status status="FAIL" start="2026-10-25T23:13:52.663179" elapsed="0.001181">Setup failed:
+<status status="FAIL" start="2026-10-25T23:23:56.038131" elapsed="0.001230">Setup failed:
 Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </test>
 <test id="s1-t3" name="CT20 - Alterar gestor sem trocar a senha" line="22">
 <kw name="Preparar o banco de dados" owner="leandro_resources" type="SETUP">
 <kw name="Run Process" owner="Process">
-<msg time="2026-10-25T23:13:52.664769" level="FAIL">Keyword 'Process.Run Process' got positional argument after named arguments.</msg>
+<msg time="2026-10-25T23:23:56.039783" level="FAIL">Keyword 'Process.Run Process' got positional argument after named arguments.</msg>
 <var>${resultado}</var>
 <arg>${MYSQL}</arg>
 <arg>--socket=${SOCKET}</arg>
@@ -152,19 +152,19 @@ Keyword 'Process.Run Process' got positional argument after named arguments.</st
 <arg>source ${MASSA}</arg>
 <arg>stderr=STDOUT</arg>
 <doc>Runs a process and waits for it to complete.</doc>
-<status status="FAIL" start="2026-10-25T23:13:52.664702" elapsed="0.000081">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
+<status status="FAIL" start="2026-10-25T23:23:56.039716" elapsed="0.000082">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </kw>
 <kw name="Log" owner="BuiltIn">
 <arg>${resultado.stdout}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.664861" elapsed="0.000010"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.039876" elapsed="0.000010"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${resultado.rc}</arg>
 <arg>0</arg>
-<arg>msg=Erro ao importar banco: ${resultado.stdout}</arg>
+<arg>msg=Erro ao importar o banco: ${resultado.stdout}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.664913" elapsed="0.000009"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.039924" elapsed="0.000008"/>
 </kw>
 <kw name="Connect To Database" owner="DatabaseLibrary">
 <arg>pymysql</arg>
@@ -176,42 +176,42 @@ Keyword 'Process.Run Process' got positional argument after named arguments.</st
 <doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
 Along with listed commonly used arguments (`db_name`, `db_host` etc.)
 you can set any other DB module specific parameters as key/value pairs.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.664992" elapsed="0.000010"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.039994" elapsed="0.000007"/>
 </kw>
-<status status="FAIL" start="2026-10-25T23:13:52.664604" elapsed="0.000433">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
+<status status="FAIL" start="2026-10-25T23:23:56.039615" elapsed="0.000419">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </kw>
 <kw name="Encerrar o teste" owner="leandro_resources" type="TEARDOWN">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.665309" elapsed="0.000035"/>
+<status status="PASS" start="2026-10-25T23:23:56.040315" elapsed="0.000036"/>
 </kw>
 <arg>Close Browser</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.665209" elapsed="0.000155"/>
+<status status="PASS" start="2026-10-25T23:23:56.040218" elapsed="0.000153"/>
 </kw>
 <kw name="Disconnect From Database" owner="DatabaseLibrary">
-<msg time="2026-10-25T23:13:52.665428" level="INFO">No open database connection to close</msg>
+<msg time="2026-10-25T23:23:56.040430" level="INFO">No open database connection to close</msg>
 <doc>Disconnects from the database.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.665401" elapsed="0.000043"/>
+<status status="PASS" start="2026-10-25T23:23:56.040406" elapsed="0.000038"/>
 </kw>
 <kw name="Delete All Sessions" owner="RequestsLibrary">
-<msg time="2026-10-25T23:13:52.665498" level="INFO">Deleting All Sessions</msg>
+<msg time="2026-10-25T23:23:56.040493" level="INFO">Deleting All Sessions</msg>
 <doc>Removes all the session objects </doc>
-<status status="PASS" start="2026-10-25T23:13:52.665475" elapsed="0.000038"/>
+<status status="PASS" start="2026-10-25T23:23:56.040472" elapsed="0.000035"/>
 </kw>
-<status status="PASS" start="2026-10-25T23:13:52.665116" elapsed="0.000416"/>
+<status status="PASS" start="2026-10-25T23:23:56.040122" elapsed="0.000402"/>
 </kw>
 <doc>Alterar apenas o e-mail do gestor 1 deixando a nova senha em branco.</doc>
 <tag>CT20</tag>
 <tag>leandro</tag>
-<status status="FAIL" start="2026-10-25T23:13:52.664453" elapsed="0.001102">Setup failed:
+<status status="FAIL" start="2026-10-25T23:23:56.039463" elapsed="0.001086">Setup failed:
 Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </test>
 <test id="s1-t4" name="CT21 - Cadastrar analista de dados" line="31">
 <kw name="Preparar o banco de dados" owner="leandro_resources" type="SETUP">
 <kw name="Run Process" owner="Process">
-<msg time="2026-10-25T23:13:52.666071" level="FAIL">Keyword 'Process.Run Process' got positional argument after named arguments.</msg>
+<msg time="2026-10-25T23:23:56.040938" level="FAIL">Keyword 'Process.Run Process' got positional argument after named arguments.</msg>
 <var>${resultado}</var>
 <arg>${MYSQL}</arg>
 <arg>--socket=${SOCKET}</arg>
@@ -221,19 +221,19 @@ Keyword 'Process.Run Process' got positional argument after named arguments.</st
 <arg>source ${MASSA}</arg>
 <arg>stderr=STDOUT</arg>
 <doc>Runs a process and waits for it to complete.</doc>
-<status status="FAIL" start="2026-10-25T23:13:52.666005" elapsed="0.000081">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
+<status status="FAIL" start="2026-10-25T23:23:56.040874" elapsed="0.000080">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </kw>
 <kw name="Log" owner="BuiltIn">
 <arg>${resultado.stdout}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.666163" elapsed="0.000035"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.041030" elapsed="0.000009"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${resultado.rc}</arg>
 <arg>0</arg>
-<arg>msg=Erro ao importar banco: ${resultado.stdout}</arg>
+<arg>msg=Erro ao importar o banco: ${resultado.stdout}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.666354" elapsed="0.000038"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.041083" elapsed="0.000008"/>
 </kw>
 <kw name="Connect To Database" owner="DatabaseLibrary">
 <arg>pymysql</arg>
@@ -245,42 +245,42 @@ Keyword 'Process.Run Process' got positional argument after named arguments.</st
 <doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
 Along with listed commonly used arguments (`db_name`, `db_host` etc.)
 you can set any other DB module specific parameters as key/value pairs.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.666485" elapsed="0.000013"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.041152" elapsed="0.000008"/>
 </kw>
-<status status="FAIL" start="2026-10-25T23:13:52.665906" elapsed="0.000640">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
+<status status="FAIL" start="2026-10-25T23:23:56.040777" elapsed="0.000416">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </kw>
 <kw name="Encerrar o teste" owner="leandro_resources" type="TEARDOWN">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.666985" elapsed="0.000048"/>
+<status status="PASS" start="2026-10-25T23:23:56.041473" elapsed="0.000036"/>
 </kw>
 <arg>Close Browser</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.666851" elapsed="0.000206"/>
+<status status="PASS" start="2026-10-25T23:23:56.041367" elapsed="0.000162"/>
 </kw>
 <kw name="Disconnect From Database" owner="DatabaseLibrary">
-<msg time="2026-10-25T23:13:52.667127" level="INFO">No open database connection to close</msg>
+<msg time="2026-10-25T23:23:56.041587" level="INFO">No open database connection to close</msg>
 <doc>Disconnects from the database.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.667096" elapsed="0.000048"/>
+<status status="PASS" start="2026-10-25T23:23:56.041564" elapsed="0.000037"/>
 </kw>
 <kw name="Delete All Sessions" owner="RequestsLibrary">
-<msg time="2026-10-25T23:13:52.667199" level="INFO">Deleting All Sessions</msg>
+<msg time="2026-10-25T23:23:56.041650" level="INFO">Deleting All Sessions</msg>
 <doc>Removes all the session objects </doc>
-<status status="PASS" start="2026-10-25T23:13:52.667175" elapsed="0.000040"/>
+<status status="PASS" start="2026-10-25T23:23:56.041629" elapsed="0.000035"/>
 </kw>
-<status status="PASS" start="2026-10-25T23:13:52.666733" elapsed="0.000501"/>
+<status status="PASS" start="2026-10-25T23:23:56.041277" elapsed="0.000404"/>
 </kw>
 <doc>Gestor 2 cadastra um novo analista de dados válido.</doc>
 <tag>CT21</tag>
 <tag>leandro</tag>
-<status status="FAIL" start="2026-10-25T23:13:52.665637" elapsed="0.001626">Setup failed:
+<status status="FAIL" start="2026-10-25T23:23:56.040637" elapsed="0.001064">Setup failed:
 Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </test>
 <test id="s1-t5" name="CT22 - Cadastrar analista com e-mail repetido" line="39">
 <kw name="Preparar o banco de dados" owner="leandro_resources" type="SETUP">
 <kw name="Run Process" owner="Process">
-<msg time="2026-10-25T23:13:52.667717" level="FAIL">Keyword 'Process.Run Process' got positional argument after named arguments.</msg>
+<msg time="2026-10-25T23:23:56.042104" level="FAIL">Keyword 'Process.Run Process' got positional argument after named arguments.</msg>
 <var>${resultado}</var>
 <arg>${MYSQL}</arg>
 <arg>--socket=${SOCKET}</arg>
@@ -290,19 +290,19 @@ Keyword 'Process.Run Process' got positional argument after named arguments.</st
 <arg>source ${MASSA}</arg>
 <arg>stderr=STDOUT</arg>
 <doc>Runs a process and waits for it to complete.</doc>
-<status status="FAIL" start="2026-10-25T23:13:52.667643" elapsed="0.000089">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
+<status status="FAIL" start="2026-10-25T23:23:56.042042" elapsed="0.000076">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </kw>
 <kw name="Log" owner="BuiltIn">
 <arg>${resultado.stdout}</arg>
 <doc>Logs the given message with the given level.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.667811" elapsed="0.000010"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.042196" elapsed="0.000010"/>
 </kw>
 <kw name="Should Be Equal As Integers" owner="BuiltIn">
 <arg>${resultado.rc}</arg>
 <arg>0</arg>
-<arg>msg=Erro ao importar banco: ${resultado.stdout}</arg>
+<arg>msg=Erro ao importar o banco: ${resultado.stdout}</arg>
 <doc>Fails if objects are unequal after converting them to integers.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.667863" elapsed="0.000008"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.042244" elapsed="0.000007"/>
 </kw>
 <kw name="Connect To Database" owner="DatabaseLibrary">
 <arg>pymysql</arg>
@@ -314,40 +314,40 @@ Keyword 'Process.Run Process' got positional argument after named arguments.</st
 <doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
 Along with listed commonly used arguments (`db_name`, `db_host` etc.)
 you can set any other DB module specific parameters as key/value pairs.</doc>
-<status status="NOT RUN" start="2026-10-25T23:13:52.667930" elapsed="0.000010"/>
+<status status="NOT RUN" start="2026-10-25T23:23:56.042303" elapsed="0.000007"/>
 </kw>
-<status status="FAIL" start="2026-10-25T23:13:52.667533" elapsed="0.000443">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
+<status status="FAIL" start="2026-10-25T23:23:56.041942" elapsed="0.000397">Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </kw>
 <kw name="Encerrar o teste" owner="leandro_resources" type="TEARDOWN">
 <kw name="Run Keyword And Ignore Error" owner="BuiltIn">
 <kw name="Close Browser" owner="SeleniumLibrary">
 <doc>Closes the current browser.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.668255" elapsed="0.000037"/>
+<status status="PASS" start="2026-10-25T23:23:56.042591" elapsed="0.000031"/>
 </kw>
 <arg>Close Browser</arg>
 <doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.668153" elapsed="0.000159"/>
+<status status="PASS" start="2026-10-25T23:23:56.042507" elapsed="0.000133"/>
 </kw>
 <kw name="Disconnect From Database" owner="DatabaseLibrary">
-<msg time="2026-10-25T23:13:52.668386" level="INFO">No open database connection to close</msg>
+<msg time="2026-10-25T23:23:56.042700" level="INFO">No open database connection to close</msg>
 <doc>Disconnects from the database.</doc>
-<status status="PASS" start="2026-10-25T23:13:52.668348" elapsed="0.000054"/>
+<status status="PASS" start="2026-10-25T23:23:56.042671" elapsed="0.000043"/>
 </kw>
 <kw name="Delete All Sessions" owner="RequestsLibrary">
-<msg time="2026-10-25T23:13:52.668455" level="INFO">Deleting All Sessions</msg>
+<msg time="2026-10-25T23:23:56.042763" level="INFO">Deleting All Sessions</msg>
 <doc>Removes all the session objects </doc>
-<status status="PASS" start="2026-10-25T23:13:52.668433" elapsed="0.000037"/>
+<status status="PASS" start="2026-10-25T23:23:56.042741" elapsed="0.000037"/>
 </kw>
-<status status="PASS" start="2026-10-25T23:13:52.668061" elapsed="0.000429"/>
+<status status="PASS" start="2026-10-25T23:23:56.042425" elapsed="0.000370"/>
 </kw>
 <doc>Cadastrar analista com e-mail já existente deve ser recusado com mensagem de erro.</doc>
 <tag>CT22</tag>
 <tag>leandro</tag>
-<status status="FAIL" start="2026-10-25T23:13:52.667363" elapsed="0.001150">Setup failed:
+<status status="FAIL" start="2026-10-25T23:23:56.041787" elapsed="0.001030">Setup failed:
 Keyword 'Process.Run Process' got positional argument after named arguments.</status>
 </test>
 <doc>Testes de gestores e analistas do AlignUp - Leandro.</doc>
-<status status="FAIL" start="2026-10-25T23:13:52.447148" elapsed="0.221546"/>
+<status status="FAIL" start="2026-10-25T23:23:55.852166" elapsed="0.190823"/>
 </suite>
 <statistics>
 <total>

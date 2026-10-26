@@ -1,0 +1,863 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<robot generator="Robot 7.5 (Python 3.14.5 on darwin)" generated="2026-10-25T23:26:10.055893" rpa="false" schemaversion="5">
+<suite id="s1" name="Leandro Testes" source="/Applications/XAMPP/xamppfiles/htdocs/sistema_feedback_pucpr/testes/robot/leandro_testes.robot">
+<test id="s1-t1" name="CT17 - Ver lista de gestores sem estar logado" line="8">
+<kw name="Preparar o banco de dados" owner="leandro_resources" type="SETUP">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-10-25T23:26:10.253840" level="INFO">@{args} = [ --socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock | -u | root | -e | source /Applications/XAMPP/xamppfiles/htdocs/sistema_feedback_pucpr/testes/robot/../massa_de_dados.sql ]</msg>
+<var>@{args}</var>
+<arg>--socket=${SOCKET}</arg>
+<arg>-u</arg>
+<arg>root</arg>
+<arg>-e</arg>
+<arg>source ${MASSA}</arg>
+<doc>Creates and returns a list containing the given items.</doc>
+<status status="PASS" start="2026-10-25T23:26:10.253633" elapsed="0.000227"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-25T23:26:10.254236" level="INFO">Starting process:
+/Applications/XAMPP/xamppfiles/bin/mysql --socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock -u root -e "source /Applications/XAMPP/xamppfiles/htdocs/sistema_feedback_pucpr/testes/robot/../massa_de_dados.sql"</msg>
+<msg time="2026-10-25T23:26:10.261774" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-25T23:26:11.163418" level="INFO">Process completed.</msg>
+<msg time="2026-10-25T23:26:11.163806" level="INFO">${resultado} = &lt;result object with rc 0&gt;</msg>
+<var>${resultado}</var>
+<arg>${MYSQL}</arg>
+<arg>@{args}</arg>
+<arg>stderr=STDOUT</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-25T23:26:10.253972" elapsed="0.909882"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-10-25T23:26:11.165233" level="INFO"/>
+<arg>${resultado.stdout}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-10-25T23:26:11.164322" elapsed="0.000945"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-10-25T23:26:11.165643" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resultado.rc}</arg>
+<arg>0</arg>
+<arg>msg=Erro ao importar o banco: ${resultado.stdout}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-10-25T23:26:11.165366" elapsed="0.000327"/>
+</kw>
+<kw name="Connect To Database" owner="DatabaseLibrary">
+<msg time="2026-10-25T23:26:11.166047" level="INFO">Looking for configuration file: 'resources/db.cfg'</msg>
+<msg time="2026-10-25T23:26:11.166086" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2026-10-25T23:26:11.175612" level="INFO">Connect to DB using : pymysql.connect(db='projeto', user='root', passwd=***, host='localhost', port=3306, charset='utf8mb4', unix_socket='/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock')</msg>
+<arg>pymysql</arg>
+<arg>db_name=projeto</arg>
+<arg>db_user=root</arg>
+<arg>db_password=${EMPTY}</arg>
+<arg>db_host=localhost</arg>
+<arg>unix_socket=${SOCKET}</arg>
+<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
+Along with listed commonly used arguments (`db_name`, `db_host` etc.)
+you can set any other DB module specific parameters as key/value pairs.</doc>
+<status status="PASS" start="2026-10-25T23:26:11.165818" elapsed="0.024457"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:10.253265" elapsed="0.937113"/>
+</kw>
+<kw name="Abrir a página de listagem de gestores sem login" owner="leandro_resources">
+<kw name="Open Browser" owner="SeleniumLibrary">
+<msg time="2026-10-25T23:26:11.191077" level="INFO">Opening browser 'chrome' to base url 'http://localhost/sistema_feedback_pucpr/admins/php/gestores/gestor_get.php'.</msg>
+<arg>url=${URL}/admins/php/gestores/gestor_get.php</arg>
+<arg>browser=${BROWSER}</arg>
+<doc>Opens a new browser instance to the optional ``url``.</doc>
+<status status="PASS" start="2026-10-25T23:26:11.190910" elapsed="5.112881"/>
+</kw>
+<kw name="Maximize Browser Window" owner="SeleniumLibrary">
+<doc>Maximizes current browser window.</doc>
+<status status="PASS" start="2026-10-25T23:26:16.304332" elapsed="1.122480"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:11.190622" elapsed="6.236458"/>
+</kw>
+<kw name="Verificar se nenhum dado de gestor aparece na tela" owner="leandro_resources">
+<kw name="Capture Page Screenshot" owner="SeleniumLibrary">
+<msg time="2026-10-25T23:26:17.786885" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-1.png"&gt;&lt;img src="selenium-screenshot-1.png" width="800px"&gt;&lt;/a&gt;</msg>
+<doc>Takes a screenshot of the current page and embeds it into a log file.</doc>
+<status status="PASS" start="2026-10-25T23:26:17.427842" elapsed="0.359106"/>
+</kw>
+<kw name="Page Should Not Contain" owner="SeleniumLibrary">
+<msg time="2026-10-25T23:26:17.994199" level="INFO" html="true">&lt;/td&gt;&lt;/tr&gt;&lt;tr&gt;&lt;td colspan="3"&gt;&lt;a href="selenium-screenshot-2.png"&gt;&lt;img src="selenium-screenshot-2.png" width="800px"&gt;&lt;/a&gt;</msg>
+<msg time="2026-10-25T23:26:17.994331" level="FAIL">Page should not have contained text 'gestor1@empresa.com'.</msg>
+<arg>${EMAIL_GESTOR_1}</arg>
+<doc>Verifies the current page does not contain ``text``.</doc>
+<status status="FAIL" start="2026-10-25T23:26:17.787053" elapsed="0.208761">Page should not have contained text 'gestor1@empresa.com'.</status>
+</kw>
+<kw name="Page Should Not Contain" owner="SeleniumLibrary">
+<arg>${SENHA_GESTOR_1}</arg>
+<doc>Verifies the current page does not contain ``text``.</doc>
+<status status="NOT RUN" start="2026-10-25T23:26:17.995919" elapsed="0.000017"/>
+</kw>
+<status status="FAIL" start="2026-10-25T23:26:17.427574" elapsed="0.568424">Page should not have contained text 'gestor1@empresa.com'.</status>
+</kw>
+<kw name="Encerrar o teste" owner="leandro_resources" type="TEARDOWN">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-10-25T23:26:17.996586" elapsed="0.072299"/>
+</kw>
+<arg>Close Browser</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
+<status status="PASS" start="2026-10-25T23:26:17.996325" elapsed="0.072632"/>
+</kw>
+<kw name="Disconnect From Database" owner="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.069064" elapsed="0.001185"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.070416" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects </doc>
+<status status="PASS" start="2026-10-25T23:26:18.070341" elapsed="0.000113"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:17.996186" elapsed="0.074304"/>
+</kw>
+<doc>Acessar a lista de gestores sem login não deve mostrar dados de gestores.</doc>
+<tag>CT17</tag>
+<tag>leandro</tag>
+<status status="FAIL" start="2026-10-25T23:26:10.252850" elapsed="7.817712">Page should not have contained text 'gestor1@empresa.com'.</status>
+</test>
+<test id="s1-t2" name="CT19 - Cadastrar gestor com e-mail repetido" line="14">
+<kw name="Preparar o banco de dados" owner="leandro_resources" type="SETUP">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.071350" level="INFO">@{args} = [ --socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock | -u | root | -e | source /Applications/XAMPP/xamppfiles/htdocs/sistema_feedback_pucpr/testes/robot/../massa_de_dados.sql ]</msg>
+<var>@{args}</var>
+<arg>--socket=${SOCKET}</arg>
+<arg>-u</arg>
+<arg>root</arg>
+<arg>-e</arg>
+<arg>source ${MASSA}</arg>
+<doc>Creates and returns a list containing the given items.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.071159" elapsed="0.000205"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-25T23:26:18.071692" level="INFO">Starting process:
+/Applications/XAMPP/xamppfiles/bin/mysql --socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock -u root -e "source /Applications/XAMPP/xamppfiles/htdocs/sistema_feedback_pucpr/testes/robot/../massa_de_dados.sql"</msg>
+<msg time="2026-10-25T23:26:18.075234" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-25T23:26:18.176570" level="INFO">Process completed.</msg>
+<msg time="2026-10-25T23:26:18.176779" level="INFO">${resultado} = &lt;result object with rc 0&gt;</msg>
+<var>${resultado}</var>
+<arg>${MYSQL}</arg>
+<arg>@{args}</arg>
+<arg>stderr=STDOUT</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.071439" elapsed="0.105362"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.177416" level="INFO"/>
+<arg>${resultado.stdout}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.177060" elapsed="0.000381"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.177712" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resultado.rc}</arg>
+<arg>0</arg>
+<arg>msg=Erro ao importar o banco: ${resultado.stdout}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.177515" elapsed="0.000229"/>
+</kw>
+<kw name="Connect To Database" owner="DatabaseLibrary">
+<msg time="2026-10-25T23:26:18.178003" level="INFO">Looking for configuration file: 'resources/db.cfg'</msg>
+<msg time="2026-10-25T23:26:18.178037" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2026-10-25T23:26:18.178179" level="INFO">Connect to DB using : pymysql.connect(db='projeto', user='root', passwd=***, host='localhost', port=3306, charset='utf8mb4', unix_socket='/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock')</msg>
+<arg>pymysql</arg>
+<arg>db_name=projeto</arg>
+<arg>db_user=root</arg>
+<arg>db_password=${EMPTY}</arg>
+<arg>db_host=localhost</arg>
+<arg>unix_socket=${SOCKET}</arg>
+<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
+Along with listed commonly used arguments (`db_name`, `db_host` etc.)
+you can set any other DB module specific parameters as key/value pairs.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.177840" elapsed="0.005679"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.071049" elapsed="0.112548"/>
+</kw>
+<kw name="Fazer login como administrador" owner="leandro_resources">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.184059" level="INFO">Creating Session using : alias=admin, url=http://localhost/sistema_feedback_pucpr, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>admin</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-10-25T23:26:18.183984" elapsed="0.000287"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.184676" level="INFO">${dados} = {'usuario': 'admin', 'senha': 'admin123'}</msg>
+<var>${dados}</var>
+<arg>usuario=${USUARIO_ADMIN}</arg>
+<arg>senha=${SENHA_ADMIN}</arg>
+<doc>Creates and returns a dictionary based on the given `items`.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.184360" elapsed="0.000330"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.212460" level="INFO">POST Request : url=http://localhost/sistema_feedback_pucpr/admins/php/admin_login.php 
+ path_url=/sistema_feedback_pucpr/admins/php/admin_login.php 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '28', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=usuario=admin&amp;senha=admin123 
+ </msg>
+<msg time="2026-10-25T23:26:18.212518" level="INFO">POST Response : url=http://localhost/sistema_feedback_pucpr/admins/php/admin_login.php 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 26 Oct 2026 02:26:18 GMT', 'Server': 'Apache/2.4.56 (Unix) OpenSSL/1.1.1t PHP/8.2.4 mod_perl/2.0.12 Perl/v5.34.1', 'X-Powered-By': 'PHP/8.2.4', 'Set-Cookie': 'PHPSESSID=jvvm9pva8qte62aj9e0h8jq9bc; path=/', 'Expires': 'Thu, 19 Nov 1981 08:52:00 GMT', 'Cache-Control': 'no-store, no-cache, must-revalidate', 'Pragma': 'no-cache', 'Content-Length': '143', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json;charset:utf-8'} 
+ body={"status":"ok","mensagem":"Sucesso consulta efetuada","data":[{"id":1,"usuario":"admin","senha":"admin123","criado_em":"2026-10-25 23:26:18"}]} 
+ </msg>
+<arg>admin</arg>
+<arg>/admins/php/admin_login.php</arg>
+<arg>data=${dados}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.184747" elapsed="0.027816"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.183790" elapsed="0.028822"/>
+</kw>
+<kw name="Cadastrar gestor com e-mail repetido" owner="leandro_resources">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.215435" level="INFO">${dados} = {'email': 'gestor1@empresa.com', 'senha': 'abc'}</msg>
+<var>${dados}</var>
+<arg>email=${EMAIL_GESTOR_1}</arg>
+<arg>senha=${SENHA_REPETIDO_GESTOR}</arg>
+<doc>Creates and returns a dictionary based on the given `items`.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.215178" elapsed="0.000276"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.225365" level="INFO">POST Request : url=http://localhost/sistema_feedback_pucpr/admins/php/gestores/gestor_novo.php 
+ path_url=/sistema_feedback_pucpr/admins/php/gestores/gestor_novo.php 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=jvvm9pva8qte62aj9e0h8jq9bc', 'Content-Length': '37', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=gestor1%40empresa.com&amp;senha=abc 
+ </msg>
+<msg time="2026-10-25T23:26:18.225413" level="INFO">POST Response : url=http://localhost/sistema_feedback_pucpr/admins/php/gestores/gestor_novo.php 
+ status=500, reason=Internal Server Error 
+ headers={'Date': 'Mon, 26 Oct 2026 02:26:18 GMT', 'Server': 'Apache/2.4.56 (Unix) OpenSSL/1.1.1t PHP/8.2.4 mod_perl/2.0.12 Perl/v5.34.1', 'X-Powered-By': 'PHP/8.2.4', 'Content-Length': '0', 'Connection': 'close', 'Content-Type': 'text/html; charset=UTF-8'} 
+ body=None 
+ </msg>
+<msg time="2026-10-25T23:26:18.225537" level="FAIL">HTTPError: 500 Server Error: Internal Server Error for url: http://localhost/sistema_feedback_pucpr/admins/php/gestores/gestor_novo.php</msg>
+<var>${RESPOSTA}</var>
+<arg>admin</arg>
+<arg>/admins/php/gestores/gestor_novo.php</arg>
+<arg>data=${dados}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="FAIL" start="2026-10-25T23:26:18.215525" elapsed="0.011428">HTTPError: 500 Server Error: Internal Server Error for url: http://localhost/sistema_feedback_pucpr/admins/php/gestores/gestor_novo.php</status>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<arg>${RESPOSTA}</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="NOT RUN" start="2026-10-25T23:26:18.227059" elapsed="0.000015"/>
+</kw>
+<status status="FAIL" start="2026-10-25T23:26:18.212749" elapsed="0.014383">HTTPError: 500 Server Error: Internal Server Error for url: http://localhost/sistema_feedback_pucpr/admins/php/gestores/gestor_novo.php</status>
+</kw>
+<kw name="Verificar se o sistema recusou" owner="leandro_resources">
+<status status="NOT RUN" start="2026-10-25T23:26:18.227239" elapsed="0.000017"/>
+</kw>
+<kw name="Verificar se o gestor repetido não foi cadastrado" owner="leandro_resources">
+<status status="NOT RUN" start="2026-10-25T23:26:18.227313" elapsed="0.000011"/>
+</kw>
+<kw name="Encerrar o teste" owner="leandro_resources" type="TEARDOWN">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.227728" elapsed="0.000075"/>
+</kw>
+<arg>Close Browser</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.227559" elapsed="0.000270"/>
+</kw>
+<kw name="Disconnect From Database" owner="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.227894" elapsed="0.000372"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.228333" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects </doc>
+<status status="PASS" start="2026-10-25T23:26:18.228304" elapsed="0.000058"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.227438" elapsed="0.000947"/>
+</kw>
+<doc>Cadastrar gestor com e-mail já existente deve ser recusado pelo sistema.</doc>
+<tag>CT19</tag>
+<tag>leandro</tag>
+<status status="FAIL" start="2026-10-25T23:26:18.070786" elapsed="0.157633">HTTPError: 500 Server Error: Internal Server Error for url: http://localhost/sistema_feedback_pucpr/admins/php/gestores/gestor_novo.php</status>
+</test>
+<test id="s1-t3" name="CT20 - Alterar gestor sem trocar a senha" line="22">
+<kw name="Preparar o banco de dados" owner="leandro_resources" type="SETUP">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.229007" level="INFO">@{args} = [ --socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock | -u | root | -e | source /Applications/XAMPP/xamppfiles/htdocs/sistema_feedback_pucpr/testes/robot/../massa_de_dados.sql ]</msg>
+<var>@{args}</var>
+<arg>--socket=${SOCKET}</arg>
+<arg>-u</arg>
+<arg>root</arg>
+<arg>-e</arg>
+<arg>source ${MASSA}</arg>
+<doc>Creates and returns a list containing the given items.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.228852" elapsed="0.000168"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-25T23:26:18.229276" level="INFO">Starting process:
+/Applications/XAMPP/xamppfiles/bin/mysql --socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock -u root -e "source /Applications/XAMPP/xamppfiles/htdocs/sistema_feedback_pucpr/testes/robot/../massa_de_dados.sql"</msg>
+<msg time="2026-10-25T23:26:18.232129" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-25T23:26:18.320038" level="INFO">Process completed.</msg>
+<msg time="2026-10-25T23:26:18.320292" level="INFO">${resultado} = &lt;result object with rc 0&gt;</msg>
+<var>${resultado}</var>
+<arg>${MYSQL}</arg>
+<arg>@{args}</arg>
+<arg>stderr=STDOUT</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.229088" elapsed="0.091231"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.321080" level="INFO"/>
+<arg>${resultado.stdout}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.320637" elapsed="0.000474"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.321444" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resultado.rc}</arg>
+<arg>0</arg>
+<arg>msg=Erro ao importar o banco: ${resultado.stdout}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.321206" elapsed="0.000278"/>
+</kw>
+<kw name="Connect To Database" owner="DatabaseLibrary">
+<msg time="2026-10-25T23:26:18.321757" level="INFO">Looking for configuration file: 'resources/db.cfg'</msg>
+<msg time="2026-10-25T23:26:18.321790" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2026-10-25T23:26:18.321901" level="INFO">Connect to DB using : pymysql.connect(db='projeto', user='root', passwd=***, host='localhost', port=3306, charset='utf8mb4', unix_socket='/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock')</msg>
+<arg>pymysql</arg>
+<arg>db_name=projeto</arg>
+<arg>db_user=root</arg>
+<arg>db_password=${EMPTY}</arg>
+<arg>db_host=localhost</arg>
+<arg>unix_socket=${SOCKET}</arg>
+<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
+Along with listed commonly used arguments (`db_name`, `db_host` etc.)
+you can set any other DB module specific parameters as key/value pairs.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.321589" elapsed="0.006109"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.228764" elapsed="0.098991"/>
+</kw>
+<kw name="Fazer login como administrador" owner="leandro_resources">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.328169" level="INFO">Creating Session using : alias=admin, url=http://localhost/sistema_feedback_pucpr, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>admin</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-10-25T23:26:18.328107" elapsed="0.000211"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.328604" level="INFO">${dados} = {'usuario': 'admin', 'senha': 'admin123'}</msg>
+<var>${dados}</var>
+<arg>usuario=${USUARIO_ADMIN}</arg>
+<arg>senha=${SENHA_ADMIN}</arg>
+<doc>Creates and returns a dictionary based on the given `items`.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.328406" elapsed="0.000212"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.346423" level="INFO">POST Request : url=http://localhost/sistema_feedback_pucpr/admins/php/admin_login.php 
+ path_url=/sistema_feedback_pucpr/admins/php/admin_login.php 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '28', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=usuario=admin&amp;senha=admin123 
+ </msg>
+<msg time="2026-10-25T23:26:18.346479" level="INFO">POST Response : url=http://localhost/sistema_feedback_pucpr/admins/php/admin_login.php 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 26 Oct 2026 02:26:18 GMT', 'Server': 'Apache/2.4.56 (Unix) OpenSSL/1.1.1t PHP/8.2.4 mod_perl/2.0.12 Perl/v5.34.1', 'X-Powered-By': 'PHP/8.2.4', 'Set-Cookie': 'PHPSESSID=n20mnbg8esp7kftt81d95j204e; path=/', 'Expires': 'Thu, 19 Nov 1981 08:52:00 GMT', 'Cache-Control': 'no-store, no-cache, must-revalidate', 'Pragma': 'no-cache', 'Content-Length': '143', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json;charset:utf-8'} 
+ body={"status":"ok","mensagem":"Sucesso consulta efetuada","data":[{"id":1,"usuario":"admin","senha":"admin123","criado_em":"2026-10-25 23:26:18"}]} 
+ </msg>
+<arg>admin</arg>
+<arg>/admins/php/admin_login.php</arg>
+<arg>data=${dados}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.328674" elapsed="0.017844"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.327930" elapsed="0.018644"/>
+</kw>
+<kw name="Alterar gestor 1 sem preencher a nova senha" owner="leandro_resources">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.347088" level="INFO">${dados} = {'email': 'gestor1.novo@empresa.com'}</msg>
+<var>${dados}</var>
+<arg>email=${EMAIL_GESTOR_1_NOVO}</arg>
+<doc>Creates and returns a dictionary based on the given `items`.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.346885" elapsed="0.000217"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.357072" level="INFO">POST Request : url=http://localhost/sistema_feedback_pucpr/admins/php/gestores/gestor_alterar.php?id=1 
+ path_url=/sistema_feedback_pucpr/admins/php/gestores/gestor_alterar.php?id=1 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=n20mnbg8esp7kftt81d95j204e', 'Content-Length': '32', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=gestor1.novo%40empresa.com 
+ </msg>
+<msg time="2026-10-25T23:26:18.357116" level="INFO">POST Response : url=http://localhost/sistema_feedback_pucpr/admins/php/gestores/gestor_alterar.php?id=1 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 26 Oct 2026 02:26:18 GMT', 'Server': 'Apache/2.4.56 (Unix) OpenSSL/1.1.1t PHP/8.2.4 mod_perl/2.0.12 Perl/v5.34.1', 'X-Powered-By': 'PHP/8.2.4', 'Content-Length': '69', 'Keep-Alive': 'timeout=5, max=99', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json;charset:utf-8'} 
+ body={"status":"ok","mensagem":"Registro alterado com sucesso!","data":[]} 
+ </msg>
+<msg time="2026-10-25T23:26:18.357227" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
+<var>${RESPOSTA}</var>
+<arg>admin</arg>
+<arg>/admins/php/gestores/gestor_alterar.php</arg>
+<arg>params=id=${ID_GESTOR_1}</arg>
+<arg>data=${dados}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.347163" elapsed="0.010078"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.357540" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
+<arg>${RESPOSTA}</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.357349" elapsed="0.000214"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.346715" elapsed="0.010882"/>
+</kw>
+<kw name="Verificar se o sistema aceitou" owner="leandro_resources">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${RESPOSTA.json()}[status]</arg>
+<arg>ok</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.357856" elapsed="0.000223"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.357698" elapsed="0.000418"/>
+</kw>
+<kw name="Verificar mensagem de registro alterado com sucesso" owner="leandro_resources">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${RESPOSTA.json()}[mensagem]</arg>
+<arg>${MENSAGEM_ALTERADO_SUCESSO}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.358331" elapsed="0.000166"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.358198" elapsed="0.000331"/>
+</kw>
+<kw name="Verificar se o e-mail do gestor 1 mudou e a senha continuou a mesma" owner="leandro_resources">
+<kw name="Check Row Count" owner="DatabaseLibrary">
+<msg time="2026-10-25T23:26:18.358862" level="INFO" html="true">Executing sql:&lt;br&gt;&lt;code style="font-weight: bold;"&gt;SELECT id FROM gestor WHERE id=1 AND email='gestor1.novo@empresa.com' AND senha='g1senha'&lt;/code&gt;</msg>
+<msg time="2026-10-25T23:26:18.360094" level="INFO">Commit the transaction</msg>
+<msg time="2026-10-25T23:26:18.361314" level="INFO">Retrieved 1 rows</msg>
+<msg time="2026-10-25T23:26:18.361356" level="INFO" html="true">&lt;div style="max-width: 100%; overflow-x: auto; max-height: 500px; overflow-y: auto;"&gt;&lt;table style="width: auto; border-collapse: collapse; border: 2px solid rgb(140 140 140)"&gt;&lt;caption style="text-align: left; font-weight: bold; padding: 5px;"&gt;Query returned 1 rows&lt;/caption&gt;&lt;tr&gt;&lt;th scope="col" style="position: sticky; top: 0; color:black; background-color: #d6ecd4; border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Row&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;id&lt;/th&gt;&lt;/tr&gt;&lt;tr style="background-color: var(--secondary-color, #eee)"&gt;&lt;th scope="row" style="color:black; background-color: #d6ecd4;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0&lt;/th&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;1&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<arg>SELECT id FROM gestor WHERE id=${ID_GESTOR_1} AND email='${EMAIL_GESTOR_1_NOVO}' AND senha='${SENHA_GESTOR_1}'</arg>
+<arg>==</arg>
+<arg>1</arg>
+<doc>Check the number of rows returned from ``select_statement`` using ``assertion_operator``
+and ``expected_value``. See `Inline assertions` for more details.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.358716" elapsed="0.002686"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.358597" elapsed="0.002840"/>
+</kw>
+<kw name="Encerrar o teste" owner="leandro_resources" type="TEARDOWN">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.361833" elapsed="0.000080"/>
+</kw>
+<arg>Close Browser</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.361678" elapsed="0.000260"/>
+</kw>
+<kw name="Disconnect From Database" owner="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.361987" elapsed="0.000432"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.362492" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects </doc>
+<status status="PASS" start="2026-10-25T23:26:18.362460" elapsed="0.000065"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.361554" elapsed="0.000996"/>
+</kw>
+<doc>Alterar apenas o e-mail do gestor 1 deixando a nova senha em branco.</doc>
+<tag>CT20</tag>
+<tag>leandro</tag>
+<status status="PASS" start="2026-10-25T23:26:18.228565" elapsed="0.134018"/>
+</test>
+<test id="s1-t4" name="CT21 - Cadastrar analista de dados" line="31">
+<kw name="Preparar o banco de dados" owner="leandro_resources" type="SETUP">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.363361" level="INFO">@{args} = [ --socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock | -u | root | -e | source /Applications/XAMPP/xamppfiles/htdocs/sistema_feedback_pucpr/testes/robot/../massa_de_dados.sql ]</msg>
+<var>@{args}</var>
+<arg>--socket=${SOCKET}</arg>
+<arg>-u</arg>
+<arg>root</arg>
+<arg>-e</arg>
+<arg>source ${MASSA}</arg>
+<doc>Creates and returns a list containing the given items.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.363163" elapsed="0.000216"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-25T23:26:18.363741" level="INFO">Starting process:
+/Applications/XAMPP/xamppfiles/bin/mysql --socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock -u root -e "source /Applications/XAMPP/xamppfiles/htdocs/sistema_feedback_pucpr/testes/robot/../massa_de_dados.sql"</msg>
+<msg time="2026-10-25T23:26:18.366791" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-25T23:26:18.455946" level="INFO">Process completed.</msg>
+<msg time="2026-10-25T23:26:18.456179" level="INFO">${resultado} = &lt;result object with rc 0&gt;</msg>
+<var>${resultado}</var>
+<arg>${MYSQL}</arg>
+<arg>@{args}</arg>
+<arg>stderr=STDOUT</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.363475" elapsed="0.092729"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.456779" level="INFO"/>
+<arg>${resultado.stdout}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.456457" elapsed="0.000345"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.457034" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resultado.rc}</arg>
+<arg>0</arg>
+<arg>msg=Erro ao importar o banco: ${resultado.stdout}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.456871" elapsed="0.000189"/>
+</kw>
+<kw name="Connect To Database" owner="DatabaseLibrary">
+<msg time="2026-10-25T23:26:18.457262" level="INFO">Looking for configuration file: 'resources/db.cfg'</msg>
+<msg time="2026-10-25T23:26:18.457286" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2026-10-25T23:26:18.457368" level="INFO">Connect to DB using : pymysql.connect(db='projeto', user='root', passwd=***, host='localhost', port=3306, charset='utf8mb4', unix_socket='/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock')</msg>
+<arg>pymysql</arg>
+<arg>db_name=projeto</arg>
+<arg>db_user=root</arg>
+<arg>db_password=${EMPTY}</arg>
+<arg>db_host=localhost</arg>
+<arg>unix_socket=${SOCKET}</arg>
+<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
+Along with listed commonly used arguments (`db_name`, `db_host` etc.)
+you can set any other DB module specific parameters as key/value pairs.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.457134" elapsed="0.004623"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.363034" elapsed="0.098788"/>
+</kw>
+<kw name="Fazer login como gestor 2" owner="leandro_resources">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.462159" level="INFO">Creating Session using : alias=gestor2, url=http://localhost/sistema_feedback_pucpr, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>gestor2</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-10-25T23:26:18.462111" elapsed="0.000166"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.462507" level="INFO">${dados} = {'email': 'gestor2@empresa.com', 'senha': 'g2senha'}</msg>
+<var>${dados}</var>
+<arg>email=${EMAIL_GESTOR_2}</arg>
+<arg>senha=${SENHA_GESTOR_2}</arg>
+<doc>Creates and returns a dictionary based on the given `items`.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.462346" elapsed="0.000172"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.482774" level="INFO">POST Request : url=http://localhost/sistema_feedback_pucpr/php/gestor_login.php 
+ path_url=/sistema_feedback_pucpr/php/gestor_login.php 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '41', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=gestor2%40empresa.com&amp;senha=g2senha 
+ </msg>
+<msg time="2026-10-25T23:26:18.482823" level="INFO">POST Response : url=http://localhost/sistema_feedback_pucpr/php/gestor_login.php 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 26 Oct 2026 02:26:18 GMT', 'Server': 'Apache/2.4.56 (Unix) OpenSSL/1.1.1t PHP/8.2.4 mod_perl/2.0.12 Perl/v5.34.1', 'X-Powered-By': 'PHP/8.2.4', 'Set-Cookie': 'PHPSESSID=m3bceus7shtrsndjr0v40o2nl0; path=/', 'Expires': 'Thu, 19 Nov 1981 08:52:00 GMT', 'Cache-Control': 'no-store, no-cache, must-revalidate', 'Pragma': 'no-cache', 'Content-Length': '154', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json;charset:utf-8'} 
+ body={"status":"ok","mensagem":"Sucesso consulta efetuada","data":[{"id":2,"email":"gestor2@empresa.com","senha":"g2senha","criado_em":"2026-10-25 23:26:18"}]} 
+ </msg>
+<arg>gestor2</arg>
+<arg>/php/gestor_login.php</arg>
+<arg>data=${dados}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.462563" elapsed="0.020294"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.461974" elapsed="0.020932"/>
+</kw>
+<kw name="Cadastrar analista de dados válido" owner="leandro_resources">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.483361" level="INFO">${dados} = {'email': 'analista3@empresa.com', 'senha': 'an3'}</msg>
+<var>${dados}</var>
+<arg>email=${EMAIL_ANALISTA_NOVO}</arg>
+<arg>senha=${SENHA_ANALISTA_NOVO}</arg>
+<doc>Creates and returns a dictionary based on the given `items`.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.483181" elapsed="0.000193"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.488574" level="INFO">POST Request : url=http://localhost/sistema_feedback_pucpr/php/analista_dados_novo.php 
+ path_url=/sistema_feedback_pucpr/php/analista_dados_novo.php 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=m3bceus7shtrsndjr0v40o2nl0', 'Content-Length': '39', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=analista3%40empresa.com&amp;senha=an3 
+ </msg>
+<msg time="2026-10-25T23:26:18.488606" level="INFO">POST Response : url=http://localhost/sistema_feedback_pucpr/php/analista_dados_novo.php 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 26 Oct 2026 02:26:18 GMT', 'Server': 'Apache/2.4.56 (Unix) OpenSSL/1.1.1t PHP/8.2.4 mod_perl/2.0.12 Perl/v5.34.1', 'X-Powered-By': 'PHP/8.2.4', 'Expires': 'Thu, 19 Nov 1981 08:52:00 GMT', 'Cache-Control': 'no-store, no-cache, must-revalidate', 'Pragma': 'no-cache', 'Content-Length': '68', 'Keep-Alive': 'timeout=5, max=99', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"status":"ok","mensagem":"Registro inserido com sucesso","data":[]} 
+ </msg>
+<msg time="2026-10-25T23:26:18.488662" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
+<var>${RESPOSTA}</var>
+<arg>gestor2</arg>
+<arg>/php/analista_dados_novo.php</arg>
+<arg>data=${dados}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.483425" elapsed="0.005247"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.488906" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
+<arg>${RESPOSTA}</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.488747" elapsed="0.000179"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.483035" elapsed="0.005921"/>
+</kw>
+<kw name="Verificar se o sistema aceitou" owner="leandro_resources">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${RESPOSTA.json()}[status]</arg>
+<arg>ok</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.489168" elapsed="0.000189"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.489043" elapsed="0.000342"/>
+</kw>
+<kw name="Verificar se o analista foi cadastrado e ligado ao gestor 2" owner="leandro_resources">
+<kw name="Check Row Count" owner="DatabaseLibrary">
+<msg time="2026-10-25T23:26:18.489688" level="INFO" html="true">Executing sql:&lt;br&gt;&lt;code style="font-weight: bold;"&gt;SELECT id FROM analista_dados WHERE email='analista3@empresa.com' AND senha='an3' AND gestor_id=2&lt;/code&gt;</msg>
+<msg time="2026-10-25T23:26:18.490219" level="INFO">Commit the transaction</msg>
+<msg time="2026-10-25T23:26:18.490306" level="INFO">Retrieved 1 rows</msg>
+<msg time="2026-10-25T23:26:18.490324" level="INFO" html="true">&lt;div style="max-width: 100%; overflow-x: auto; max-height: 500px; overflow-y: auto;"&gt;&lt;table style="width: auto; border-collapse: collapse; border: 2px solid rgb(140 140 140)"&gt;&lt;caption style="text-align: left; font-weight: bold; padding: 5px;"&gt;Query returned 1 rows&lt;/caption&gt;&lt;tr&gt;&lt;th scope="col" style="position: sticky; top: 0; color:black; background-color: #d6ecd4; border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Row&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;id&lt;/th&gt;&lt;/tr&gt;&lt;tr style="background-color: var(--secondary-color, #eee)"&gt;&lt;th scope="row" style="color:black; background-color: #d6ecd4;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0&lt;/th&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;3&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<arg>SELECT id FROM analista_dados WHERE email='${EMAIL_ANALISTA_NOVO}' AND senha='${SENHA_ANALISTA_NOVO}' AND gestor_id=${ID_GESTOR_2}</arg>
+<arg>==</arg>
+<arg>1</arg>
+<doc>Check the number of rows returned from ``select_statement`` using ``assertion_operator``
+and ``expected_value``. See `Inline assertions` for more details.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.489554" elapsed="0.000802"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.489450" elapsed="0.000934"/>
+</kw>
+<kw name="Encerrar o teste" owner="leandro_resources" type="TEARDOWN">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.490705" elapsed="0.000063"/>
+</kw>
+<arg>Close Browser</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.490577" elapsed="0.000212"/>
+</kw>
+<kw name="Disconnect From Database" owner="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.490835" elapsed="0.000352"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.491252" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects </doc>
+<status status="PASS" start="2026-10-25T23:26:18.491225" elapsed="0.000053"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.490477" elapsed="0.000822"/>
+</kw>
+<doc>Gestor 2 cadastra um novo analista de dados válido.</doc>
+<tag>CT21</tag>
+<tag>leandro</tag>
+<status status="PASS" start="2026-10-25T23:26:18.362739" elapsed="0.128587"/>
+</test>
+<test id="s1-t5" name="CT22 - Cadastrar analista com e-mail repetido" line="39">
+<kw name="Preparar o banco de dados" owner="leandro_resources" type="SETUP">
+<kw name="Create List" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.491879" level="INFO">@{args} = [ --socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock | -u | root | -e | source /Applications/XAMPP/xamppfiles/htdocs/sistema_feedback_pucpr/testes/robot/../massa_de_dados.sql ]</msg>
+<var>@{args}</var>
+<arg>--socket=${SOCKET}</arg>
+<arg>-u</arg>
+<arg>root</arg>
+<arg>-e</arg>
+<arg>source ${MASSA}</arg>
+<doc>Creates and returns a list containing the given items.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.491749" elapsed="0.000143"/>
+</kw>
+<kw name="Run Process" owner="Process">
+<msg time="2026-10-25T23:26:18.492154" level="INFO">Starting process:
+/Applications/XAMPP/xamppfiles/bin/mysql --socket=/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock -u root -e "source /Applications/XAMPP/xamppfiles/htdocs/sistema_feedback_pucpr/testes/robot/../massa_de_dados.sql"</msg>
+<msg time="2026-10-25T23:26:18.494407" level="INFO">Waiting for process to complete.</msg>
+<msg time="2026-10-25T23:26:18.572462" level="INFO">Process completed.</msg>
+<msg time="2026-10-25T23:26:18.572722" level="INFO">${resultado} = &lt;result object with rc 0&gt;</msg>
+<var>${resultado}</var>
+<arg>${MYSQL}</arg>
+<arg>@{args}</arg>
+<arg>stderr=STDOUT</arg>
+<doc>Runs a process and waits for it to complete.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.491958" elapsed="0.080791"/>
+</kw>
+<kw name="Log" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.573433" level="INFO"/>
+<arg>${resultado.stdout}</arg>
+<doc>Logs the given message with the given level.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.573050" elapsed="0.000409"/>
+</kw>
+<kw name="Should Be Equal As Integers" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.573751" level="INFO">Argument types are:
+&lt;class 'int'&gt;
+&lt;class 'str'&gt;</msg>
+<arg>${resultado.rc}</arg>
+<arg>0</arg>
+<arg>msg=Erro ao importar o banco: ${resultado.stdout}</arg>
+<doc>Fails if objects are unequal after converting them to integers.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.573538" elapsed="0.000247"/>
+</kw>
+<kw name="Connect To Database" owner="DatabaseLibrary">
+<msg time="2026-10-25T23:26:18.574057" level="INFO">Looking for configuration file: 'resources/db.cfg'</msg>
+<msg time="2026-10-25T23:26:18.574088" level="INFO">Configuration file doesn't exist</msg>
+<msg time="2026-10-25T23:26:18.574197" level="INFO">Connect to DB using : pymysql.connect(db='projeto', user='root', passwd=***, host='localhost', port=3306, charset='utf8mb4', unix_socket='/Applications/XAMPP/xamppfiles/var/mysql/mysql.sock')</msg>
+<arg>pymysql</arg>
+<arg>db_name=projeto</arg>
+<arg>db_user=root</arg>
+<arg>db_password=${EMPTY}</arg>
+<arg>db_host=localhost</arg>
+<arg>unix_socket=${SOCKET}</arg>
+<doc>Creates a database connection using the DB API 2.0 ``db_module`` and the parameters provided.
+Along with listed commonly used arguments (`db_name`, `db_host` etc.)
+you can set any other DB module specific parameters as key/value pairs.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.573890" elapsed="0.005916"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.491666" elapsed="0.088199"/>
+</kw>
+<kw name="Fazer login como gestor 1" owner="leandro_resources">
+<kw name="Create Session" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.580272" level="INFO">Creating Session using : alias=gestor1, url=http://localhost/sistema_feedback_pucpr, headers={},                     cookies={}, auth=None, timeout=None, proxies=None, verify=False,                     debug=0 </msg>
+<arg>gestor1</arg>
+<arg>${URL}</arg>
+<doc>Create Session: create a HTTP session to a server</doc>
+<status status="PASS" start="2026-10-25T23:26:18.580207" elapsed="0.000219"/>
+</kw>
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.580712" level="INFO">${dados} = {'email': 'gestor1@empresa.com', 'senha': 'g1senha'}</msg>
+<var>${dados}</var>
+<arg>email=${EMAIL_GESTOR_1}</arg>
+<arg>senha=${SENHA_GESTOR_1}</arg>
+<doc>Creates and returns a dictionary based on the given `items`.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.580511" elapsed="0.000215"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.617165" level="INFO">POST Request : url=http://localhost/sistema_feedback_pucpr/php/gestor_login.php 
+ path_url=/sistema_feedback_pucpr/php/gestor_login.php 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Content-Length': '41', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=gestor1%40empresa.com&amp;senha=g1senha 
+ </msg>
+<msg time="2026-10-25T23:26:18.617231" level="INFO">POST Response : url=http://localhost/sistema_feedback_pucpr/php/gestor_login.php 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 26 Oct 2026 02:26:18 GMT', 'Server': 'Apache/2.4.56 (Unix) OpenSSL/1.1.1t PHP/8.2.4 mod_perl/2.0.12 Perl/v5.34.1', 'X-Powered-By': 'PHP/8.2.4', 'Set-Cookie': 'PHPSESSID=m16e2igbpbqjljqhvkot7h2pof; path=/', 'Expires': 'Thu, 19 Nov 1981 08:52:00 GMT', 'Cache-Control': 'no-store, no-cache, must-revalidate', 'Pragma': 'no-cache', 'Content-Length': '154', 'Keep-Alive': 'timeout=5, max=100', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json;charset:utf-8'} 
+ body={"status":"ok","mensagem":"Sucesso consulta efetuada","data":[{"id":1,"email":"gestor1@empresa.com","senha":"g1senha","criado_em":"2026-10-25 23:26:18"}]} 
+ </msg>
+<arg>gestor1</arg>
+<arg>/php/gestor_login.php</arg>
+<arg>data=${dados}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.580781" elapsed="0.036494"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.580038" elapsed="0.037306"/>
+</kw>
+<kw name="Cadastrar analista com e-mail repetido" owner="leandro_resources">
+<kw name="Create Dictionary" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.618399" level="INFO">${dados} = {'email': 'analista1@empresa.com', 'senha': 'x'}</msg>
+<var>${dados}</var>
+<arg>email=${EMAIL_ANALISTA_1}</arg>
+<arg>senha=${SENHA_ANALISTA_REPETIDO}</arg>
+<doc>Creates and returns a dictionary based on the given `items`.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.618158" elapsed="0.000257"/>
+</kw>
+<kw name="POST On Session" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.622197" level="INFO">POST Request : url=http://localhost/sistema_feedback_pucpr/php/analista_dados_novo.php 
+ path_url=/sistema_feedback_pucpr/php/analista_dados_novo.php 
+ headers={'User-Agent': 'python-requests/2.34.2', 'Accept-Encoding': 'gzip, deflate, zstd', 'Accept': '*/*', 'Connection': 'keep-alive', 'Cookie': 'PHPSESSID=m16e2igbpbqjljqhvkot7h2pof', 'Content-Length': '37', 'Content-Type': 'application/x-www-form-urlencoded'} 
+ body=email=analista1%40empresa.com&amp;senha=x 
+ </msg>
+<msg time="2026-10-25T23:26:18.622258" level="INFO">POST Response : url=http://localhost/sistema_feedback_pucpr/php/analista_dados_novo.php 
+ status=200, reason=OK 
+ headers={'Date': 'Mon, 26 Oct 2026 02:26:18 GMT', 'Server': 'Apache/2.4.56 (Unix) OpenSSL/1.1.1t PHP/8.2.4 mod_perl/2.0.12 Perl/v5.34.1', 'X-Powered-By': 'PHP/8.2.4', 'Expires': 'Thu, 19 Nov 1981 08:52:00 GMT', 'Cache-Control': 'no-store, no-cache, must-revalidate', 'Pragma': 'no-cache', 'Content-Length': '91', 'Keep-Alive': 'timeout=5, max=99', 'Connection': 'Keep-Alive', 'Content-Type': 'application/json; charset=utf-8'} 
+ body={"status":"nok","mensagem":"Este e-mail j\u00e1 est\u00e1 cadastrado no sistema","data":[]} 
+ </msg>
+<msg time="2026-10-25T23:26:18.622374" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
+<var>${RESPOSTA}</var>
+<arg>gestor1</arg>
+<arg>/php/analista_dados_novo.php</arg>
+<arg>data=${dados}</arg>
+<doc>Sends a POST request on a previously created HTTP Session.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.618479" elapsed="0.003912"/>
+</kw>
+<kw name="Set Test Variable" owner="BuiltIn">
+<msg time="2026-10-25T23:26:18.622778" level="INFO">${RESPOSTA} = &lt;Response [200]&gt;</msg>
+<arg>${RESPOSTA}</arg>
+<doc>Makes the variable available everywhere within the scope of the current test.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.622549" elapsed="0.000253"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.617964" elapsed="0.004879"/>
+</kw>
+<kw name="Verificar se o sistema recusou" owner="leandro_resources">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${RESPOSTA.json()}[status]</arg>
+<arg>nok</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.623121" elapsed="0.000270"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.622963" elapsed="0.000467"/>
+</kw>
+<kw name="Verificar mensagem de e-mail já cadastrado" owner="leandro_resources">
+<kw name="Should Be Equal" owner="BuiltIn">
+<arg>${RESPOSTA.json()}[mensagem]</arg>
+<arg>${MENSAGEM_EMAIL_CADASTRADO}</arg>
+<doc>Fails if the given objects are unequal.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.623664" elapsed="0.000182"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.623523" elapsed="0.000355"/>
+</kw>
+<kw name="Verificar se o analista repetido não foi cadastrado" owner="leandro_resources">
+<kw name="Check Row Count" owner="DatabaseLibrary">
+<msg time="2026-10-25T23:26:18.624181" level="INFO" html="true">Executing sql:&lt;br&gt;&lt;code style="font-weight: bold;"&gt;SELECT id FROM analista_dados WHERE email='analista1@empresa.com'&lt;/code&gt;</msg>
+<msg time="2026-10-25T23:26:18.624949" level="INFO">Commit the transaction</msg>
+<msg time="2026-10-25T23:26:18.625061" level="INFO">Retrieved 1 rows</msg>
+<msg time="2026-10-25T23:26:18.625081" level="INFO" html="true">&lt;div style="max-width: 100%; overflow-x: auto; max-height: 500px; overflow-y: auto;"&gt;&lt;table style="width: auto; border-collapse: collapse; border: 2px solid rgb(140 140 140)"&gt;&lt;caption style="text-align: left; font-weight: bold; padding: 5px;"&gt;Query returned 1 rows&lt;/caption&gt;&lt;tr&gt;&lt;th scope="col" style="position: sticky; top: 0; color:black; background-color: #d6ecd4; border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;Row&lt;/th&gt;&lt;th scope="col" style="position: sticky; top: 0; background-color: #505050; color: #fff;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;id&lt;/th&gt;&lt;/tr&gt;&lt;tr style="background-color: var(--secondary-color, #eee)"&gt;&lt;th scope="row" style="color:black; background-color: #d6ecd4;border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;0&lt;/th&gt;&lt;td style="border: 1px solid rgb(160 160 160);padding: 8px 10px;text-align: center;"&gt;1&lt;/td&gt;&lt;/tr&gt;&lt;/table&gt;&lt;/div&gt;</msg>
+<arg>SELECT id FROM analista_dados WHERE email='${EMAIL_ANALISTA_1}'</arg>
+<arg>==</arg>
+<arg>1</arg>
+<doc>Check the number of rows returned from ``select_statement`` using ``assertion_operator``
+and ``expected_value``. See `Inline assertions` for more details.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.624067" elapsed="0.001054"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.623951" elapsed="0.001205"/>
+</kw>
+<kw name="Encerrar o teste" owner="leandro_resources" type="TEARDOWN">
+<kw name="Run Keyword And Ignore Error" owner="BuiltIn">
+<kw name="Close Browser" owner="SeleniumLibrary">
+<doc>Closes the current browser.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.625548" elapsed="0.000076"/>
+</kw>
+<arg>Close Browser</arg>
+<doc>Runs the given keyword with the given arguments and ignores possible errorw.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.625389" elapsed="0.000259"/>
+</kw>
+<kw name="Disconnect From Database" owner="DatabaseLibrary">
+<doc>Disconnects from the database.</doc>
+<status status="PASS" start="2026-10-25T23:26:18.625694" elapsed="0.000407"/>
+</kw>
+<kw name="Delete All Sessions" owner="RequestsLibrary">
+<msg time="2026-10-25T23:26:18.626171" level="INFO">Deleting All Sessions</msg>
+<doc>Removes all the session objects </doc>
+<status status="PASS" start="2026-10-25T23:26:18.626141" elapsed="0.000060"/>
+</kw>
+<status status="PASS" start="2026-10-25T23:26:18.625267" elapsed="0.000957"/>
+</kw>
+<doc>Cadastrar analista com e-mail já existente deve ser recusado com mensagem de erro.</doc>
+<tag>CT22</tag>
+<tag>leandro</tag>
+<status status="PASS" start="2026-10-25T23:26:18.491463" elapsed="0.134792"/>
+</test>
+<doc>Testes de gestores e analistas do AlignUp - Leandro.</doc>
+<status status="FAIL" start="2026-10-25T23:26:10.057596" elapsed="8.568976"/>
+</suite>
+<statistics>
+<total>
+<stat pass="3" fail="2" skip="0">All Tests</stat>
+</total>
+<tag>
+<stat pass="0" fail="1" skip="0">CT17</stat>
+<stat pass="0" fail="1" skip="0">CT19</stat>
+<stat pass="1" fail="0" skip="0">CT20</stat>
+<stat pass="1" fail="0" skip="0">CT21</stat>
+<stat pass="1" fail="0" skip="0">CT22</stat>
+<stat pass="3" fail="2" skip="0">leandro</stat>
+</tag>
+<suite>
+<stat name="Leandro Testes" id="s1" pass="3" fail="2" skip="0">Leandro Testes</stat>
+</suite>
+</statistics>
+<errors>
+</errors>
+</robot>
