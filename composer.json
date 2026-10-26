@@ -1,0 +1,17 @@
+{
+    "name": "leandro/sistema_feedback_pucpr",
+    "autoload": {
+        "psr-4": {
+            "Leandro\\SistemaFeedbackPucpr\\": "src/"
+        }
+    },
+    "authors": [
+        {
+            "name": "leandrotmst",
+            "email": "leandrotomasetto@gmail.com"
+        }
+    ],
+    "require-dev": {
+        "phpunit/phpunit": "^13.4"
+    }
+}

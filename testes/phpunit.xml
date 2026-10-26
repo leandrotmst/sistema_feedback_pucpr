@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Configuração do PHPUnit: um conjunto de testes para cada integrante -->
+<phpunit colors="true" testdox="true" cacheResult="false">
+    <php>
+        <!-- Endereço do AlignUp no XAMPP. Se a pasta ou a porta for diferente, mude aqui. -->
+        <env name="URL_SISTEMA" value="http://localhost/sistema_feedback_pucpr"/>
+    </php>
+    <testsuites>
+        <testsuite name="Fernanda"><file>unit/FernandaAutenticacaoTest.php</file></testsuite>
+        <testsuite name="Igor"><file>unit/IgorFuncionariosTest.php</file></testsuite>
+        <testsuite name="Leandro"><file>unit/LeandroGestoresAnalistasTest.php</file></testsuite>
+        <testsuite name="Yumi"><file>unit/YumiRespostasTest.php</file></testsuite>
+        <testsuite name="Gustavo"><file>unit/GustavoSolucoesFeedbacksTest.php</file></testsuite>
+        <testsuite name="Mariana"><file>unit/MarianaAnaliseIATest.php</file></testsuite>
+    </testsuites>
+</phpunit>
